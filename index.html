@@ -274,6 +274,33 @@
   .edge-tile b{display:block;font-size:13.5px;margin-bottom:5px}
   .edge-tile span{display:block;font-size:12.5px;color:var(--mut);line-height:1.45}
 
+  /* SOW routing flow */
+  .sow-board{--blue:#22D3EE;margin:20px 0 8px}
+  .sow-flow{position:relative;display:grid;gap:13px;margin-bottom:18px}
+  .sow-step{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;
+    border:1px solid color-mix(in srgb,var(--ac) 55%,var(--line));background:rgba(255,255,255,.03);border-radius:12px;padding:15px;cursor:pointer;transition:.18s}
+  .sow-step:hover,.sow-step.is-open{background:color-mix(in srgb,var(--ac) 10%,transparent);border-color:var(--ac);transform:translateY(-2px)}
+  .sow-step:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+  .sow-step:not(:last-child)::after{content:'';position:absolute;left:40px;bottom:-14px;width:2px;height:14px;background:var(--ac)}
+  .sow-num{width:42px;height:42px;border-radius:10px;background:var(--ac);color:#0A0815;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:800}
+  .sow-copy b{display:block;font-size:16px;margin-bottom:3px}
+  .sow-copy span{display:block;font-size:13.5px;color:var(--mut);line-height:1.45}
+  .sow-step::before{content:attr(data-detail);grid-column:2;max-height:0;overflow:hidden;color:color-mix(in srgb,var(--ac) 72%,#fff);font-size:12.8px;line-height:1.45;opacity:0;transition:max-height .22s,opacity .18s}
+  .sow-step.is-open::before{max-height:70px;opacity:1;margin-top:2px}
+  .sow-routes{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .route-card{border:1px solid var(--line);border-left:3px solid var(--rc);background:rgba(255,255,255,.035);border-radius:12px;padding:14px;min-height:136px}
+  .route-card h3{font-size:14.5px;line-height:1.2;margin-bottom:7px}
+  .route-card p{font-size:12.5px;color:var(--mut);line-height:1.42;margin-bottom:10px}
+  .route-card a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--rc);text-decoration:none;font-weight:700}
+  .sow-matrix{display:grid;grid-template-columns:1.2fr .8fr .9fr;gap:12px;margin-top:16px}
+  .matrix-card{border:1px solid var(--line);border-radius:12px;padding:15px;background:rgba(255,255,255,.035)}
+  .matrix-card .card__label{margin-bottom:9px}
+  .mini-table{display:grid;gap:8px}
+  .mini-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+  .mini-row:first-child{border-top:none}
+  .mini-row span{color:var(--mut)}
+  .mini-row b{color:var(--txt);font-weight:700;text-align:right}
+
   /* map rows */
   .map{display:flex;flex-direction:column}
   .maprow{display:flex;align-items:flex-start;gap:13px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px;line-height:1.45}
@@ -332,6 +359,7 @@
     .rules-panel ul{grid-template-columns:1fr}
     .cycle-card::before{display:none}
     .redesign-edge{grid-template-columns:1fr}
+    .sow-routes,.sow-matrix{grid-template-columns:1fr}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -343,6 +371,8 @@
     .redesign-flow::before{left:25px}
     .redesign-step:not(:last-child)::after{left:24px}
     .side-panel:first-child{grid-template-columns:1fr}
+    .sow-step{grid-template-columns:42px minmax(0,1fr);gap:11px;padding:13px}
+    .sow-step:not(:last-child)::after{left:33px}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -473,7 +503,7 @@
   <section class="hero" id="hero">
     <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
     <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
-    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Twelve sections, one flow.</p>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Thirteen sections, one flow.</p>
     <div class="hero__chips reveal">
       <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
     </div>
@@ -522,9 +552,72 @@
     </div></div>
   </section>
 
-  <!-- 03 JOURNEYS -->
+  <!-- 03 SCOPE OF WORK -->
+  <section class="sec" id="sow" style="--ac:#22D3EE">
+    <div class="sec__head reveal"><span class="sec__num">03</span><h2 class="sec__title">Scope of Work for Brand Making</h2><span class="sec__kicker">classify → scope → route</span></div>
+    <p class="lead reveal">Before a brand enters delivery, make the SOW. The SOW converts the client request into <span class="hl">focus, task, current gap/data, priority, timeline or hours, owner, commercials, and handoff</span>. Then the brand gets tagged and routed to the right operating flow.</p>
+
+    <div class="sow-board reveal">
+      <div class="sow-flow">
+        <div class="sow-step is-open" tabindex="0" role="button" aria-expanded="true" data-detail="Inputs: website link, brand guide, call notes, screenshots, current problem, desired outcome, platform, timeline, and data access.">
+          <div class="sow-num">1</div><div class="sow-copy"><b>Collect Requirement</b><span>Understand what the client is asking for and what outcome they expect.</span></div>
+        </div>
+        <div class="sow-step" tabindex="0" role="button" aria-expanded="false" data-detail="Tag the request as pure tech, tech over cap, pure CRO, other work + CRO, mixed work, or small change.">
+          <div class="sow-num">2</div><div class="sow-copy"><b>Classify Work Type</b><span>Decide the work bucket before writing anything.</span></div>
+        </div>
+        <div class="sow-step" tabindex="0" role="button" aria-expanded="false" data-detail="Check Clarity, GA4, Shopify, heatmaps, funnel data, PageSpeed, screenshots, and current page behavior.">
+          <div class="sow-num">3</div><div class="sow-copy"><b>Audit Website or Page</b><span>Find current gaps, data proof, user friction, and technical blockers.</span></div>
+        </div>
+        <div class="sow-step" tabindex="0" role="button" aria-expanded="false" data-detail="Use the table format: Focus → Task → Current Gap/Data → Priority → Timeline/Hours → Metric.">
+          <div class="sow-num">4</div><div class="sow-copy"><b>Convert Problems into Tasks</b><span>Every observation becomes a clear execution item.</span></div>
+        </div>
+        <div class="sow-step" tabindex="0" role="button" aria-expanded="false" data-detail="Tech = hour cap. Pure CRO = MIA CRO. Other work + CRO = MIA + design/dev layer. Small change = common ops.">
+          <div class="sow-num">5</div><div class="sow-copy"><b>Apply Scoping Model</b><span>Choose how the work should be estimated and approved.</span></div>
+        </div>
+        <div class="sow-step" tabindex="0" role="button" aria-expanded="false" data-detail="Client approves scope, tasks, timeline, hours, commercials, review cycle, deployment process, and exclusions.">
+          <div class="sow-num">6</div><div class="sow-copy"><b>Approve, Execute, QA, Deploy</b><span>Only approved scope moves into execution, staging, QA, live, and monitoring.</span></div>
+        </div>
+      </div>
+
+      <div class="phase" style="--ac:#22D3EE">Brand tag → correct flow</div>
+      <div class="sow-routes">
+        <div class="route-card" style="--rc:#FBBF24"><h3>One-time Tech</h3><p>Shopify dev, custom sections, tracking, app setup, theme edits.</p><a href="#pageopt">Tech only → Page Optimization</a></div>
+        <div class="route-card" style="--rc:#34D399"><h3>Pure CRO</h3><p>Audit, funnel diagnosis, quick wins, big bets, page-level CRO tasks.</p><a href="#lifecycle">CRO → Engagement Lifecycle</a></div>
+        <div class="route-card" style="--rc:#A78BFA"><h3>CRO + Tech + Design</h3><p>Mixed growth work with CRO logic and delivery ownership.</p><a href="#journeys">Mixed → Client Journeys</a></div>
+        <div class="route-card" style="--rc:#F472B6"><h3>Design / Redesign</h3><p>Landing page, PDP, homepage, collection, Figma, or AI HTML prototype.</p><a href="#design">Design → Design Flow</a></div>
+        <div class="route-card" style="--rc:#FB923C"><h3>Small Change</h3><p>CTA, badge, copy, sticky bar, card tag, section order, cart nudge.</p><a href="#summary">Small → Ops checklist</a></div>
+      </div>
+    </div>
+
+    <div class="sow-matrix reveal">
+      <div class="matrix-card"><div class="card__label">SOW table format</div><ul class="ul">
+        <li><b>Focus:</b> PDP, cart, collection, performance, tracking.</li>
+        <li><b>Task:</b> exact change or recommendation.</li>
+        <li><b>Current gap/data:</b> why this task exists.</li>
+        <li><b>Priority + timeline:</b> high/medium/low and hours or days.</li>
+        <li><b>Metric:</b> ATC, CVR, AOV, checkout rate, scroll depth.</li></ul></div>
+      <div class="matrix-card"><div class="card__label">Scoping rules</div><div class="mini-table">
+        <div class="mini-row"><span>Tech work</span><b>hour cap</b></div>
+        <div class="mini-row"><span>Tech over cap</span><b>MIA-style priority</b></div>
+        <div class="mini-row"><span>Pure CRO</span><b>MIA CRO only</b></div>
+        <div class="mini-row"><span>Other + CRO</span><b>MIA + design/dev</b></div>
+        <div class="mini-row"><span>Small change</span><b>XS/S/M/L</b></div>
+      </div></div>
+      <div class="matrix-card"><div class="card__label">Timeline rules</div><div class="mini-table">
+        <div class="mini-row"><span>Design time</span><b>10h</b></div>
+        <div class="mini-row"><span>Scope covered</span><b>1 PDP/Home/Collection</b></div>
+        <div class="mini-row"><span>Client review</span><b>≤ 3 days</b></div>
+        <div class="mini-row"><span>Iterations</span><b>up to 5</b></div>
+        <div class="mini-row"><span>Extra work</span><b>separate SOW</b></div>
+      </div></div>
+    </div>
+
+    <div class="callout reveal"><div class="callout__ic">→</div><p><b>Connection rule:</b> once the SOW is approved, route the brand into the next correct page flow. Pure CRO and mixed growth go to <span class="hl">Engagement Lifecycle</span>, heavy/new build goes to <span class="hl">Client Journeys</span>, design/redesign goes to <span class="hl">Design → Development</span> or <span class="hl">AI HTML → Client Live</span>, and tech-only goes to <span class="hl">Page Optimization</span>.</p></div>
+  </section>
+
+  <!-- 04 JOURNEYS -->
   <section class="sec" id="journeys" style="--ac:#38BDF8">
-    <div class="sec__head reveal"><span class="sec__num">03</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
+    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
     <p class="lead reveal">Two journeys cover most brands. The <span class="hl">40-hour tech gate</span> decides which one. Both end in CRO retention.</p>
     <div class="journey reveal">
       <div class="journey__h"><div class="journey__n">Journey A · CRO-led</div><div class="journey__c">Live store · tech ≤ 40 hrs</div></div>
@@ -541,9 +634,9 @@
     </div>
   </section>
 
-  <!-- 04 LIFECYCLE -->
+  <!-- 05 LIFECYCLE -->
   <section class="sec" id="lifecycle" style="--ac:#E879F9">
-    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
     <p class="lead reveal">The core work for CRO + Tech + Design brands — six stages, in order. The engine does the signals; the KAM owns judgement and the client.</p>
     <div class="stages reveal" id="stages">
       <div class="stage"><div class="stage__head"><span class="stage__num">00</span><span class="stage__t">Intake &amp; Brand Setup</span><span class="stage__when">Day 0</span><span class="stage__chev">▼</span></div>
@@ -595,9 +688,9 @@
     </div>
   </section>
 
-  <!-- 05 TIMELINE -->
+  <!-- 06 TIMELINE -->
   <section class="sec" id="timeline" style="--ac:#34D399">
-    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
+    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
     <p class="lead reveal">One brand cycle runs across 8 weeks. The <span class="hl">28-day test window</span> sets the pace; from Month 3, velocity rises to 2–4 tests / month.</p>
     <div class="cards two reveal">
       <div class="card"><div class="month__h">Month 1</div><div class="month__s">Audit · Benchmark · Design</div>
@@ -622,9 +715,9 @@
       <p style="font-size:12.5px;color:var(--faint);line-height:1.5;margin-top:13px;font-style:italic">60% win rate; per-winner lift +3% (conservative) to +12% (strong), compounded. Expect <span class="hl">1–2 tests in the first 2-month cycle</span> — Month 1 is mostly setup &amp; design — rising to 2–4 / month from Month 3. Direction-setting estimates, not guarantees.</p></div>
   </section>
 
-  <!-- 06 DESIGN -->
+  <!-- 07 DESIGN -->
   <section class="sec" id="design" style="--ac:#F472B6">
-    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
+    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
     <p class="lead reveal">How any page moves from design to development. The <span class="hl">~2-week review window</span> keeps it from stalling; nothing goes to dev until the design is closed. The brand is walked through these steps before we start.</p>
     <div class="flow reveal">
       <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brief + brand guidelines confirmed</b><span>Guidelines in hand before a pixel is drawn.</span></div></div>
@@ -646,9 +739,9 @@
       <li><b>Dev-feasibility</b> — quick design ↔ dev check before locking.</li></ul></div>
   </section>
 
-  <!-- 07 AI HTML REDESIGN -->
+  <!-- 08 AI HTML REDESIGN -->
   <section class="sec" id="aihtml" style="--ac:#2563EB">
-    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
+    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
     <p class="lead reveal">Use this when a brand needs a fast redesign prototype in HTML before it becomes a client-approved live website. The goal is <span class="hl">brand-safe, CRO-focused, premium-looking work</span> that does not feel randomly generated by AI.</p>
 
     <div class="redesign-board reveal">
@@ -746,9 +839,9 @@
     </div>
   </section>
 
-  <!-- 08 ZERO-COMEBACK -->
+  <!-- 09 ZERO-COMEBACK -->
   <section class="sec" id="zerocomeback" style="--ac:#FBBF24">
-    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
+    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill" style="color:#FBBF24;border-color:rgba(251,191,36,.4)">100% Figma deployed</span><span class="pill" style="color:#34D399;border-color:rgba(52,211,153,.4)">0 comebacks</span></div>
     <p class="lead reveal">The discipline that guarantees what ships matches the Figma exactly — no "this doesn't match," no "this is broken." <span class="hl">Every gate must pass. Nothing skips.</span> The brand knows every step in advance.</p>
     <div class="flow reveal">
@@ -773,9 +866,9 @@
     </div>
   </section>
 
-  <!-- 09 BRAND FIGMA -->
+  <!-- 10 BRAND FIGMA -->
   <section class="sec" id="brandfigma" style="--ac:#818CF8">
-    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
+    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
     <p class="lead reveal">When the brand hands over their own Figma. Extra validation up front — we didn't build the file — then it joins the zero-comeback process.</p>
     <div class="flow reveal">
       <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brand provides Figma + access</b><span>File access, brand guidelines, fonts, content, assets.</span></div></div>
@@ -789,9 +882,9 @@
       <li>Closing gaps up front is exactly what prevents comebacks after deployment.</li></ul></div>
   </section>
 
-  <!-- 10 PAGE OPTIMIZATION -->
+  <!-- 11 PAGE OPTIMIZATION -->
   <section class="sec" id="pageopt" style="--ac:#FB923C">
-    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
+    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill o">POC · CTO directly</span><span class="pill" style="color:#FB923C;border-color:rgba(251,146,60,.4)">~2 weeks to go / no-go</span></div>
     <p class="lead reveal">A standalone offering. The goal is a high Lighthouse score — faster loading, better Core Web Vitals. The assessment runs with the <span class="hl">CTO directly</span>. The brand is briefed on the steps up front.</p>
     <div class="flow reveal">
@@ -818,9 +911,9 @@
     </div>
   </section>
 
-  <!-- 11 SUMMARY -->
+  <!-- 12 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
-    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
     <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
     <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
       <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
@@ -829,11 +922,13 @@
       <div class="maprow"><div class="if"><b>Tech-only</b> · Page Optimization</div><div class="ar">→</div><div class="to">Make the site fast, pass Core Web Vitals. POC is the CTO. ~2 weeks to go/no-go.</div></div>
       <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Design a page, get sign-off, build it. Project-priced.</div></div>
       <div class="maprow"><div class="if"><b>AI HTML → Client Live</b></div><div class="ar">→</div><div class="to">Prototype a brand-safe redesign, review it with the client, approve, hand off, deploy, then monitor live.</div></div>
+      <div class="maprow"><div class="if"><b>Scope of Work</b></div><div class="ar">→</div><div class="to">Classify the request, convert gaps into tasks, approve scope/hours/commercials, then route into the correct operating flow.</div></div>
     </div></div>
     <div class="cards two reveal" style="margin-top:16px">
       <div class="card"><div class="card__label">The steps, in order</div><ul class="ul arrow">
         <li>Onboard &amp; research (1 day, 2 hrs). Explain Troopod + expectations. Register in the brand DB.</li>
         <li>Categorize &amp; route by scope — mind the 40-hour gate.</li>
+        <li>Create SOW: classify work, audit current gaps, build task table, approve scope, route to lifecycle.</li>
         <li>Pick the journey — CRO-led or Build-first.</li>
         <li>Run the lifecycle: intake → audit → benchmark → data → PDP + A/B → rollout.</li>
         <li>For AI HTML redesigns, clean the prototype, review CRO, host preview, control revisions, approve, deploy, monitor.</li>
@@ -841,6 +936,7 @@
         <li>Track the 2-month timeline; CVR compounds as you run more tests.</li></ul></div>
       <div class="card"><div class="card__label">Key points to remember</div><ul class="ul">
         <li><b>Research first</b> so categorization has 0 issues.</li>
+        <li><b>SOW before delivery</b> — no execution without approved scope, hours, timeline, and commercials.</li>
         <li><b>Explain every step to the brand in advance.</b></li>
         <li>Suppress signals that don't apply before sharing.</li>
         <li>A/B: 60% win · 95% confidence · 28-day min · top 20 SKUs.</li>
@@ -852,9 +948,9 @@
     </div>
   </section>
 
-  <!-- 12 FAQ -->
+  <!-- 13 FAQ -->
   <section class="sec" id="faqs" style="--ac:#2DD4BF">
-    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
     <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
@@ -867,7 +963,7 @@
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 12 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 13 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -882,16 +978,17 @@
   var SECTIONS = [
     {id:'onboarding', n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
     {id:'triage',     n:'02', t:'Triage & Routing', ac:'#22D3EE'},
-    {id:'journeys',   n:'03', t:'Client Journeys', ac:'#38BDF8'},
-    {id:'lifecycle',  n:'04', t:'Engagement Lifecycle', ac:'#E879F9'},
-    {id:'timeline',   n:'05', t:'Timeline & CVR', ac:'#34D399'},
-    {id:'design',     n:'06', t:'Design → Development', ac:'#F472B6'},
-    {id:'aihtml',     n:'07', t:'AI HTML → Client Live', ac:'#2563EB'},
-    {id:'zerocomeback',n:'08',t:'Zero-Comeback Deploy', ac:'#FBBF24'},
-    {id:'brandfigma', n:'09', t:'Brand Figma → Live', ac:'#818CF8'},
-    {id:'pageopt',    n:'10', t:'Page Optimization', ac:'#FB923C'},
-    {id:'summary',    n:'11', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',       n:'12', t:'FAQs', ac:'#2DD4BF'}
+    {id:'sow',        n:'03', t:'Scope of Work', ac:'#22D3EE'},
+    {id:'journeys',   n:'04', t:'Client Journeys', ac:'#38BDF8'},
+    {id:'lifecycle',  n:'05', t:'Engagement Lifecycle', ac:'#E879F9'},
+    {id:'timeline',   n:'06', t:'Timeline & CVR', ac:'#34D399'},
+    {id:'design',     n:'07', t:'Design → Development', ac:'#F472B6'},
+    {id:'aihtml',     n:'08', t:'AI HTML → Client Live', ac:'#2563EB'},
+    {id:'zerocomeback',n:'09',t:'Zero-Comeback Deploy', ac:'#FBBF24'},
+    {id:'brandfigma', n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
+    {id:'pageopt',    n:'11', t:'Page Optimization', ac:'#FB923C'},
+    {id:'summary',    n:'12', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',       n:'13', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -916,6 +1013,7 @@
     {key:'dsn',name:'Design',ac:'#F472B6'},
     {key:'bld',name:'Build & Deploy',ac:'#FBBF24'},
     {key:'perf',name:'Performance',ac:'#FB923C'},
+    {key:'sow',name:'Scope of Work',ac:'#22D3EE'},
     {key:'proc',name:'Process & Client',ac:'#A78BFA'}
   ];
   var FAQS=[
@@ -924,6 +1022,11 @@
     ['onb',"What exactly do we cover in the 2-hour onboarding?","Who Troopod is, our expectations both ways, and a walk-through of the brand's journey and every step in advance \u2014 no surprises later."],
     ['onb',"Where do tech hours get tracked?","In the Brand DB at registration. It logs the commercial model, requirement scope, decision-maker, and budgeted / tracked tech hours."],
     ['onb',"A brand is recurring \u2014 what must I capture?","Capture MRR at registration \u2014 it drives forecasting and the monthly Client Update."],
+    ['sow',"When do we create the Scope of Work?","Immediately after triage and before delivery. The SOW locks the work type, tasks, current gap/data, priority, timeline or hours, owner, commercials, and handoff."],
+    ['sow',"How do I tag the brand in the SOW?","Tag by work type: one-time tech, pure CRO, CRO + Tech + Design, design/redesign, tech-only, mixed work, or small change. That tag decides the next page flow."],
+    ['sow',"Where does each SOW route next?","Pure CRO and mixed growth go to Engagement Lifecycle. Heavy/new build goes to Client Journeys. Design/redesign goes to Design → Development or AI HTML. Tech-only goes to Page Optimization."],
+    ['sow',"What table format should every SOW use?","Focus → Task → Current Gap/Data → Priority → Timeline/Hours → Metric. This keeps the SOW execution-ready instead of vague."],
+    ['sow',"What if the client adds extra work after approval?","Treat it as new scope. Extra work, platform limitations, third-party issues, or new requests beyond the approved cap must be estimated separately."],
     ['cro',"How many of our A/B tests are expected to win?","Around 60%. Each winner must clear 95% confidence over a 28-day minimum window, and we start with the top 20 SKUs."],
     ['cro',"How long does one A/B test run?","A 28-day minimum window. Ramp traffic 90:10 \u2192 50:50, top 20 SKUs first, and only call a winner at 95% confidence."],
     ['cro',"How much conversion lift can I promise a client?","Don't promise a single number. Lift compounds with the number of tests \u2014 expect 1\u20132 in the first 2-month cycle and present a range, never a guarantee."],
@@ -984,6 +1087,7 @@
   var REMIND=[
     ["#A78BFA","<b>Research first.</b> Categorize with 0 issues."],
     ["#22D3EE","<b>Explain every step</b> to the brand in advance."],
+    ["#22D3EE","SOW before delivery: <b>classify, scope, approve, then route.</b>"],
     ["#E879F9","<b>Suppress</b> signals that don't apply before sharing."],
     ["#34D399","A/B: <b>60% win · 95% · 28-day · top 20 SKUs.</b>"],
     ["#2563EB","AI HTML is a <b>prototype</b> until cleaned, approved, and handed off."],
@@ -1064,6 +1168,23 @@
     });
   });
 
+  /* ---- interactive SOW flowchart ---- */
+  function openSowStep(step){
+    var flow = step.closest('.sow-flow');
+    if(!flow) return;
+    Array.prototype.forEach.call(flow.querySelectorAll('.sow-step'),function(el){
+      var open = el === step;
+      el.classList.toggle('is-open', open);
+      el.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.sow-step'),function(step){
+    step.addEventListener('click',function(){ openSowStep(step); });
+    step.addEventListener('keydown',function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openSowStep(step); }
+    });
+  });
+
   /* ---- scroll progress (top bar + rail fill) ---- */
   var pfill=document.getElementById('pfill'), railFill=document.getElementById('railFill'), railNavEl=document.getElementById('railNav');
   var fab=document.getElementById('fab');
@@ -1123,7 +1244,7 @@
   setTimeout(finishPre,3200);
 
   /* ---- gamified learning score ---- */
-  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[12,'Certified']];
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[13,'Certified']];
   var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
   var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
       scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),

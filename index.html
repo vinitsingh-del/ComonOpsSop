@@ -666,9 +666,105 @@
     <div class="callout reveal"><div class="callout__ic">→</div><p><b>Connection rule:</b> once the SOW is approved, route the brand into the next correct page flow. Pure CRO and mixed growth go to <span class="hl">Engagement Lifecycle</span>, heavy/new build goes to <span class="hl">Client Journeys</span>, design/redesign goes to <span class="hl">Design → Development</span> or <span class="hl">AI HTML → Client Live</span>, and tech-only goes to <span class="hl">Page Optimization</span>.</p></div>
   </section>
 
-  <!-- 04 JOURNEYS -->
+  <!-- 04 MARKET STANDARD TIMELINE -->
+  <section class="sec" id="market" style="--ac:#60A5FA">
+    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Market Standard Timeline</h2><span class="sec__kicker">traditional UI/UX + dev</span></div>
+    <p class="lead reveal">Use this when a trainee or brand asks, “How long would this take in the market?” Traditional delivery usually separates discovery, UX/UI, development, QA, launch, and stabilization. Our SOP compresses the loop only when scope, assets, approvals, and ownership are clean.</p>
+
+    <div class="market-hero reveal">
+      <div class="market-stat"><b>6-12w</b><span>Typical small to mid-size website from kickoff to launch.</span></div>
+      <div class="market-stat"><b>12-24w</b><span>Common range for complex or ecommerce builds with integrations.</span></div>
+      <div class="market-stat"><b>16-30w</b><span>Full redesign ranges reported by agencies for larger B2B or premium projects.</span></div>
+    </div>
+
+    <div class="market-table reveal">
+      <div class="market-row head">
+        <div class="market-cell">Task we do</div>
+        <div class="market-cell">Traditional market time</div>
+        <div class="market-cell">Our SOP target</div>
+        <div class="market-cell">Trainee note</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Brand onboarding + discovery</b>Input call, site context, goals, access, brand DB.</div>
+        <div class="market-cell"><span class="market-risk">1-4 weeks</span> for discovery; scope/quote discovery can take 2-4 weeks.</div>
+        <div class="market-cell"><span class="market-fast">~1 day + 2-hr call</span> when inputs are ready.</div>
+        <div class="market-cell">Delay if decision-maker, assets, access, or current goals are unclear.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>SOW + routing</b>Classify one-time, CRO, tech-only, design, build-first, or mixed.</div>
+        <div class="market-cell"><span class="market-risk">1-3 weeks</span> planning and requirement freeze in normal agency flow.</div>
+        <div class="market-cell"><span class="market-fast">Before delivery starts</span>; lock task, gap, priority, hours, metric.</div>
+        <div class="market-cell">No work starts without approved scope, hours, commercials, exclusions, and owner.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>UX/UI page design</b>PDP, homepage, collection, landing page, cart nudges.</div>
+        <div class="market-cell"><span class="market-risk">2-5 weeks</span> for design/prototype; larger UX design can run 4-8 weeks.</div>
+        <div class="market-cell"><span class="market-fast">10h first AI HTML preview</span> or ~2-week client review loop.</div>
+        <div class="market-cell">Fast only if brand guideline, screenshots, product assets, and CRO goal are complete.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Full redesign / ecommerce build</b>Strategy, UX, visual design, dev, content, QA, launch.</div>
+        <div class="market-cell"><span class="market-risk">12-24+ weeks</span>; premium rebuilds often show 16-24 or 26-30 weeks.</div>
+        <div class="market-cell"><span class="market-fast">Route by 40h gate</span>: AI HTML preview or build-first journey.</div>
+        <div class="market-cell">Do not sell a heavy rebuild as a small revision. New page or major module = new scope.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Figma → Dev → Deploy</b>Dev-readiness, responsive build, QA, staging, sign-off, production.</div>
+        <div class="market-cell"><span class="market-risk">3-8 weeks dev</span> for standard builds; custom Shopify theme can be 4-8+ weeks.</div>
+        <div class="market-cell"><span class="market-fast">Estimate by tech hours</span>; never skip readiness, QA, or written sign-off.</div>
+        <div class="market-cell">Traditional time expands when Figma lacks states, responsive frames, assets, or interactions.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>QA + launch + stabilization</b>Cross-device QA, links, forms, tracking, staging approval, live check.</div>
+        <div class="market-cell"><span class="market-risk">1-4 weeks QA</span>; launch/stabilization commonly adds 1-2 weeks.</div>
+        <div class="market-cell"><span class="market-fast">Zero-comeback gates</span> + post-live monitoring.</div>
+        <div class="market-cell">QA is not optional. Most delivery embarrassment comes from skipped staging checks.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>CRO experiment</b>Hypothesis, A/B setup, traffic ramp, winner call, rollout.</div>
+        <div class="market-cell"><span class="market-risk">2-6 weeks</span>; many sources recommend at least 2 weeks, preferably 4.</div>
+        <div class="market-cell"><span class="market-fast">28-day minimum</span>, 95% confidence, top 20 SKUs first.</div>
+        <div class="market-cell">Never call a test early just because week 1 looks good. False positives are common.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Page Optimization / CWV</b>Audit, speed fixes, Core Web Vitals, Lighthouse, validation.</div>
+        <div class="market-cell"><span class="market-risk">4-6 weeks</span> for focused Shopify speed engagements; field data is real-user based.</div>
+        <div class="market-cell"><span class="market-fast">~2 weeks go/no-go</span> with CTO; 90+ green ideal, 70+ may be acceptable by scope.</div>
+        <div class="market-cell">Lighthouse is lab. Google Core Web Vitals depend on real-user field data, not only one test run.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Escalation / angry brand</b>Ghosting, missed timeline, design mismatch, conversion dissatisfaction.</div>
+        <div class="market-cell"><span class="market-risk">Unplanned days/weeks</span> if PM, dev, design, and client communication are fragmented.</div>
+        <div class="market-cell"><span class="market-fast">Same-day severity tag</span> + CTO/founder route + RCA + apology-led recovery ETA.</div>
+        <div class="market-cell">The goal is not speed alone. The goal is trust recovery with one owner and one source of truth.</div>
+      </div>
+    </div>
+
+    <div class="cards two reveal" style="margin-top:16px">
+      <div class="card"><div class="card__label">How to explain the delta</div><ul class="ul">
+        <li><b>Traditional</b> means separate handoffs: strategist → UI/UX → developer → QA → launch manager.</li>
+        <li><b>Comon Ops</b> is faster only when SOW, assets, approvals, platform access, and decision-maker are ready.</li>
+        <li><b>Do not compress risk.</b> Heavy build, missing assets, unclear Figma, or new scope must expand timeline.</li>
+      </ul></div>
+      <div class="card"><div class="card__label">Research basis</div>
+        <p style="font-size:14px;color:var(--mut);line-height:1.55">Benchmarks were cross-checked against agency timeline guides, CRO testing guidance, Chrome Lighthouse documentation, Google Core Web Vitals documentation, and Shopify speed/theme references.</p>
+        <div class="source-strip">
+          <a href="https://butterfly.com.au/blog/website-development-timelines/" target="_blank" rel="noopener">6-24w web builds</a>
+          <a href="https://cliquestudios.com/faq/website-redesign-timeline-and-process" target="_blank" rel="noopener">16-24w redesign</a>
+          <a href="https://www.threesevenmarketing.com/blog/website-redesign-timeline/" target="_blank" rel="noopener">phase ranges</a>
+          <a href="https://www.abtasty.com/blog/how-long-run-ab-test/" target="_blank" rel="noopener">A/B duration</a>
+          <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring" target="_blank" rel="noopener">Lighthouse score</a>
+          <a href="https://support.google.com/webmasters/answer/9205520?hl=en" target="_blank" rel="noopener">CWV field data</a>
+          <a href="https://aheadworks.com/shopify-plus-services/theme-development" target="_blank" rel="noopener">Shopify theme</a>
+          <a href="https://www.webrexstudio.com/services/shopify-core-web-vitals-optimization/" target="_blank" rel="noopener">Shopify speed</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 JOURNEYS -->
   <section class="sec" id="journeys" style="--ac:#38BDF8">
-    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
+    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
     <p class="lead reveal">Two journeys cover most brands. The <span class="hl">40-hour tech gate</span> decides which one. Both end in CRO retention.</p>
     <div class="journey reveal">
       <div class="journey__h"><div class="journey__n">Journey A · CRO-led</div><div class="journey__c">Live store · tech ≤ 40 hrs</div></div>
@@ -685,9 +781,9 @@
     </div>
   </section>
 
-  <!-- 05 LIFECYCLE -->
+  <!-- 06 LIFECYCLE -->
   <section class="sec" id="lifecycle" style="--ac:#E879F9">
-    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
     <p class="lead reveal">The core work for CRO + Tech + Design brands — six stages, in order. The engine does the signals; the KAM owns judgement and the client.</p>
     <div class="stages reveal" id="stages">
       <div class="stage"><div class="stage__head"><span class="stage__num">00</span><span class="stage__t">Intake &amp; Brand Setup</span><span class="stage__when">Day 0</span><span class="stage__chev">▼</span></div>
@@ -739,9 +835,9 @@
     </div>
   </section>
 
-  <!-- 06 TIMELINE -->
+  <!-- 07 TIMELINE -->
   <section class="sec" id="timeline" style="--ac:#34D399">
-    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
+    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
     <p class="lead reveal">One brand cycle runs across 8 weeks. The <span class="hl">28-day test window</span> sets the pace; from Month 3, velocity rises to 2–4 tests / month.</p>
     <div class="cards two reveal">
       <div class="card"><div class="month__h">Month 1</div><div class="month__s">Audit · Benchmark · Design</div>
@@ -766,9 +862,9 @@
       <p style="font-size:12.5px;color:var(--faint);line-height:1.5;margin-top:13px;font-style:italic">60% win rate; per-winner lift +3% (conservative) to +12% (strong), compounded. Expect <span class="hl">1–2 tests in the first 2-month cycle</span> — Month 1 is mostly setup &amp; design — rising to 2–4 / month from Month 3. Direction-setting estimates, not guarantees.</p></div>
   </section>
 
-  <!-- 07 DESIGN -->
+  <!-- 08 DESIGN -->
   <section class="sec" id="design" style="--ac:#F472B6">
-    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
+    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
     <p class="lead reveal">How any page moves from design to development. The <span class="hl">~2-week review window</span> keeps it from stalling; nothing goes to dev until the design is closed. The brand is walked through these steps before we start.</p>
     <div class="flow reveal">
       <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brief + brand guidelines confirmed</b><span>Guidelines in hand before a pixel is drawn.</span></div></div>
@@ -790,9 +886,52 @@
       <li><b>Dev-feasibility</b> — quick design ↔ dev check before locking.</li></ul></div>
   </section>
 
-  <!-- 08 AI HTML REDESIGN -->
+  <!-- 09 ZERO-COMEBACK -->
+  <section class="sec" id="zerocomeback" style="--ac:#FBBF24">
+    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
+    <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill" style="color:#FBBF24;border-color:rgba(251,191,36,.4)">100% Figma deployed</span><span class="pill" style="color:#34D399;border-color:rgba(52,211,153,.4)">0 comebacks</span></div>
+    <p class="lead reveal">The discipline that guarantees what ships matches the Figma exactly — no "this doesn't match," no "this is broken." <span class="hl">Every gate must pass. Nothing skips.</span> The brand knows every step in advance.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Figma locked &amp; approved</b><span>Signed off, no further changes. Still open → not ready.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Dev-readiness gate</b><span>States, responsive frames, specs, components, assets, fonts, interactions. Not ready → back to design.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Build to spec</b><span>Token-for-token. No "close enough."</span></div></div>
+      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>QA gate — against the Figma</b><span>Side-by-side, every state + cross-device. Any miss → fix, re-QA.</span></div></div>
+      <div class="fstep"><div class="fstep__node">5</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Staging → brand sign-off gate</b><span>Brand confirms on the staging link. Explicit written yes before live.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Deploy → verified live · 100% Figma · 0 comebacks</b></div></div>
+    </div>
+    <div class="cards two reveal">
+      <div class="card"><div class="card__label">Dev-readiness checklist</div><ul class="ul">
+        <li>All states — default, hover, empty, error, loading.</li>
+        <li>Responsive frames — mobile + desktop.</li>
+        <li>Specs, components, assets at correct resolution.</li>
+        <li>Fonts supplied; interactions documented.</li></ul></div>
+      <div class="card"><div class="card__label">Zero-comeback rules</div><ul class="ul">
+        <li>Never build from an unlocked Figma.</li>
+        <li>Never skip a gate — a skipped gate is a future comeback.</li>
+        <li>QA against the file, never from memory.</li>
+        <li>Written sign-off before production. Always.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 10 BRAND FIGMA -->
+  <section class="sec" id="brandfigma" style="--ac:#818CF8">
+    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
+    <p class="lead reveal">When the brand hands over their own Figma. Extra validation up front — we didn't build the file — then it joins the zero-comeback process.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brand provides Figma + access</b><span>File access, brand guidelines, fonts, content, assets.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Figma audit · readiness</b><span>Complete and dev-ready? Check states, responsive frames, specs — flag every gap.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Gaps → back to the brand</b><span>They fill gaps, or <span class="hl">sign off on assumptions in writing</span>. Don't build on ambiguity.</span></div></div>
+      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><b>Confirm scope + timeline</b><span>Lock which frames are in scope and the delivery date.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Enter the Zero-Comeback Process → build · QA · sign-off · deploy</b></div></div>
+    </div>
+    <div class="card reveal"><div class="card__label">Why the extra steps</div><ul class="ul">
+      <li>A brand's Figma is frequently <b>not dev-ready</b> — missing states, specs or responsive frames.</li>
+      <li>Closing gaps up front is exactly what prevents comebacks after deployment.</li></ul></div>
+  </section>
+
+  <!-- 11 AI HTML REDESIGN -->
   <section class="sec" id="aihtml" style="--ac:#2563EB">
-    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
+    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
     <p class="lead reveal">Use this when a brand needs a fast redesign prototype in HTML before it becomes a client-approved live website. The goal is <span class="hl">brand-safe, CRO-focused, premium-looking work</span> that does not feel randomly generated by AI.</p>
 
     <div class="redesign-board reveal">
@@ -890,52 +1029,9 @@
     </div>
   </section>
 
-  <!-- 09 ZERO-COMEBACK -->
-  <section class="sec" id="zerocomeback" style="--ac:#FBBF24">
-    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
-    <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill" style="color:#FBBF24;border-color:rgba(251,191,36,.4)">100% Figma deployed</span><span class="pill" style="color:#34D399;border-color:rgba(52,211,153,.4)">0 comebacks</span></div>
-    <p class="lead reveal">The discipline that guarantees what ships matches the Figma exactly — no "this doesn't match," no "this is broken." <span class="hl">Every gate must pass. Nothing skips.</span> The brand knows every step in advance.</p>
-    <div class="flow reveal">
-      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Figma locked &amp; approved</b><span>Signed off, no further changes. Still open → not ready.</span></div></div>
-      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Dev-readiness gate</b><span>States, responsive frames, specs, components, assets, fonts, interactions. Not ready → back to design.</span></div></div>
-      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Build to spec</b><span>Token-for-token. No "close enough."</span></div></div>
-      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>QA gate — against the Figma</b><span>Side-by-side, every state + cross-device. Any miss → fix, re-QA.</span></div></div>
-      <div class="fstep"><div class="fstep__node">5</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Staging → brand sign-off gate</b><span>Brand confirms on the staging link. Explicit written yes before live.</span></div></div>
-      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Deploy → verified live · 100% Figma · 0 comebacks</b></div></div>
-    </div>
-    <div class="cards two reveal">
-      <div class="card"><div class="card__label">Dev-readiness checklist</div><ul class="ul">
-        <li>All states — default, hover, empty, error, loading.</li>
-        <li>Responsive frames — mobile + desktop.</li>
-        <li>Specs, components, assets at correct resolution.</li>
-        <li>Fonts supplied; interactions documented.</li></ul></div>
-      <div class="card"><div class="card__label">Zero-comeback rules</div><ul class="ul">
-        <li>Never build from an unlocked Figma.</li>
-        <li>Never skip a gate — a skipped gate is a future comeback.</li>
-        <li>QA against the file, never from memory.</li>
-        <li>Written sign-off before production. Always.</li></ul></div>
-    </div>
-  </section>
-
-  <!-- 10 BRAND FIGMA -->
-  <section class="sec" id="brandfigma" style="--ac:#818CF8">
-    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
-    <p class="lead reveal">When the brand hands over their own Figma. Extra validation up front — we didn't build the file — then it joins the zero-comeback process.</p>
-    <div class="flow reveal">
-      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brand provides Figma + access</b><span>File access, brand guidelines, fonts, content, assets.</span></div></div>
-      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Figma audit · readiness</b><span>Complete and dev-ready? Check states, responsive frames, specs — flag every gap.</span></div></div>
-      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Gaps → back to the brand</b><span>They fill gaps, or <span class="hl">sign off on assumptions in writing</span>. Don't build on ambiguity.</span></div></div>
-      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><b>Confirm scope + timeline</b><span>Lock which frames are in scope and the delivery date.</span></div></div>
-      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Enter the Zero-Comeback Process → build · QA · sign-off · deploy</b></div></div>
-    </div>
-    <div class="card reveal"><div class="card__label">Why the extra steps</div><ul class="ul">
-      <li>A brand's Figma is frequently <b>not dev-ready</b> — missing states, specs or responsive frames.</li>
-      <li>Closing gaps up front is exactly what prevents comebacks after deployment.</li></ul></div>
-  </section>
-
-  <!-- 11 PAGE OPTIMIZATION -->
+  <!-- 12 PAGE OPTIMIZATION -->
   <section class="sec" id="pageopt" style="--ac:#FB923C">
-    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
+    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill o">POC · CTO directly</span><span class="pill" style="color:#FB923C;border-color:rgba(251,146,60,.4)">~2 weeks to go / no-go</span></div>
     <p class="lead reveal">A standalone offering. The goal is faster loading and better Core Web Vitals. A <span class="hl">90+ green Lighthouse score</span> is ideal, but <span class="hl">70+ can be acceptable</span> depending on brand requirements, platform limits, and agreed scope. The assessment runs with the <span class="hl">CTO directly</span>.</p>
     <div class="flow reveal">
@@ -962,9 +1058,9 @@
     </div>
   </section>
 
-  <!-- 12 ESCALATION -->
+  <!-- 13 ESCALATION -->
   <section class="sec" id="escalation" style="--ac:#F87171">
-    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
     <p class="lead reveal">Use this when the relationship is at risk: the brand is ghosting, delivery is late, deployment does not match design, the brand rejects design quality, conversions are not moving, or the brand is below ICP but expects CRO + ads scale.</p>
 
     <div class="esc-triggers reveal">
@@ -1006,102 +1102,6 @@
     <div class="callout reveal"><div class="callout__ic">RCA</div><p><b>RCA rule:</b> for red brands, document the promise, the miss, the root cause, team owner, recovery ETA, client message, and prevention step. Then send one apology-led update to the brand: acknowledge, apologise, ask for time to revert, and return with a solution.</p></div>
   </section>
 
-  <!-- 13 MARKET STANDARD TIMELINE -->
-  <section class="sec" id="market" style="--ac:#60A5FA">
-    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Market Standard Timeline</h2><span class="sec__kicker">traditional UI/UX + dev</span></div>
-    <p class="lead reveal">Use this when a trainee or brand asks, “How long would this take in the market?” Traditional delivery usually separates discovery, UX/UI, development, QA, launch, and stabilization. Our SOP compresses the loop only when scope, assets, approvals, and ownership are clean.</p>
-
-    <div class="market-hero reveal">
-      <div class="market-stat"><b>6-12w</b><span>Typical small to mid-size website from kickoff to launch.</span></div>
-      <div class="market-stat"><b>12-24w</b><span>Common range for complex or ecommerce builds with integrations.</span></div>
-      <div class="market-stat"><b>16-30w</b><span>Full redesign ranges reported by agencies for larger B2B or premium projects.</span></div>
-    </div>
-
-    <div class="market-table reveal">
-      <div class="market-row head">
-        <div class="market-cell">Task we do</div>
-        <div class="market-cell">Traditional market time</div>
-        <div class="market-cell">Our SOP target</div>
-        <div class="market-cell">Trainee note</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>Brand onboarding + discovery</b>Input call, site context, goals, access, brand DB.</div>
-        <div class="market-cell"><span class="market-risk">1-4 weeks</span> for discovery; scope/quote discovery can take 2-4 weeks.</div>
-        <div class="market-cell"><span class="market-fast">~1 day + 2-hr call</span> when inputs are ready.</div>
-        <div class="market-cell">Delay if decision-maker, assets, access, or current goals are unclear.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>SOW + routing</b>Classify one-time, CRO, tech-only, design, build-first, or mixed.</div>
-        <div class="market-cell"><span class="market-risk">1-3 weeks</span> planning and requirement freeze in normal agency flow.</div>
-        <div class="market-cell"><span class="market-fast">Before delivery starts</span>; lock task, gap, priority, hours, metric.</div>
-        <div class="market-cell">No work starts without approved scope, hours, commercials, exclusions, and owner.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>UX/UI page design</b>PDP, homepage, collection, landing page, cart nudges.</div>
-        <div class="market-cell"><span class="market-risk">2-5 weeks</span> for design/prototype; larger UX design can run 4-8 weeks.</div>
-        <div class="market-cell"><span class="market-fast">10h first AI HTML preview</span> or ~2-week client review loop.</div>
-        <div class="market-cell">Fast only if brand guideline, screenshots, product assets, and CRO goal are complete.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>Full redesign / ecommerce build</b>Strategy, UX, visual design, dev, content, QA, launch.</div>
-        <div class="market-cell"><span class="market-risk">12-24+ weeks</span>; premium rebuilds often show 16-24 or 26-30 weeks.</div>
-        <div class="market-cell"><span class="market-fast">Route by 40h gate</span>: AI HTML preview or build-first journey.</div>
-        <div class="market-cell">Do not sell a heavy rebuild as a small revision. New page or major module = new scope.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>Figma → Dev → Deploy</b>Dev-readiness, responsive build, QA, staging, sign-off, production.</div>
-        <div class="market-cell"><span class="market-risk">3-8 weeks dev</span> for standard builds; custom Shopify theme can be 4-8+ weeks.</div>
-        <div class="market-cell"><span class="market-fast">Estimate by tech hours</span>; never skip readiness, QA, or written sign-off.</div>
-        <div class="market-cell">Traditional time expands when Figma lacks states, responsive frames, assets, or interactions.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>QA + launch + stabilization</b>Cross-device QA, links, forms, tracking, staging approval, live check.</div>
-        <div class="market-cell"><span class="market-risk">1-4 weeks QA</span>; launch/stabilization commonly adds 1-2 weeks.</div>
-        <div class="market-cell"><span class="market-fast">Zero-comeback gates</span> + post-live monitoring.</div>
-        <div class="market-cell">QA is not optional. Most delivery embarrassment comes from skipped staging checks.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>CRO experiment</b>Hypothesis, A/B setup, traffic ramp, winner call, rollout.</div>
-        <div class="market-cell"><span class="market-risk">2-6 weeks</span>; many sources recommend at least 2 weeks, preferably 4.</div>
-        <div class="market-cell"><span class="market-fast">28-day minimum</span>, 95% confidence, top 20 SKUs first.</div>
-        <div class="market-cell">Never call a test early just because week 1 looks good. False positives are common.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>Page Optimization / CWV</b>Audit, speed fixes, Core Web Vitals, Lighthouse, validation.</div>
-        <div class="market-cell"><span class="market-risk">4-6 weeks</span> for focused Shopify speed engagements; field data is real-user based.</div>
-        <div class="market-cell"><span class="market-fast">~2 weeks go/no-go</span> with CTO; 90+ green ideal, 70+ may be acceptable by scope.</div>
-        <div class="market-cell">Lighthouse is lab. Google Core Web Vitals depend on real-user field data, not only one test run.</div>
-      </div>
-      <div class="market-row">
-        <div class="market-cell"><b>Escalation / angry brand</b>Ghosting, missed timeline, design mismatch, conversion dissatisfaction.</div>
-        <div class="market-cell"><span class="market-risk">Unplanned days/weeks</span> if PM, dev, design, and client communication are fragmented.</div>
-        <div class="market-cell"><span class="market-fast">Same-day severity tag</span> + CTO/founder route + RCA + apology-led recovery ETA.</div>
-        <div class="market-cell">The goal is not speed alone. The goal is trust recovery with one owner and one source of truth.</div>
-      </div>
-    </div>
-
-    <div class="cards two reveal" style="margin-top:16px">
-      <div class="card"><div class="card__label">How to explain the delta</div><ul class="ul">
-        <li><b>Traditional</b> means separate handoffs: strategist → UI/UX → developer → QA → launch manager.</li>
-        <li><b>Comon Ops</b> is faster only when SOW, assets, approvals, platform access, and decision-maker are ready.</li>
-        <li><b>Do not compress risk.</b> Heavy build, missing assets, unclear Figma, or new scope must expand timeline.</li>
-      </ul></div>
-      <div class="card"><div class="card__label">Research basis</div>
-        <p style="font-size:14px;color:var(--mut);line-height:1.55">Benchmarks were cross-checked against agency timeline guides, CRO testing guidance, Chrome Lighthouse documentation, Google Core Web Vitals documentation, and Shopify speed/theme references.</p>
-        <div class="source-strip">
-          <a href="https://butterfly.com.au/blog/website-development-timelines/" target="_blank" rel="noopener">6-24w web builds</a>
-          <a href="https://cliquestudios.com/faq/website-redesign-timeline-and-process" target="_blank" rel="noopener">16-24w redesign</a>
-          <a href="https://www.threesevenmarketing.com/blog/website-redesign-timeline/" target="_blank" rel="noopener">phase ranges</a>
-          <a href="https://www.abtasty.com/blog/how-long-run-ab-test/" target="_blank" rel="noopener">A/B duration</a>
-          <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring" target="_blank" rel="noopener">Lighthouse score</a>
-          <a href="https://support.google.com/webmasters/answer/9205520?hl=en" target="_blank" rel="noopener">CWV field data</a>
-          <a href="https://aheadworks.com/shopify-plus-services/theme-development" target="_blank" rel="noopener">Shopify theme</a>
-          <a href="https://www.webrexstudio.com/services/shopify-core-web-vitals-optimization/" target="_blank" rel="noopener">Shopify speed</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 14 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
     <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
@@ -1114,19 +1114,21 @@
       <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Design a page, get sign-off, build it. Project-priced.</div></div>
       <div class="maprow"><div class="if"><b>AI HTML → Client Live</b></div><div class="ar">→</div><div class="to">Prototype a brand-safe redesign, review it with the client, approve, hand off, deploy, then monitor live.</div></div>
       <div class="maprow"><div class="if"><b>Scope of Work</b></div><div class="ar">→</div><div class="to">Classify the request, convert gaps into tasks, approve scope/hours/commercials, then route into the correct operating flow.</div></div>
+      <div class="maprow"><div class="if"><b>Market Standard Timeline</b></div><div class="ar">→</div><div class="to">Set realistic expectations against traditional UI/UX + developer timelines before committing dates.</div></div>
       <div class="maprow"><div class="if"><b>Escalation / Angry Brand</b></div><div class="ar">→</div><div class="to">Mark red brands, alert CTO/founder as needed, run RCA, apologise, recover timeline, and close the loop.</div></div>
     </div></div>
     <div class="cards two reveal" style="margin-top:16px">
       <div class="card"><div class="card__label">The steps, in order</div><ul class="ul arrow">
         <li>Onboard &amp; research (1 day, 2 hrs). Explain Troopod + expectations. Register in the brand DB.</li>
         <li>Categorize &amp; route by scope — mind the 40-hour gate.</li>
-        <li>Create SOW: classify work, audit current gaps, build task table, approve scope, route to lifecycle.</li>
-        <li>Pick the journey — CRO-led or Build-first.</li>
-        <li>Run the lifecycle: intake → audit → benchmark → data → PDP + A/B → rollout.</li>
-        <li>For AI HTML redesigns, clean the prototype, review CRO, host preview, control revisions, approve, deploy, monitor.</li>
-        <li>Design/dev passes every gate — 100% Figma, 0 comebacks.</li>
-        <li>If brand risk appears, run escalation: severity tag → owner → RCA → apology → recovery plan.</li>
-        <li>Track the 2-month timeline; CVR compounds as you run more tests.</li></ul></div>
+        <li>Create SOW: classify work, audit current gaps, build task table, approve scope, hours, commercials, and owner.</li>
+        <li>Check the market-standard timeline so the client expectation is realistic before delivery dates are promised.</li>
+        <li>Pick the journey — CRO-led or Build-first — then run the lifecycle.</li>
+        <li>Track the 8-week CVR model; CVR compounds as tests move from setup to rollout.</li>
+        <li>For design work, close design review first, then pass through Figma readiness, QA, staging, sign-off, and deploy.</li>
+        <li>Use AI HTML only as the fast prototype route, then clean, review, approve, hand off, deploy, and monitor.</li>
+        <li>For speed work, route to Page Optimization with CTO as POC.</li>
+        <li>If brand risk appears, run escalation: severity tag → owner → RCA → apology → recovery plan.</li></ul></div>
       <div class="card"><div class="card__label">Key points to remember</div><ul class="ul">
         <li><b>Research first</b> so categorization has 0 issues.</li>
         <li><b>SOW before delivery</b> — no execution without approved scope, hours, timeline, and commercials.</li>
@@ -1149,7 +1151,6 @@
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
   </section>
-
 </div></div>
 
 <div class="score" id="score" title="Continue — jump to the next section">
@@ -1170,21 +1171,21 @@
 
   /* ---- section registry ---- */
   var SECTIONS = [
-    {id:'onboarding', n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
-    {id:'triage',     n:'02', t:'Triage & Routing', ac:'#22D3EE'},
-    {id:'sow',        n:'03', t:'Scope of Work', ac:'#22D3EE'},
-    {id:'journeys',   n:'04', t:'Client Journeys', ac:'#38BDF8'},
-    {id:'lifecycle',  n:'05', t:'Engagement Lifecycle', ac:'#E879F9'},
-    {id:'timeline',   n:'06', t:'Timeline & CVR', ac:'#34D399'},
-    {id:'design',     n:'07', t:'Design → Development', ac:'#F472B6'},
-    {id:'aihtml',     n:'08', t:'AI HTML → Client Live', ac:'#2563EB'},
-    {id:'zerocomeback',n:'09',t:'Zero-Comeback Deploy', ac:'#FBBF24'},
-    {id:'brandfigma', n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
-    {id:'pageopt',    n:'11', t:'Page Optimization', ac:'#FB923C'},
-    {id:'escalation', n:'12', t:'Escalation / Angry Brand', ac:'#F87171'},
-    {id:'market',     n:'13', t:'Market Standard Timeline', ac:'#60A5FA'},
-    {id:'summary',    n:'14', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',       n:'15', t:'FAQs', ac:'#2DD4BF'}
+    {id:'onboarding',   n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
+    {id:'triage',       n:'02', t:'Triage & Routing', ac:'#22D3EE'},
+    {id:'sow',          n:'03', t:'Scope of Work', ac:'#22D3EE'},
+    {id:'market',       n:'04', t:'Market Standard Timeline', ac:'#60A5FA'},
+    {id:'journeys',     n:'05', t:'Client Journeys', ac:'#38BDF8'},
+    {id:'lifecycle',    n:'06', t:'Engagement Lifecycle', ac:'#E879F9'},
+    {id:'timeline',     n:'07', t:'Timeline & CVR', ac:'#34D399'},
+    {id:'design',       n:'08', t:'Design → Development', ac:'#F472B6'},
+    {id:'zerocomeback', n:'09', t:'Zero-Comeback Deploy', ac:'#FBBF24'},
+    {id:'brandfigma',   n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
+    {id:'aihtml',       n:'11', t:'AI HTML → Client Live', ac:'#2563EB'},
+    {id:'pageopt',      n:'12', t:'Page Optimization', ac:'#FB923C'},
+    {id:'escalation',   n:'13', t:'Escalation / Angry Brand', ac:'#F87171'},
+    {id:'summary',      n:'14', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',         n:'15', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */

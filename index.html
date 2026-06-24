@@ -334,6 +334,25 @@
   .maprow .ar{color:var(--ac);font-weight:700}
   .maprow .to{flex:1.1;color:var(--txt)}
 
+  /* market timeline */
+  .market-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0 18px}
+  .market-stat{border:1px solid color-mix(in srgb,var(--ac) 42%,var(--line));border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.048),rgba(255,255,255,.024)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
+  .market-stat b{display:block;font-size:24px;line-height:1;color:var(--ac);margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+  .market-stat span{display:block;color:var(--mut);font-size:13px;line-height:1.45}
+  .market-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)),var(--surface)}
+  .market-row{display:grid;grid-template-columns:.95fr .9fr .9fr 1.05fr;gap:0;border-top:1px solid var(--line)}
+  .market-row:first-child{border-top:none}
+  .market-row.head{background:color-mix(in srgb,var(--ac) 13%,transparent)}
+  .market-cell{padding:13px 14px;border-left:1px solid var(--line);font-size:13px;line-height:1.45;color:var(--mut);overflow-wrap:anywhere}
+  .market-cell:first-child{border-left:none}
+  .market-cell b{display:block;color:var(--txt);font-size:13.5px;margin-bottom:3px}
+  .market-row.head .market-cell{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:700}
+  .market-fast{color:#34D399;font-family:'JetBrains Mono',monospace;font-weight:700}
+  .market-risk{color:#FBBF24;font-family:'JetBrains Mono',monospace;font-weight:700}
+  .source-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .source-strip a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac);text-decoration:none;border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.03)}
+  .source-strip a:hover{background:color-mix(in srgb,var(--ac) 12%,transparent)}
+
   /* faq accordion */
   .faq{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.022)),var(--surface);transition:.16s}
   .faq.open{border-color:var(--ac)}
@@ -387,6 +406,10 @@
     .redesign-edge{grid-template-columns:1fr}
     .sow-routes,.sow-matrix{grid-template-columns:1fr}
     .esc-grid,.esc-triggers,.icp-strip{grid-template-columns:1fr}
+    .market-hero{grid-template-columns:1fr}
+    .market-row{grid-template-columns:1fr}
+    .market-cell{border-left:none;border-top:1px solid var(--line)}
+    .market-cell:first-child{border-top:none}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -531,7 +554,7 @@
   <section class="hero" id="hero">
     <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
     <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
-    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Fourteen sections, one flow.</p>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Fifteen sections, one flow.</p>
     <div class="hero__chips reveal">
       <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
     </div>
@@ -983,9 +1006,105 @@
     <div class="callout reveal"><div class="callout__ic">RCA</div><p><b>RCA rule:</b> for red brands, document the promise, the miss, the root cause, team owner, recovery ETA, client message, and prevention step. Then send one apology-led update to the brand: acknowledge, apologise, ask for time to revert, and return with a solution.</p></div>
   </section>
 
-  <!-- 13 SUMMARY -->
+  <!-- 13 MARKET STANDARD TIMELINE -->
+  <section class="sec" id="market" style="--ac:#60A5FA">
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Market Standard Timeline</h2><span class="sec__kicker">traditional UI/UX + dev</span></div>
+    <p class="lead reveal">Use this when a trainee or brand asks, “How long would this take in the market?” Traditional delivery usually separates discovery, UX/UI, development, QA, launch, and stabilization. Our SOP compresses the loop only when scope, assets, approvals, and ownership are clean.</p>
+
+    <div class="market-hero reveal">
+      <div class="market-stat"><b>6-12w</b><span>Typical small to mid-size website from kickoff to launch.</span></div>
+      <div class="market-stat"><b>12-24w</b><span>Common range for complex or ecommerce builds with integrations.</span></div>
+      <div class="market-stat"><b>16-30w</b><span>Full redesign ranges reported by agencies for larger B2B or premium projects.</span></div>
+    </div>
+
+    <div class="market-table reveal">
+      <div class="market-row head">
+        <div class="market-cell">Task we do</div>
+        <div class="market-cell">Traditional market time</div>
+        <div class="market-cell">Our SOP target</div>
+        <div class="market-cell">Trainee note</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Brand onboarding + discovery</b>Input call, site context, goals, access, brand DB.</div>
+        <div class="market-cell"><span class="market-risk">1-4 weeks</span> for discovery; scope/quote discovery can take 2-4 weeks.</div>
+        <div class="market-cell"><span class="market-fast">~1 day + 2-hr call</span> when inputs are ready.</div>
+        <div class="market-cell">Delay if decision-maker, assets, access, or current goals are unclear.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>SOW + routing</b>Classify one-time, CRO, tech-only, design, build-first, or mixed.</div>
+        <div class="market-cell"><span class="market-risk">1-3 weeks</span> planning and requirement freeze in normal agency flow.</div>
+        <div class="market-cell"><span class="market-fast">Before delivery starts</span>; lock task, gap, priority, hours, metric.</div>
+        <div class="market-cell">No work starts without approved scope, hours, commercials, exclusions, and owner.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>UX/UI page design</b>PDP, homepage, collection, landing page, cart nudges.</div>
+        <div class="market-cell"><span class="market-risk">2-5 weeks</span> for design/prototype; larger UX design can run 4-8 weeks.</div>
+        <div class="market-cell"><span class="market-fast">10h first AI HTML preview</span> or ~2-week client review loop.</div>
+        <div class="market-cell">Fast only if brand guideline, screenshots, product assets, and CRO goal are complete.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Full redesign / ecommerce build</b>Strategy, UX, visual design, dev, content, QA, launch.</div>
+        <div class="market-cell"><span class="market-risk">12-24+ weeks</span>; premium rebuilds often show 16-24 or 26-30 weeks.</div>
+        <div class="market-cell"><span class="market-fast">Route by 40h gate</span>: AI HTML preview or build-first journey.</div>
+        <div class="market-cell">Do not sell a heavy rebuild as a small revision. New page or major module = new scope.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Figma → Dev → Deploy</b>Dev-readiness, responsive build, QA, staging, sign-off, production.</div>
+        <div class="market-cell"><span class="market-risk">3-8 weeks dev</span> for standard builds; custom Shopify theme can be 4-8+ weeks.</div>
+        <div class="market-cell"><span class="market-fast">Estimate by tech hours</span>; never skip readiness, QA, or written sign-off.</div>
+        <div class="market-cell">Traditional time expands when Figma lacks states, responsive frames, assets, or interactions.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>QA + launch + stabilization</b>Cross-device QA, links, forms, tracking, staging approval, live check.</div>
+        <div class="market-cell"><span class="market-risk">1-4 weeks QA</span>; launch/stabilization commonly adds 1-2 weeks.</div>
+        <div class="market-cell"><span class="market-fast">Zero-comeback gates</span> + post-live monitoring.</div>
+        <div class="market-cell">QA is not optional. Most delivery embarrassment comes from skipped staging checks.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>CRO experiment</b>Hypothesis, A/B setup, traffic ramp, winner call, rollout.</div>
+        <div class="market-cell"><span class="market-risk">2-6 weeks</span>; many sources recommend at least 2 weeks, preferably 4.</div>
+        <div class="market-cell"><span class="market-fast">28-day minimum</span>, 95% confidence, top 20 SKUs first.</div>
+        <div class="market-cell">Never call a test early just because week 1 looks good. False positives are common.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Page Optimization / CWV</b>Audit, speed fixes, Core Web Vitals, Lighthouse, validation.</div>
+        <div class="market-cell"><span class="market-risk">4-6 weeks</span> for focused Shopify speed engagements; field data is real-user based.</div>
+        <div class="market-cell"><span class="market-fast">~2 weeks go/no-go</span> with CTO; 90+ green ideal, 70+ may be acceptable by scope.</div>
+        <div class="market-cell">Lighthouse is lab. Google Core Web Vitals depend on real-user field data, not only one test run.</div>
+      </div>
+      <div class="market-row">
+        <div class="market-cell"><b>Escalation / angry brand</b>Ghosting, missed timeline, design mismatch, conversion dissatisfaction.</div>
+        <div class="market-cell"><span class="market-risk">Unplanned days/weeks</span> if PM, dev, design, and client communication are fragmented.</div>
+        <div class="market-cell"><span class="market-fast">Same-day severity tag</span> + CTO/founder route + RCA + apology-led recovery ETA.</div>
+        <div class="market-cell">The goal is not speed alone. The goal is trust recovery with one owner and one source of truth.</div>
+      </div>
+    </div>
+
+    <div class="cards two reveal" style="margin-top:16px">
+      <div class="card"><div class="card__label">How to explain the delta</div><ul class="ul">
+        <li><b>Traditional</b> means separate handoffs: strategist → UI/UX → developer → QA → launch manager.</li>
+        <li><b>Comon Ops</b> is faster only when SOW, assets, approvals, platform access, and decision-maker are ready.</li>
+        <li><b>Do not compress risk.</b> Heavy build, missing assets, unclear Figma, or new scope must expand timeline.</li>
+      </ul></div>
+      <div class="card"><div class="card__label">Research basis</div>
+        <p style="font-size:14px;color:var(--mut);line-height:1.55">Benchmarks were cross-checked against agency timeline guides, CRO testing guidance, Chrome Lighthouse documentation, Google Core Web Vitals documentation, and Shopify speed/theme references.</p>
+        <div class="source-strip">
+          <a href="https://butterfly.com.au/blog/website-development-timelines/" target="_blank" rel="noopener">6-24w web builds</a>
+          <a href="https://cliquestudios.com/faq/website-redesign-timeline-and-process" target="_blank" rel="noopener">16-24w redesign</a>
+          <a href="https://www.threesevenmarketing.com/blog/website-redesign-timeline/" target="_blank" rel="noopener">phase ranges</a>
+          <a href="https://www.abtasty.com/blog/how-long-run-ab-test/" target="_blank" rel="noopener">A/B duration</a>
+          <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring" target="_blank" rel="noopener">Lighthouse score</a>
+          <a href="https://support.google.com/webmasters/answer/9205520?hl=en" target="_blank" rel="noopener">CWV field data</a>
+          <a href="https://aheadworks.com/shopify-plus-services/theme-development" target="_blank" rel="noopener">Shopify theme</a>
+          <a href="https://www.webrexstudio.com/services/shopify-core-web-vitals-optimization/" target="_blank" rel="noopener">Shopify speed</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
-    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
     <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
     <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
       <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
@@ -1023,9 +1142,9 @@
     </div>
   </section>
 
-  <!-- 14 FAQ -->
+  <!-- 15 FAQ -->
   <section class="sec" id="faqs" style="--ac:#2DD4BF">
-    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">15</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
     <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
@@ -1038,7 +1157,7 @@
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 14 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 15 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -1063,8 +1182,9 @@
     {id:'brandfigma', n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
     {id:'pageopt',    n:'11', t:'Page Optimization', ac:'#FB923C'},
     {id:'escalation', n:'12', t:'Escalation / Angry Brand', ac:'#F87171'},
-    {id:'summary',    n:'13', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',       n:'14', t:'FAQs', ac:'#2DD4BF'}
+    {id:'market',     n:'13', t:'Market Standard Timeline', ac:'#60A5FA'},
+    {id:'summary',    n:'14', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',       n:'15', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -1091,6 +1211,7 @@
     {key:'perf',name:'Performance',ac:'#FB923C'},
     {key:'sow',name:'Scope of Work',ac:'#22D3EE'},
     {key:'esc',name:'Escalation',ac:'#F87171'},
+    {key:'mkt',name:'Market Timeline',ac:'#60A5FA'},
     {key:'proc',name:'Process & Client',ac:'#A78BFA'}
   ];
   var FAQS=[
@@ -1133,6 +1254,9 @@
     ['perf',"Lighthouse is green but the client says the site feels slow.","Lighthouse is lab data; Google ranks on real-user CrUX field data. A 90+ lab score can still fail field Core Web Vitals on slow devices \u2014 validate against CrUX first."],
     ['perf',"What scores are we aiming for?","Lighthouse 90+ green is ideal. 70+ can also be acceptable depending on the brand requirement, platform constraints, and approved scope. Core Web Vitals targets stay: LCP under 2.5s, INP under 200ms, CLS under 0.1."],
     ['perf',"What if optimization isn't doable?","Flag the blockers. If the theme or build caps the gains, recommend a rebuild rather than forcing it."],
+    ['mkt',"How long would a normal market team take for this work?","Traditional UI/UX plus developer teams usually take 6-12 weeks for a small to mid-size website, 12-24+ weeks for complex ecommerce, 2-6 weeks for CRO tests, and 4-6 weeks for focused speed work."],
+    ['mkt',"Can we always promise faster than market standard?","No. We move faster only when SOW, access, assets, Figma, approvals, and decision-maker are clean. Heavy build, missing assets, new scope, or unclear approvals should expand the timeline."],
+    ['mkt',"How do I explain our speed without overselling?","Say the market is slower because work is split across discovery, UI/UX, development, QA, launch, and stabilization. Our SOP compresses handoffs, but it does not remove QA, approval, or scope control."],
     ['proc',"Do we explain the process to the brand?","Yes \u2014 the brand is walked through every step of every process in advance. No surprises."],
     ['proc',"How often do we report to the client?","Bi-weekly performance reports, plus a monthly Client Update covering status, margin health, churn risk, and upsell."]
   ];

@@ -353,6 +353,36 @@
   .source-strip a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac);text-decoration:none;border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.03)}
   .source-strip a:hover{background:color-mix(in srgb,var(--ac) 12%,transparent)}
 
+  /* section checkpoints */
+  .quiz-card{display:none;margin:22px 0 4px;border:1px solid color-mix(in srgb,var(--ac) 40%,var(--line));border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 16px 42px rgba(0,0,0,.18);overflow:hidden;overflow-wrap:anywhere}
+  .quiz-card.is-ready{display:block;animation:quizPop .32s cubic-bezier(.2,.8,.2,1)}
+  .quiz-card.is-open{border-color:var(--ac)}
+  .quiz-head{width:100%;border:none;background:transparent;color:var(--txt);display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:15px 17px;cursor:pointer;text-align:left;font-family:'Poppins'}
+  .quiz-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:4px}
+  .quiz-title{font-size:15.5px;font-weight:800;line-height:1.25}
+  .quiz-score{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);border-radius:999px;padding:6px 9px;white-space:nowrap}
+  .quiz-chev{color:var(--ac);font-size:16px;font-weight:800;transition:transform .2s}
+  .quiz-card.is-open .quiz-chev{transform:rotate(45deg)}
+  .quiz-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .quiz-inner{padding:0 17px 17px}
+  .quiz-points{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+  .quiz-point{font-size:12.5px;line-height:1.4;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:9px;background:rgba(255,255,255,.028)}
+  .quiz-point b{color:var(--txt)}
+  .quiz-list{display:grid;gap:9px}
+  .quiz-q{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:10px}
+  .quiz-q:first-child{border-top:none}
+  .quiz-q p{font-size:13.5px;color:var(--mut);line-height:1.45}
+  .quiz-q p b{color:var(--txt)}
+  .quiz-actions{display:flex;gap:7px}
+  .quiz-actions button{min-width:46px;height:34px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--txt);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;cursor:pointer;transition:.16s}
+  .quiz-actions button:hover{border-color:var(--ac);transform:translateY(-1px)}
+  .quiz-actions button.good{background:rgba(52,211,153,.16);border-color:#34D399;color:#B8F7D7}
+  .quiz-actions button.ok{background:rgba(251,191,36,.14);border-color:#FBBF24;color:#FDE68A}
+  .quiz-feedback{grid-column:1/-1;font-size:12.5px;line-height:1.45;color:var(--faint);padding:0 0 2px}
+  .quiz-feedback.good{color:#86EFAC}
+  .quiz-feedback.ok{color:#FDE68A}
+  @keyframes quizPop{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
   /* faq accordion */
   .faq{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.022)),var(--surface);transition:.16s}
   .faq.open{border-color:var(--ac)}
@@ -410,6 +440,9 @@
     .market-row{grid-template-columns:1fr}
     .market-cell{border-left:none;border-top:1px solid var(--line)}
     .market-cell:first-child{border-top:none}
+    .quiz-points{grid-template-columns:1fr}
+    .quiz-q{grid-template-columns:1fr}
+    .quiz-actions{justify-content:flex-start}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -424,6 +457,10 @@
     .sow-step{grid-template-columns:42px minmax(0,1fr);gap:11px;padding:13px}
     .sow-step:not(:last-child)::after{left:33px}
     .who-row{grid-template-columns:1fr;gap:4px}
+    .quiz-head{grid-template-columns:1fr auto;gap:8px;padding:14px}
+    .quiz-score{justify-self:start}
+    .quiz-chev{grid-column:2;grid-row:1 / span 2}
+    .quiz-inner{padding:0 14px 14px}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -1203,6 +1240,235 @@
   });
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.rlink,.dlink'));
 
+  /* ---- section checkpoints ---- */
+  var QUIZZES = {
+    onboarding: {
+      points:['Research before routing','2-hour kickoff sets expectations','Brand DB captures scope + hours'],
+      q:[
+        ['Should the KAM research the brand before categorizing it?',true],
+        ['Can onboarding skip the brand journey explanation if the client seems busy?',false],
+        ['Should recurring brand MRR be captured in the Brand DB?',true],
+        ['Is the onboarding target roughly 1 day with a 2-hour session?',true],
+        ['Can tech hours be left informal outside the Brand DB?',false]
+      ]
+    },
+    triage: {
+      points:['Route by scope','40+ tech hours changes journey','Do not guess unclear brands'],
+      q:[
+        ['Should CRO + Tech + Design brands move into the full lifecycle?',true],
+        ['Does a new brand with 40+ tech hours follow the normal CRO-led route?',false],
+        ['Should tech-only work route toward Page Optimization or tech execution?',true],
+        ['Can a KAM choose a route without confirming scope?',false],
+        ['Is routing meant to happen after onboarding and registration?',true]
+      ]
+    },
+    sow: {
+      points:['SOW before delivery','Lock owner + metric','New requests become new scope'],
+      q:[
+        ['Should delivery start before the SOW is approved?',false],
+        ['Should the SOW include focus, task, current gap, priority, timeline/hours, and metric?',true],
+        ['Can new work after approval be treated as a normal revision?',false],
+        ['Does the SOW decide the next operating flow?',true],
+        ['Should commercials and exclusions be clear before handoff?',true]
+      ]
+    },
+    market: {
+      points:['Set realistic expectations','Market is slower due to handoffs','Speed depends on clean inputs'],
+      q:[
+        ['Should market-standard timelines be used to set expectations before promising dates?',true],
+        ['Can Comon Ops always promise faster delivery regardless of scope?',false],
+        ['Do missing assets and unclear approvals expand timelines?',true],
+        ['Is Lighthouse field data the same as one lab test run?',false],
+        ['Should heavy rebuilds be sold as small revisions?',false]
+      ]
+    },
+    journeys: {
+      points:['Two core journeys','40-hour gate matters','Both end in CRO retention'],
+      q:[
+        ['Does Journey A fit a live store with tech work under or equal to 40 hours?',true],
+        ['Does Journey B start with build and launch before CRO retention?',true],
+        ['Can the 40-hour gate be ignored if the client wants speed?',false],
+        ['Do both journeys eventually move toward CRO retention?',true],
+        ['Is build-first the standard route for every brand?',false]
+      ]
+    },
+    lifecycle: {
+      points:['KAM owns judgment','Signals need context','Lifecycle ends in rollout'],
+      q:[
+        ['Should the KAM blindly forward every automated signal to the client?',false],
+        ['Does the lifecycle include intake, audit, benchmarks, data, PDP/A-B, and rollout?',true],
+        ['Should irrelevant signals be suppressed before sharing?',true],
+        ['Is the KAM responsible for client judgment and context?',true],
+        ['Can benchmark work be skipped because the design looks good?',false]
+      ]
+    },
+    timeline: {
+      points:['8-week cycle','28-day test window','Lift compounds with tests'],
+      q:[
+        ['Is the first brand cycle presented as roughly 8 weeks?',true],
+        ['Can an A/B winner be called before the 28-day minimum just because it looks good?',false],
+        ['Does testing velocity increase after setup months?',true],
+        ['Should CVR lift be presented as a guarantee?',false],
+        ['Does compounding improve as more valid tests run?',true]
+      ]
+    },
+    design: {
+      points:['Design closes before dev','Review window controls drift','Decision-maker matters'],
+      q:[
+        ['Should development begin before design sign-off?',false],
+        ['Is the design review window around 2 weeks?',true],
+        ['Should conflicting feedback route through one named decision-maker?',true],
+        ['Can guidelines be missing and still move forward normally?',false],
+        ['Should dev feasibility be checked before locking complex design?',true]
+      ]
+    },
+    zerocomeback: {
+      points:['No skipped gates','QA against Figma','Written sign-off before production'],
+      q:[
+        ['Can the team build from an unlocked Figma?',false],
+        ['Should QA be done side-by-side against the Figma?',true],
+        ['Is written staging sign-off required before production?',true],
+        ['Can a gate be skipped to hit a deadline?',false],
+        ['Does zero-comeback mean 100% Figma match and verified live deployment?',true]
+      ]
+    },
+    brandfigma: {
+      points:['Audit brand Figma first','Flag gaps early','Assumptions need written sign-off'],
+      q:[
+        ['Should a brand-provided Figma be audited before development?',true],
+        ['Can missing responsive frames be ignored until QA?',false],
+        ['Should the brand fill gaps or sign off assumptions in writing?',true],
+        ['Does brand Figma then enter the zero-comeback process?',true],
+        ['Is ambiguity safe if the deadline is close?',false]
+      ]
+    },
+    aihtml: {
+      points:['Prototype first','Clean before production','Client approval controls deploy'],
+      q:[
+        ['Is AI HTML automatically production-ready?',false],
+        ['Should the AI prototype be checked for premium, CRO-focused, non-AI-looking quality?',true],
+        ['Should mobile and desktop be verified before sharing/deploying?',true],
+        ['Can a new page added mid-review stay inside the same revision scope?',false],
+        ['Does final approval come before deployment handoff?',true]
+      ]
+    },
+    pageopt: {
+      points:['CTO is POC','90+ ideal, 70+ can pass by scope','Field data matters'],
+      q:[
+        ['Is the CTO the direct POC for Page Optimization?',true],
+        ['Is Lighthouse 90+ ideal?',true],
+        ['Can 70+ be acceptable depending on brand requirements and scope?',true],
+        ['Should CrUX/field data be ignored if lab Lighthouse is green?',false],
+        ['If optimization is blocked, should the team force fixes without flagging blockers?',false]
+      ]
+    },
+    escalation: {
+      points:['Tag severity fast','RCA before recovery','One owner for client comms'],
+      q:[
+        ['Should a brand ghosting for 2-3 weeks be treated as risk/red?',true],
+        ['For missed tech delivery, should CTO be looped in?',true],
+        ['Can apology-led recovery happen without documenting RCA?',false],
+        ['Should below-ICP CRO + ads brands be escalated for commercial review?',true],
+        ['Should multiple teams message the client separately in a crisis?',false]
+      ]
+    },
+    summary: {
+      points:['Research → scope → route','Use market expectations','Escalate risk early'],
+      q:[
+        ['Should KAMs remember SOW before delivery as a core rule?',true],
+        ['Does market timeline help prevent over-promising?',true],
+        ['Should every journey end in CRO retention where applicable?',true],
+        ['Can red-brand RCA be skipped if the client is angry?',false],
+        ['Is Conversion Rate the north-star metric?',true]
+      ]
+    },
+    faqs: {
+      points:['Use FAQ as fallback','Rules beat exceptions','Filter by cohort'],
+      q:[
+        ['Should KAMs use the FAQ when unsure about an edge case?',true],
+        ['Should exceptions override the SOP without owner approval?',false],
+        ['Can FAQ filters help find cohort-specific answers faster?',true],
+        ['Should unresolved ambiguity be guessed to save time?',false],
+        ['Is the FAQ meant to reinforce the operating rules?',true]
+      ]
+    }
+  };
+
+  function renderQuizCards(){
+    SECTIONS.forEach(function(sec){
+      var data = QUIZZES[sec.id], host = document.getElementById(sec.id);
+      if(!data || !host) return;
+      var card = document.createElement('article');
+      card.className = 'quiz-card';
+      card.dataset.quiz = sec.id;
+      card.style.setProperty('--ac', sec.ac);
+      card.innerHTML =
+        '<button class="quiz-head" type="button" aria-expanded="false">'+
+          '<span><span class="quiz-eyebrow">Section checkpoint</span><span class="quiz-title">'+sec.n+' · '+sec.t+' · Key Points + 5 Questions</span></span>'+
+          '<span class="quiz-score">0 / 5</span><span class="quiz-chev">+</span>'+
+        '</button>'+
+        '<div class="quiz-body"><div class="quiz-inner">'+
+          '<div class="quiz-points"></div><div class="quiz-list"></div>'+
+        '</div></div>';
+      var points = card.querySelector('.quiz-points');
+      data.points.forEach(function(point){
+        var p = document.createElement('div');
+        p.className = 'quiz-point';
+        p.innerHTML = '<b>Key point</b><br>'+point;
+        points.appendChild(p);
+      });
+      var list = card.querySelector('.quiz-list');
+      data.q.forEach(function(item, index){
+        var row = document.createElement('div');
+        row.className = 'quiz-q';
+        row.dataset.correct = item[1] ? 'yes' : 'no';
+        row.innerHTML = '<p><b>Q'+(index+1)+'.</b> '+item[0]+'</p><div class="quiz-actions"><button type="button" data-answer="yes">Yes</button><button type="button" data-answer="no">No</button></div><div class="quiz-feedback"></div>';
+        list.appendChild(row);
+      });
+      var head = card.querySelector('.quiz-head');
+      head.addEventListener('click',function(){ toggleQuiz(card); });
+      card.addEventListener('click',function(e){
+        var btn = e.target.closest('.quiz-actions button');
+        if(!btn) return;
+        answerQuiz(card, btn);
+      });
+      host.appendChild(card);
+    });
+  }
+  function toggleQuiz(card, forceOpen){
+    var open = typeof forceOpen === 'boolean' ? forceOpen : !card.classList.contains('is-open');
+    card.classList.toggle('is-open', open);
+    card.querySelector('.quiz-head').setAttribute('aria-expanded', open ? 'true' : 'false');
+    var body = card.querySelector('.quiz-body');
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
+  }
+  function setQuizReady(id, autoOpen){
+    var card = document.querySelector('.quiz-card[data-quiz="'+id+'"]');
+    if(!card) return;
+    if(!card.classList.contains('is-ready')) card.classList.add('is-ready');
+    if(autoOpen) setTimeout(function(){ toggleQuiz(card, true); }, 120);
+  }
+  function answerQuiz(card, btn){
+    var row = btn.closest('.quiz-q');
+    if(!row || row.dataset.answered) return;
+    var good = btn.dataset.answer === row.dataset.correct;
+    row.dataset.answered = '1';
+    Array.prototype.forEach.call(row.querySelectorAll('button'),function(b){
+      b.disabled = true;
+      if(b === btn) b.classList.add(good ? 'good' : 'ok');
+    });
+    var fb = row.querySelector('.quiz-feedback');
+    fb.className = 'quiz-feedback ' + (good ? 'good' : 'ok');
+    fb.textContent = good ? 'Good. You caught the operating rule.' : 'It is OK. Review this section once more before using it with a brand.';
+    var answered = card.querySelectorAll('.quiz-q[data-answered="1"]').length;
+    var goodCount = card.querySelectorAll('.quiz-actions button.good').length;
+    card.querySelector('.quiz-score').textContent = goodCount + ' / 5';
+    var body = card.querySelector('.quiz-body');
+    if(card.classList.contains('is-open')) body.style.maxHeight = body.scrollHeight + 'px';
+    if(answered === 5) toast(goodCount === 5 ? 'Checkpoint cleared' : 'Checkpoint complete', goodCount + ' / 5 good', goodCount === 5 ? '#34D399' : '#FBBF24');
+  }
+  renderQuizCards();
+
   /* ---- FAQ cohorts + data ---- */
   var FAQCATS=[
     {key:'onb',name:'Onboarding & Triage',ac:'#22D3EE'},
@@ -1417,6 +1683,7 @@
       var meta=SECTIONS.filter(function(s){return s.id===id;})[0];
       if(meta){
         document.documentElement.style.setProperty('--rail-accent', meta.ac);
+        setQuizReady(id, false);
         if(!shown[id]){ shown[id]=true; toast('Now reading · '+meta.t, meta.n+' / '+TOTAL, meta.ac); }
       }
     });
@@ -1481,6 +1748,7 @@
   function markRead(id){
     if(read[id]) return; read[id]=true; readCount++;
     navLinks.forEach(function(l){ if(l.dataset.target===id) l.classList.add('read'); });
+    setQuizReady(id, true);
     xpPop('+100'); updateScore();
     if(readCount>=TOTAL) celebrate();
   }

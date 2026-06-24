@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comon OPS — KAM Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0815; --bg2:#0E0B1A; --surface:#15111F; --surface2:#1B1626; --line:rgba(255,255,255,.08);
+    --txt:#ECECF6; --mut:#A2A0BE; --faint:#6E6B88;
+    --brand:#8B5CF6; --brand-lt:#A78BFA;
+    --rail-accent:#A78BFA;
+    --radius:14px;
+    --maxw:880px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--txt);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(900px 500px at 85% -5%, rgba(139,92,246,.14), transparent 60%),
+                     radial-gradient(700px 500px at -10% 20%, rgba(34,211,238,.08), transparent 55%);
+    background-attachment:fixed;
+  }
+  .mono{font-family:'JetBrains Mono',monospace}
+
+  /* ===== top progress bar ===== */
+  .progress{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.05);z-index:120}
+  .progress__fill{height:100%;width:0;background:linear-gradient(90deg,#8B5CF6,#22D3EE,#34D399,#FBBF24,#F472B6);transition:width .1s linear}
+
+  /* ===== topbar (mobile) ===== */
+  .topbar{position:fixed;top:3px;left:0;right:0;height:54px;z-index:110;display:none;align-items:center;
+    justify-content:space-between;padding:0 16px;background:rgba(10,8,21,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .topbar__brand{font-weight:800;letter-spacing:.04em;font-size:15px}
+  .topbar__brand b{color:var(--brand-lt)}
+  .topbar__btns{display:flex;gap:8px}
+  .iconbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--txt);
+    display:grid;place-items:center;cursor:pointer;position:relative;font-size:17px;transition:.15s}
+  .iconbtn:hover{border-color:var(--brand);background:var(--surface2)}
+  .iconbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#F472B6;box-shadow:0 0 8px #F472B6}
+
+  /* ===== flow rail (desktop index + scroll flow) ===== */
+  .rail{position:fixed;top:0;left:0;width:262px;height:100vh;padding:26px 18px 18px;z-index:90;
+    background:linear-gradient(180deg,rgba(20,17,31,.9),rgba(14,11,26,.9));backdrop-filter:blur(12px);
+    border-right:1px solid var(--line);display:flex;flex-direction:column}
+  .rail__brand{font-weight:900;font-size:20px;letter-spacing:.02em;margin-bottom:3px}
+  .rail__brand b{color:var(--brand-lt)}
+  .rail__tag{font-size:10.5px;color:var(--faint);letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
+  .rail__nav{position:relative;flex:1;overflow-y:auto;padding-left:14px}
+  .rail__track{position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:rgba(255,255,255,.08);border-radius:2px}
+  .rail__fill{position:absolute;left:4px;top:6px;width:2px;height:0;border-radius:2px;
+    background:linear-gradient(180deg,var(--rail-accent),transparent);box-shadow:0 0 10px var(--rail-accent);transition:height .12s linear}
+  .rlink{position:relative;display:flex;align-items:center;gap:9px;padding:7px 6px;margin:1px 0;border-radius:9px;
+    color:var(--mut);text-decoration:none;font-size:13px;font-weight:500;transition:.16s;cursor:pointer}
+  .rlink__dot{position:absolute;left:-12.5px;width:9px;height:9px;border-radius:50%;background:var(--bg);
+    border:2px solid rgba(255,255,255,.22);transition:.16s}
+  .rlink__num{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);min-width:18px}
+  .rlink:hover{color:var(--txt);background:rgba(255,255,255,.04)}
+  .rlink.is-active{color:#fff;background:rgba(255,255,255,.05)}
+  .rlink.is-active .rlink__dot{background:var(--ac);border-color:var(--ac);box-shadow:0 0 12px var(--ac);transform:scale(1.25)}
+  .rlink.is-active .rlink__num{color:var(--ac)}
+  .rail__foot{font-size:10.5px;color:var(--faint);padding-top:14px;border-top:1px solid var(--line);margin-top:8px}
+
+  /* ===== mobile drawer ===== */
+  .scrim{position:fixed;inset:0;background:rgba(5,4,12,.6);backdrop-filter:blur(3px);z-index:115;opacity:0;visibility:hidden;transition:.2s}
+  .scrim.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:84vw;z-index:116;background:var(--bg2);
+    border-right:1px solid var(--line);padding:22px 16px;transform:translateX(-104%);transition:transform .26s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+  .drawer.open{transform:translateX(0)}
+  .drawer__brand{font-weight:900;font-size:19px;margin-bottom:18px}
+  .drawer__brand b{color:var(--brand-lt)}
+  .dlink{display:flex;align-items:center;gap:10px;padding:11px 10px;border-radius:10px;color:var(--mut);
+    text-decoration:none;font-size:14px;font-weight:500}
+  .dlink__num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac)}
+  .dlink.is-active{background:rgba(255,255,255,.06);color:#fff}
+
+  /* ===== reminders panel ===== */
+  .panel{position:fixed;top:64px;right:14px;width:330px;max-width:92vw;z-index:117;background:var(--surface);
+    border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.5);padding:16px;
+    opacity:0;visibility:hidden;transform:translateY(-8px);transition:.18s}
+  .panel.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .panel__h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .panel__t{font-weight:700;font-size:14px}
+  .panel__t span{color:var(--brand-lt)}
+  .panel__x{cursor:pointer;color:var(--faint);font-size:18px;background:none;border:none}
+  .remind{display:flex;gap:10px;padding:9px;border-radius:10px;cursor:pointer;transition:.14s;align-items:flex-start}
+  .remind:hover{background:var(--surface2)}
+  .remind__b{width:6px;height:6px;border-radius:50%;margin-top:7px;flex-shrink:0}
+  .remind__txt{font-size:12.5px;color:var(--mut);line-height:1.45}
+  .remind__txt b{color:var(--txt);font-weight:600}
+
+  /* ===== layout ===== */
+  .wrap{margin-left:262px;display:flex;justify-content:center;padding:0 28px}
+  .content{width:100%;max-width:var(--maxw);padding:0 0 120px}
+
+  /* ===== hero ===== */
+  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0 60px}
+  .hero__eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--brand-lt);margin-bottom:18px}
+  .hero__title{font-size:clamp(52px,11vw,118px);font-weight:900;line-height:.92;letter-spacing:-.03em;margin-bottom:22px}
+  .hero__title .g{background:linear-gradient(120deg,#A78BFA 0%,#22D3EE 50%,#34D399 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero__sub{font-size:clamp(16px,2.2vw,20px);color:var(--mut);max-width:600px;margin-bottom:28px}
+  .hero__chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}
+  .pill{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;padding:7px 14px;border-radius:30px;
+    border:1px solid var(--line);background:var(--surface);color:var(--mut)}
+  .pill.v{color:#A78BFA;border-color:rgba(167,139,250,.4)}
+  .pill.c{color:#22D3EE;border-color:rgba(34,211,238,.4)}
+  .pill.g{color:#34D399;border-color:rgba(52,211,153,.4)}
+  .pill.o{color:#FB923C;border-color:rgba(251,146,60,.4)}
+  .cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;cursor:pointer;border:none;
+    font-family:'Poppins';font-weight:700;font-size:16px;color:#0A0815;padding:15px 26px;border-radius:14px;
+    background:linear-gradient(120deg,#A78BFA,#8B5CF6);box-shadow:0 10px 30px rgba(139,92,246,.4);transition:.18s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(139,92,246,.55)}
+  .cta__arrow{transition:transform .2s}
+  .cta:hover .cta__arrow{transform:translateY(3px)}
+  .hero__by{margin-top:26px;font-size:13px;color:var(--faint)}
+
+  /* ===== section ===== */
+  .sec{padding:64px 0 8px;scroll-margin-top:80px;border-top:1px solid var(--line)}
+  .sec__head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .sec__num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--ac);
+    border:1px solid var(--ac);border-radius:8px;padding:4px 9px;box-shadow:0 0 16px -4px var(--ac)}
+  .sec__title{font-size:clamp(27px,4.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .sec__kicker{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;
+    margin-left:auto;background:var(--surface);border:1px solid var(--line);padding:5px 11px;border-radius:20px}
+  .lead{font-size:17px;color:var(--mut);max-width:640px;margin:14px 0 26px}
+  .lead .hl{color:var(--txt);font-weight:600}
+
+  /* highlight chip */
+  .hl{display:inline;background:color-mix(in srgb, var(--ac) 22%, transparent);color:#fff;font-weight:600;
+    padding:.5px 7px;border-radius:6px;box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--ac) 45%, transparent)}
+
+  /* cards */
+  .cards{display:grid;gap:16px;margin:8px 0}
+  .cards.two{grid-template-columns:1fr 1fr}
+  .cards.three{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;transition:.2s}
+  .card:hover{border-color:color-mix(in srgb, var(--ac) 50%, var(--line));transform:translateY(-3px);
+    box-shadow:0 14px 36px rgba(0,0,0,.32)}
+  .card__label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ac);margin-bottom:12px;font-weight:600}
+  .card h4{font-size:16px;font-weight:700;margin-bottom:6px}
+  .ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .ul li{display:flex;gap:9px;font-size:14px;color:var(--mut);line-height:1.5}
+  .ul li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ac);margin-top:8px;flex-shrink:0}
+  .ul li b{color:var(--txt);font-weight:600}
+  .ul.arrow li::before{content:'→';width:auto;height:auto;background:none;color:var(--ac);font-weight:700;margin-top:0}
+
+  /* flow */
+  .flow{position:relative;margin:10px 0 6px;padding-left:30px}
+  .flow::before{content:'';position:absolute;left:9px;top:10px;bottom:18px;width:2px;
+    background:linear-gradient(180deg,var(--ac),color-mix(in srgb,var(--ac) 15%, transparent))}
+  .fstep{position:relative;margin-bottom:14px}
+  .fstep__node{position:absolute;left:-30px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--bg);
+    border:2px solid var(--ac);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;
+    font-weight:700;color:var(--ac);box-shadow:0 0 12px -2px var(--ac)}
+  .fcard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:12px;padding:14px 16px}
+  .fcard b{font-size:15px;font-weight:700;display:block;margin-bottom:3px;color:var(--txt)}
+  .fcard span{font-size:13.5px;color:var(--mut)}
+  .fcard.dest{background:linear-gradient(120deg,color-mix(in srgb,var(--ac) 22%,transparent),color-mix(in srgb,var(--ac) 6%,transparent));
+    border:1.5px solid var(--ac);border-left:1.5px solid var(--ac)}
+  .fcard.dest b{font-size:16px}
+
+  .gate-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:#0A0815;background:var(--ac);padding:2px 8px;border-radius:5px;margin-bottom:7px}
+
+  /* callout */
+  .callout{display:flex;gap:14px;align-items:flex-start;background:color-mix(in srgb,var(--ac) 10%,var(--surface));
+    border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);border-radius:14px;padding:16px 18px;margin:8px 0}
+  .callout__ic{width:30px;height:30px;border-radius:9px;background:var(--ac);color:#0A0815;display:grid;place-items:center;
+    font-weight:800;flex-shrink:0;font-size:17px}
+  .callout p{font-size:14.5px;color:var(--mut);line-height:1.55}
+  .callout p b{color:var(--txt);font-weight:600}
+
+  /* outcomes */
+  .outs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0}
+  .out{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .out__h{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .out__d{width:9px;height:9px;border-radius:50%}
+  .out__t{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+  .out p{font-size:12.5px;color:var(--mut);line-height:1.45}
+
+  /* metric rows */
+  .mrows{display:flex;flex-direction:column}
+  .mrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+  .mrow:first-child{border-top:none}
+  .mrow .k{color:var(--mut)}
+  .mrow .val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ac);white-space:nowrap}
+
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;font-size:14px}
+  .tbl th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--ac);text-align:left;padding:11px 12px;border-bottom:1px solid color-mix(in srgb,var(--ac) 35%,transparent)}
+  .tbl th.r,.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .tbl td{padding:12px;border-bottom:1px solid var(--line);color:var(--mut)}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td.lo{font-family:'JetBrains Mono',monospace;font-weight:600}
+  .tbl td.hi{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ac)}
+
+  /* timeline months */
+  .month__h{font-weight:800;font-size:17px;margin-bottom:2px}
+  .month__s{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ac);margin-bottom:12px}
+  .wk{padding:10px 0;border-top:1px solid var(--line)}
+  .wk:first-of-type{border-top:none}
+  .wk__l{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ac);margin-bottom:3px}
+  .wk__b{font-size:13.5px;color:var(--mut);line-height:1.45}
+  .wk__b b{color:var(--txt)}
+
+  /* expandable stages */
+  .stage{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:.18s}
+  .stage:hover{border-color:color-mix(in srgb,var(--ac) 45%,var(--line))}
+  .stage.open{border-color:var(--ac)}
+  .stage__head{display:flex;align-items:center;gap:13px;padding:15px 17px;cursor:pointer;user-select:none}
+  .stage__num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--ac);min-width:24px}
+  .stage__t{font-weight:700;font-size:15.5px;flex:1}
+  .stage__when{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+  .stage__chev{color:var(--ac);font-size:14px;transition:transform .22s}
+  .stage.open .stage__chev{transform:rotate(180deg)}
+  .stage__body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .stage__inner{padding:0 17px 16px 54px}
+
+  /* journeys */
+  .journey{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:14px;padding:20px;margin-bottom:16px}
+  .journey__h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .journey__n{font-weight:800;font-size:19px}
+  .journey__c{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--ac);background:color-mix(in srgb,var(--ac) 15%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);padding:4px 9px;border-radius:7px}
+  .journey__s{font-size:13.5px;color:var(--mut);margin-bottom:14px}
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px 5px}
+  .node{font-size:12.5px;font-weight:600;color:var(--txt);background:rgba(255,255,255,.04);border:1px solid var(--line);
+    padding:7px 12px;border-radius:9px}
+  .node.b{background:color-mix(in srgb,var(--ac) 12%,transparent);border-color:color-mix(in srgb,var(--ac) 32%,transparent);color:#fff}
+  .node.d{background:var(--ac);color:#0A0815;font-weight:700;border-color:var(--ac)}
+  .sep{color:var(--ac);font-weight:700;font-size:14px}
+  .phase{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin:14px 0 7px}
+
+  /* map rows */
+  .map{display:flex;flex-direction:column}
+  .maprow{display:flex;align-items:flex-start;gap:13px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px;line-height:1.45}
+  .maprow:first-child{border-top:none}
+  .maprow .if{flex:1;color:var(--mut)}
+  .maprow .if b{color:var(--txt);font-weight:600}
+  .maprow .ar{color:var(--ac);font-weight:700}
+  .maprow .to{flex:1.1;color:var(--txt)}
+
+  /* faq accordion */
+  .faq{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden;background:var(--surface);transition:.16s}
+  .faq.open{border-color:var(--ac)}
+  .faq__q{display:flex;align-items:center;gap:12px;padding:15px 17px;cursor:pointer;font-weight:600;font-size:15px;user-select:none}
+  .faq__q .q{font-family:'JetBrains Mono',monospace;color:var(--ac);font-weight:700}
+  .faq__q .pm{margin-left:auto;color:var(--ac);font-size:18px;transition:transform .2s;font-weight:700}
+  .faq.open .faq__q .pm{transform:rotate(45deg)}
+  .faq__a{max-height:0;overflow:hidden;transition:max-height .28s ease}
+  .faq__a p{padding:0 17px 16px 45px;font-size:14px;color:var(--mut);line-height:1.55}
+
+  /* fab + toasts */
+  .fab{position:fixed;bottom:22px;right:22px;width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;z-index:95;
+    background:linear-gradient(120deg,#A78BFA,#8B5CF6);color:#0A0815;font-size:20px;font-weight:800;
+    box-shadow:0 10px 30px rgba(139,92,246,.45);opacity:0;visibility:hidden;transform:translateY(12px);transition:.22s}
+  .fab.show{opacity:1;visibility:visible;transform:none}
+  .fab:hover{transform:translateY(-3px)}
+  .toasts{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:130;display:flex;flex-direction:column;gap:9px;align-items:center;pointer-events:none;width:max-content;max-width:90vw}
+  .toast{display:flex;align-items:center;gap:11px;background:var(--surface2);border:1px solid var(--line);
+    border-left:3px solid var(--tac,#A78BFA);border-radius:12px;padding:11px 16px;box-shadow:0 16px 40px rgba(0,0,0,.45);
+    font-size:13.5px;color:var(--txt);opacity:0;transform:translateY(16px);transition:.28s;max-width:92vw}
+  .toast.in{opacity:1;transform:none}
+  .toast__d{width:8px;height:8px;border-radius:50%;background:var(--tac,#A78BFA);box-shadow:0 0 10px var(--tac,#A78BFA);flex-shrink:0}
+  .toast b{font-weight:700}
+  .toast small{color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:11px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== responsive ===== */
+  @media (max-width:980px){
+    .rail{display:none}
+    .topbar{display:flex}
+    .wrap{margin-left:0;padding:0 18px}
+    .content{padding-top:64px}
+    .hero{min-height:auto;padding:40px 0 40px}
+    .cards.two,.cards.three{grid-template-columns:1fr}
+    .outs{grid-template-columns:1fr}
+    .sec__kicker{margin-left:0}
+    .maprow{flex-direction:column;gap:4px}
+    .maprow .ar{display:none}
+    .stage__inner{padding-left:40px}
+  }
+  @media (max-width:560px){
+    .panel{right:8px;left:8px;width:auto}
+    .hero__title{font-size:clamp(44px,16vw,70px)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+
+  /* ===== preloader ===== */
+  #preloader{position:fixed;inset:0;z-index:200;background:radial-gradient(1000px 600px at 50% 32%,rgba(139,92,246,.2),transparent 60%),#0A0815;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .6s ease,visibility .6s}
+  #preloader.done{opacity:0;visibility:hidden}
+  .pl__eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--brand-lt);opacity:0;animation:plUp .6s .1s forwards}
+  .pl__title{font-size:clamp(46px,12vw,96px);font-weight:900;letter-spacing:-.03em;line-height:1;opacity:0;animation:plUp .7s .25s forwards}
+  .pl__title .g{background:linear-gradient(120deg,#A78BFA,#22D3EE,#34D399);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .pl__sub{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.34em;color:var(--faint);text-transform:uppercase;opacity:0;animation:plUp .6s .4s forwards}
+  .pl__bar{width:210px;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:10px;opacity:0;animation:plUp .6s .5s forwards}
+  .pl__fill{height:100%;width:0;background:linear-gradient(90deg,#A78BFA,#22D3EE);transition:width .12s linear}
+  @keyframes plUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* ===== learning score dock ===== */
+  .score{position:fixed;left:18px;bottom:18px;z-index:97;display:flex;align-items:center;gap:11px;
+    background:rgba(20,17,31,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:9px 15px 9px 9px;
+    box-shadow:0 14px 40px rgba(0,0,0,.42);cursor:pointer;transition:.2s}
+  .score:hover{border-color:var(--brand);transform:translateY(-2px)}
+  .score__ring{position:relative;width:46px;height:46px;flex-shrink:0}
+  .score__ring svg{display:block}
+  .score__pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:#fff}
+  .score__meta{display:flex;flex-direction:column;line-height:1.22}
+  .score__rank{font-size:13px;font-weight:700;color:#fff}
+  .score__xp{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--brand-lt)}
+  .score__sub{font-size:10px;color:var(--faint)}
+  .xp-pop{position:fixed;z-index:131;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#34D399;
+    pointer-events:none;transform:translateX(-50%);animation:xpFloat 1s ease forwards;text-shadow:0 0 12px rgba(52,211,153,.6)}
+  @keyframes xpFloat{0%{opacity:0;transform:translateX(-50%) translateY(0) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateX(-50%) translateY(-42px) scale(1.1)}}
+
+  /* rail/drawer read check */
+  .rlink.read .rlink__num{color:#34D399}
+  .rlink.read{color:#fff}
+  .rlink.read .rlink__chk{color:#34D399;font-weight:800;font-size:12px;margin-left:auto}
+  .dlink.read .dlink__chk{color:#34D399;font-weight:800;margin-left:auto}
+  .rlink__chk,.dlink__chk{opacity:0;transition:.2s}
+  .rlink.read .rlink__chk,.dlink.read .dlink__chk{opacity:1}
+
+  /* ===== faq cohort filters ===== */
+  .faqbar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 22px}
+  .fchip{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;padding:7px 14px;border-radius:30px;
+    border:1px solid var(--line);background:var(--surface);color:var(--mut);cursor:pointer;transition:.15s}
+  .fchip:hover{color:var(--txt);border-color:var(--ac)}
+  .fchip.active{background:var(--ac);color:#0A0815;border-color:var(--ac)}
+  .faq__cat{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);
+    margin-left:auto;padding-right:10px;white-space:nowrap}
+  .faq.hide{display:none}
+  @media (max-width:600px){ .faq__cat{display:none} }
+
+  /* ===== confetti + certificate ===== */
+  .confetti{position:fixed;top:-12px;width:9px;height:15px;z-index:140;pointer-events:none;border-radius:2px;animation:confFall linear forwards}
+  @keyframes confFall{to{transform:translateY(110vh) rotate(560deg);opacity:.85}}
+  .cert{position:fixed;inset:0;z-index:160;display:grid;place-items:center;padding:20px;background:rgba(5,4,12,.72);backdrop-filter:blur(7px);
+    opacity:0;visibility:hidden;transition:.3s}
+  .cert.show{opacity:1;visibility:visible}
+  .cert__card{background:linear-gradient(160deg,#1C1729,#14111F);border:1px solid var(--brand);border-radius:22px;padding:38px 40px;text-align:center;max-width:380px;
+    transform:scale(.9) translateY(8px);transition:.32s;box-shadow:0 30px 80px rgba(139,92,246,.35)}
+  .cert.show .cert__card{transform:none}
+  .cert__badge{font-size:56px;margin-bottom:8px;filter:drop-shadow(0 6px 18px rgba(251,191,36,.5))}
+  .cert__t{font-size:27px;font-weight:900;margin-bottom:8px;letter-spacing:-.02em}
+  .cert__t .g{background:linear-gradient(120deg,#A78BFA,#34D399);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .cert__p{font-size:14px;color:var(--mut);margin-bottom:22px;line-height:1.5}
+  .cert__btn{border:none;cursor:pointer;font-family:'Poppins';font-weight:700;font-size:14px;color:#0A0815;padding:13px 26px;border-radius:13px;
+    background:linear-gradient(120deg,#A78BFA,#8B5CF6);transition:.18s}
+  .cert__btn:hover{transform:translateY(-2px)}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pl__eyebrow">SOP &middot; KAM &middot; OPS</div>
+  <div class="pl__title">COMON <span class="g">OPS</span></div>
+  <div class="pl__sub">Troopod</div>
+  <div class="pl__bar"><div class="pl__fill" id="plFill"></div></div>
+</div>
+
+<div class="progress"><div class="progress__fill" id="pfill"></div></div>
+
+<!-- mobile topbar -->
+<header class="topbar">
+  <div class="topbar__brand">COMON <b>OPS</b></div>
+  <div class="topbar__btns">
+    <button class="iconbtn" id="bellM" aria-label="Reminders">🔔<span class="dot"></span></button>
+    <button class="iconbtn" id="menuBtn" aria-label="Open index">☰</button>
+  </div>
+</header>
+
+<!-- desktop flow rail -->
+<aside class="rail">
+  <div class="rail__brand">COMON <b>OPS</b></div>
+  <div class="rail__tag">KAM Operating System</div>
+  <nav class="rail__nav" id="railNav">
+    <div class="rail__track"></div>
+    <div class="rail__fill" id="railFill"></div>
+    <!-- links injected -->
+  </nav>
+  <div class="rail__foot">
+    <button class="iconbtn" id="bellD" style="width:auto;height:auto;padding:7px 11px;font-size:12px;gap:6px;border-radius:9px" aria-label="Reminders">🔔 Reminders<span class="dot" style="position:static;margin-left:4px"></span></button>
+    <div style="margin-top:10px">Troopod · Made by Vinit</div>
+  </div>
+</aside>
+
+<!-- mobile drawer -->
+<div class="scrim" id="scrim"></div>
+<nav class="drawer" id="drawer">
+  <div class="drawer__brand">COMON <b>OPS</b></div>
+  <div id="drawerNav"></div>
+</nav>
+
+<!-- reminders panel -->
+<div class="panel" id="panel">
+  <div class="panel__h">
+    <div class="panel__t">🔔 <span>Key reminders</span></div>
+    <button class="panel__x" id="panelX">✕</button>
+  </div>
+  <div id="reminders"></div>
+</div>
+
+<!-- ===================== CONTENT ===================== -->
+<div class="wrap"><div class="content">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
+    <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Eleven sections, one flow.</p>
+    <div class="hero__chips reveal">
+      <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
+    </div>
+    <button class="cta reveal" data-scroll="onboarding">Start the flow <span class="cta__arrow">↓</span></button>
+    <div class="hero__by reveal">Internal use only · Made by Vinit · Troopod.io</div>
+  </section>
+
+  <!-- 01 ONBOARDING -->
+  <section class="sec" id="onboarding" style="--ac:#A78BFA">
+    <div class="sec__head reveal"><span class="sec__num">01</span><h2 class="sec__title">Brand Onboarding</h2><span class="sec__kicker">~1 day · 2-hr session</span></div>
+    <p class="lead reveal">The first thing that happens when a brand signs. We research them, run a short kickoff, and register them — so by the time we categorize, there are <span class="hl">0 issues</span>. The brand is walked through every step of every process <span class="hl">in advance</span>.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Pre-onboarding research</b><span>Research before the call — model, niche, scale, current site &amp; stack, competitors — so categorization later has zero issues.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Onboarding session · 1 day · 2 hours</b><span>Kickoff: what Troopod is, our expectations both ways, and a walk-through of the process in advance.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Brand registration → Brand DB</b><span>Register in the brand database — it tracks the account, including tech hours.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Categorized with 0 issues → proceed to Triage</b></div></div>
+    </div>
+    <div class="cards two reveal">
+      <div class="card"><div class="card__label">Inside the 2-hour session</div><ul class="ul">
+        <li><b>What Troopod is</b> — AI-native website growth agency; our offerings and how we work.</li>
+        <li><b>Our expectations</b> — access, a single decision-maker, response cadence, content &amp; assets.</li>
+        <li><b>The process, in advance</b> — the journey they're on and what happens at each step.</li></ul></div>
+      <div class="card"><div class="card__label">Market-standard SaaS practices</div><ul class="ul">
+        <li>Clear kickoff with mutual expectations on day one.</li>
+        <li>Access &amp; asset checklist; a single source of truth.</li>
+        <li>Success metrics agreed; timeline shared up front.</li>
+        <li>A welcome doc and regular check-ins.</li></ul></div>
+    </div>
+    <div class="callout reveal"><div class="callout__ic">DB</div><p><b>Brand registration → Brand DB</b> captures brand name, niche, site &amp; stack, decision-maker, commercial model (one-time / recurring + MRR), requirement scope, and <span class="hl">tech hours — budgeted and tracked</span>.</p></div>
+  </section>
+
+  <!-- 02 TRIAGE -->
+  <section class="sec" id="triage" style="--ac:#22D3EE">
+    <div class="sec__head reveal"><span class="sec__num">02</span><h2 class="sec__title">Triage &amp; Routing</h2><span class="sec__kicker">categorize → route</span></div>
+    <p class="lead reveal">Once a brand is onboarded and registered, categorize it on two axes and route by scope.</p>
+    <div class="cards two reveal">
+      <div class="card"><div class="card__label">Commercial model</div><div class="chain"><span class="node">One-time</span><span class="node b">Recurring → MRR</span></div><p style="font-size:13px;color:var(--mut);margin-top:11px">Set first — it drives forecasting and the monthly Client Update.</p></div>
+      <div class="card"><div class="card__label">Requirement scope</div><div class="chain"><span class="node">CRO</span><span class="node">Tech</span><span class="node">Feature Dev</span><span class="node">Design</span><span class="node">Development</span></div><p style="font-size:13px;color:var(--mut);margin-top:11px">Tag every capability — the combination decides the route.</p></div>
+    </div>
+    <div class="callout reveal"><div class="callout__ic">!</div><p><b>Routing gate · new brands:</b> if the tech scope is <span class="hl">40+ hours</span>, <span class="hl">don't take the standard route</span>. Scope the build first → Build-first journey: Figma → development → deploy, then a few tech tasks, then CRO to retain.</p></div>
+    <div class="card reveal" style="margin-top:16px"><div class="card__label">Route by scope</div><div class="map">
+      <div class="maprow"><div class="if"><b>CRO + Tech + Design</b></div><div class="ar">→</div><div class="to">Full lifecycle (00–05)</div></div>
+      <div class="maprow"><div class="if"><b>CRO only</b></div><div class="ar">→</div><div class="to">CRO Program (01–05)</div></div>
+      <div class="maprow"><div class="if"><b>Tech only</b></div><div class="ar">→</div><div class="to">Page Optimization</div></div>
+      <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Rapid Build &amp; Deploy</div></div>
+    </div></div>
+  </section>
+
+  <!-- 03 JOURNEYS -->
+  <section class="sec" id="journeys" style="--ac:#38BDF8">
+    <div class="sec__head reveal"><span class="sec__num">03</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
+    <p class="lead reveal">Two journeys cover most brands. The <span class="hl">40-hour tech gate</span> decides which one. Both end in CRO retention.</p>
+    <div class="journey reveal">
+      <div class="journey__h"><div class="journey__n">Journey A · CRO-led</div><div class="journey__c">Live store · tech ≤ 40 hrs</div></div>
+      <div class="journey__s">Working store that needs CRO + Tech + Design. Goes straight onto the lifecycle.</div>
+      <div class="chain"><span class="node">Onboard</span><span class="sep">→</span><span class="node">Categorize</span><span class="sep">→</span><span class="node">CRO+Tech+Design</span><span class="sep">→</span><span class="node d">Lifecycle 00–05</span><span class="sep">→</span><span class="node">CRO retention</span></div>
+    </div>
+    <div class="journey reveal">
+      <div class="journey__h"><div class="journey__n">Journey B · Build-first</div><div class="journey__c">New brand · 40+ hrs · Figma ready</div></div>
+      <div class="journey__s">Heavy build up front. Not the standard route — ship the store first, then move into CRO.</div>
+      <div class="phase">Phase 1 · Build &amp; ship</div>
+      <div class="chain"><span class="node b">Figma ready</span><span class="sep">→</span><span class="node b">Development</span><span class="sep">→</span><span class="node b">QA</span><span class="sep">→</span><span class="node b">Deploy · go live</span></div>
+      <div class="phase">Phase 2 · Stabilise, then retain</div>
+      <div class="chain"><span class="node">Few tech tasks</span><span class="sep">→</span><span class="node">CRO to retain</span><span class="sep">→</span><span class="node d">Lifecycle 01–05</span></div>
+    </div>
+  </section>
+
+  <!-- 04 LIFECYCLE -->
+  <section class="sec" id="lifecycle" style="--ac:#E879F9">
+    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
+    <p class="lead reveal">The core work for CRO + Tech + Design brands — six stages, in order. The engine does the signals; the KAM owns judgement and the client.</p>
+    <div class="stages reveal" id="stages">
+      <div class="stage"><div class="stage__head"><span class="stage__num">00</span><span class="stage__t">Intake &amp; Brand Setup</span><span class="stage__when">Day 0</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Generate the TrooCRO magic link (7-day expiry); share over WhatsApp or email.</li>
+          <li>On submission the brand auto-creates — validate every field against the answers.</li>
+          <li>Sanity-check funnel metrics — a 65% ATC rate is a data error; reconcile first.</li>
+          <li>Fill KAM-only fields, confirm the hero SKU + ATC surface, add compliance, launch.</li></ul></div></div></div>
+      <div class="stage"><div class="stage__head"><span class="stage__num">01</span><span class="stage__t">Signal Audit &amp; Roadmap</span><span class="stage__when">Week 1</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Engine runs the 903-signal audit against barrier profiles B01–B43.</li>
+          <li>Read every signal against the brand's actual context — not in the abstract.</li>
+          <li><b>Suppress signals that don't apply</b> — never ship noise to the client.</li>
+          <li>Assemble the fix roadmap, sequenced by impact.</li></ul></div></div></div>
+      <div class="stage"><div class="stage__head"><span class="stage__num">02</span><span class="stage__t">Competitor Benchmarking</span><span class="stage__when">Week 1</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Benchmark 5 Indian + 5 global competitors in the niche.</li>
+          <li>Score front-end, UI, and category best practices.</li>
+          <li>Output the benchmark matrix and the gap-to-close.</li></ul></div></div></div>
+      <div class="stage"><div class="stage__head"><span class="stage__num">03</span><span class="stage__t">Data Movement Report</span><span class="stage__when">Week 1 → 2</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Pull how the brand's data moves across the first two weeks.</li>
+          <li>Report against baseline — evidence, not a vanity dashboard.</li>
+          <li>This becomes the PDP design brief.</li></ul></div></div></div>
+      <div class="stage"><div class="stage__head"><span class="stage__num">04</span><span class="stage__t">PDP Design &amp; A/B Test</span><span class="stage__when">Weeks 2–4</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Design the PDP from audit + data; 1–2 weeks of client iteration.</li>
+          <li>A/B test the winner: ramp 90:10 → 50:50, top 20 SKUs first.</li>
+          <li>Hold 95% confidence over a 28-day minimum before calling it.</li>
+          <li>Roll the winner across similar PDP templates.</li></ul></div></div></div>
+      <div class="stage"><div class="stage__head"><span class="stage__num">05</span><span class="stage__t">Page-Level Rollout &amp; Approach Page</span><span class="stage__when">Month 2+</span><span class="stage__chev">▼</span></div>
+        <div class="stage__body"><div class="stage__inner"><ul class="ul arrow">
+          <li>Phased: PDP → Homepage → Collection → Site-wide.</li>
+          <li>Resolve barriers to conversion at each template.</li>
+          <li>Keep the Approach Page current — facts and steps, no motivation copy.</li></ul></div></div></div>
+    </div>
+    <div class="cards three reveal" style="margin-top:18px">
+      <div class="card"><div class="card__label">A/B guardrails</div><div class="mrows">
+        <div class="mrow"><span class="k">Win rate target</span><span class="val">60%</span></div>
+        <div class="mrow"><span class="k">Confidence</span><span class="val">95%</span></div>
+        <div class="mrow"><span class="k">Min window</span><span class="val">28 days</span></div>
+        <div class="mrow"><span class="k">First scope</span><span class="val">Top 20 SKUs</span></div></div></div>
+      <div class="card"><div class="card__label">Cadence</div><ul class="ul">
+        <li><b>Bi-weekly</b> performance report to the client.</li>
+        <li><b>Monthly</b> Client Update — status, margin, churn, upsell.</li></ul></div>
+      <div class="card"><div class="card__label">North-star</div><ul class="ul">
+        <li><b>Conversion Rate</b>, reported monthly vs target.</li>
+        <li>Optimisation ~2 months; maintenance is ongoing.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 05 TIMELINE -->
+  <section class="sec" id="timeline" style="--ac:#34D399">
+    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
+    <p class="lead reveal">One brand cycle runs across 8 weeks. The <span class="hl">28-day test window</span> sets the pace; from Month 3, velocity rises to 2–4 tests / month.</p>
+    <div class="cards two reveal">
+      <div class="card"><div class="month__h">Month 1</div><div class="month__s">Audit · Benchmark · Design</div>
+        <div class="wk"><div class="wk__l">Week 1</div><div class="wk__b">Intake &amp; setup, 903-signal audit, benchmarking begins.</div></div>
+        <div class="wk"><div class="wk__l">Week 2</div><div class="wk__b">Benchmark delivered, <b>data movement report</b>, PDP design starts.</div></div>
+        <div class="wk"><div class="wk__l">Week 3</div><div class="wk__b">PDP iteration — client back-and-forth.</div></div>
+        <div class="wk"><div class="wk__l">Week 4</div><div class="wk__b">PDP finalised + QA. Goes <b>live</b>. First A/B test at 90:10.</div></div></div>
+      <div class="card"><div class="month__h">Month 2</div><div class="month__s">Test · Learn · Roll Out</div>
+        <div class="wk"><div class="wk__l">Week 5</div><div class="wk__b">Test runs. Study heatmaps. Hold the 90:10 split.</div></div>
+        <div class="wk"><div class="wk__l">Week 6</div><div class="wk__b">Ramp to <b>50:50</b>. Queue test #2.</div></div>
+        <div class="wk"><div class="wk__l">Week 7</div><div class="wk__b">Hits <b>95% confidence</b> → winner selection.</div></div>
+        <div class="wk"><div class="wk__l">Week 8</div><div class="wk__b">Roll the winner. Begin homepage. First <b>Client Update</b>.</div></div></div>
+    </div>
+    <div class="card reveal" style="margin-top:16px"><div class="card__label">CVR expectancy — lift scales with number of tests</div>
+      <table class="tbl"><thead><tr><th>Tests run</th><th class="r">Winners @ 60%</th><th class="r">Conservative</th><th class="r">Strong</th></tr></thead>
+      <tbody>
+        <tr><td>2 tests</td><td class="r">~1.2</td><td class="r lo">+4%</td><td class="r hi">+15%</td></tr>
+        <tr><td>4 tests</td><td class="r">~2.4</td><td class="r lo">+7%</td><td class="r hi">+31%</td></tr>
+        <tr><td>6 tests</td><td class="r">~3.6</td><td class="r lo">+11%</td><td class="r hi">+51%</td></tr>
+        <tr><td>8 tests</td><td class="r">~4.8</td><td class="r lo">+15%</td><td class="r hi">+74%</td></tr>
+      </tbody></table>
+      <p style="font-size:12.5px;color:var(--faint);line-height:1.5;margin-top:13px;font-style:italic">60% win rate; per-winner lift +3% (conservative) to +12% (strong), compounded. Expect <span class="hl">1–2 tests in the first 2-month cycle</span> — Month 1 is mostly setup &amp; design — rising to 2–4 / month from Month 3. Direction-setting estimates, not guarantees.</p></div>
+  </section>
+
+  <!-- 06 DESIGN -->
+  <section class="sec" id="design" style="--ac:#F472B6">
+    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
+    <p class="lead reveal">How any page moves from design to development. The <span class="hl">~2-week review window</span> keeps it from stalling; nothing goes to dev until the design is closed. The brand is walked through these steps before we start.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brief + brand guidelines confirmed</b><span>Guidelines in hand before a pixel is drawn.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Design the page</b><span>Mode: Freehand (original) or Brand-guided (to guidelines).</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Deploy to a GitHub link → share</b><span>Design goes live on a shareable link the brand can review.</span></div></div>
+    </div>
+    <div class="phase reveal" style="--ac:#F472B6">Brand review · ~2 weeks · three outcomes</div>
+    <div class="outs reveal">
+      <div class="out"><div class="out__h"><span class="out__d" style="background:#34D399"></span><span class="out__t" style="color:#34D399">Yes</span></div><p>Approved. Lock the design, close, hand off.</p></div>
+      <div class="out"><div class="out__h"><span class="out__d" style="background:#FBBF24"></span><span class="out__t" style="color:#FBBF24">Changes</span></div><p>Iterate → re-deploy → re-review. Stay in the window.</p></div>
+      <div class="out"><div class="out__h"><span class="out__d" style="background:#F87171"></span><span class="out__t" style="color:#F87171">No</span></div><p>Direction rejected. Back to brief, restart.</p></div>
+    </div>
+    <div class="flow reveal" style="margin-top:14px"><div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Closed · signed off → Development</b></div></div></div>
+    <div class="card reveal" style="margin-top:14px"><div class="card__label">Edge cases</div><ul class="ul">
+      <li><b>Guidelines missing</b> — pause; confirm before designing.</li>
+      <li><b>No response past 2 weeks</b> — follow up, set a deadline, then close as approved-as-is per terms.</li>
+      <li><b>Endless revisions</b> — cap rounds, escalate to the decision-maker, scope extras as new work.</li>
+      <li><b>Conflicting feedback</b> — route through the single named decision-maker.</li>
+      <li><b>Dev-feasibility</b> — quick design ↔ dev check before locking.</li></ul></div>
+  </section>
+
+  <!-- 07 ZERO-COMEBACK -->
+  <section class="sec" id="zerocomeback" style="--ac:#FBBF24">
+    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
+    <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill" style="color:#FBBF24;border-color:rgba(251,191,36,.4)">100% Figma deployed</span><span class="pill" style="color:#34D399;border-color:rgba(52,211,153,.4)">0 comebacks</span></div>
+    <p class="lead reveal">The discipline that guarantees what ships matches the Figma exactly — no "this doesn't match," no "this is broken." <span class="hl">Every gate must pass. Nothing skips.</span> The brand knows every step in advance.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Figma locked &amp; approved</b><span>Signed off, no further changes. Still open → not ready.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Dev-readiness gate</b><span>States, responsive frames, specs, components, assets, fonts, interactions. Not ready → back to design.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Build to spec</b><span>Token-for-token. No "close enough."</span></div></div>
+      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>QA gate — against the Figma</b><span>Side-by-side, every state + cross-device. Any miss → fix, re-QA.</span></div></div>
+      <div class="fstep"><div class="fstep__node">5</div><div class="fcard"><span class="gate-tag">Gate · must pass</span><b>Staging → brand sign-off gate</b><span>Brand confirms on the staging link. Explicit written yes before live.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Deploy → verified live · 100% Figma · 0 comebacks</b></div></div>
+    </div>
+    <div class="cards two reveal">
+      <div class="card"><div class="card__label">Dev-readiness checklist</div><ul class="ul">
+        <li>All states — default, hover, empty, error, loading.</li>
+        <li>Responsive frames — mobile + desktop.</li>
+        <li>Specs, components, assets at correct resolution.</li>
+        <li>Fonts supplied; interactions documented.</li></ul></div>
+      <div class="card"><div class="card__label">Zero-comeback rules</div><ul class="ul">
+        <li>Never build from an unlocked Figma.</li>
+        <li>Never skip a gate — a skipped gate is a future comeback.</li>
+        <li>QA against the file, never from memory.</li>
+        <li>Written sign-off before production. Always.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 08 BRAND FIGMA -->
+  <section class="sec" id="brandfigma" style="--ac:#818CF8">
+    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
+    <p class="lead reveal">When the brand hands over their own Figma. Extra validation up front — we didn't build the file — then it joins the zero-comeback process.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brand provides Figma + access</b><span>File access, brand guidelines, fonts, content, assets.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Figma audit · readiness</b><span>Complete and dev-ready? Check states, responsive frames, specs — flag every gap.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Gaps → back to the brand</b><span>They fill gaps, or <span class="hl">sign off on assumptions in writing</span>. Don't build on ambiguity.</span></div></div>
+      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><b>Confirm scope + timeline</b><span>Lock which frames are in scope and the delivery date.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Enter the Zero-Comeback Process → build · QA · sign-off · deploy</b></div></div>
+    </div>
+    <div class="card reveal"><div class="card__label">Why the extra steps</div><ul class="ul">
+      <li>A brand's Figma is frequently <b>not dev-ready</b> — missing states, specs or responsive frames.</li>
+      <li>Closing gaps up front is exactly what prevents comebacks after deployment.</li></ul></div>
+  </section>
+
+  <!-- 09 PAGE OPTIMIZATION -->
+  <section class="sec" id="pageopt" style="--ac:#FB923C">
+    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
+    <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill o">POC · CTO directly</span><span class="pill" style="color:#FB923C;border-color:rgba(251,146,60,.4)">~2 weeks to go / no-go</span></div>
+    <p class="lead reveal">A standalone offering. The goal is a high Lighthouse score — faster loading, better Core Web Vitals. The assessment runs with the <span class="hl">CTO directly</span>. The brand is briefed on the steps up front.</p>
+    <div class="flow reveal">
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Code access taken</b><span>Repo / Shopify theme collaborator. Nothing starts without it.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Understand the codebase · Week 1</b><span>~4 hrs/day to find bottlenecks — render-blocking scripts, heavy JS, images, third-party tags.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Run Lighthouse — baseline</b><span>Score performance + Core Web Vitals to see where points are lost.</span></div></div>
+    </div>
+    <div class="phase reveal" style="--ac:#FB923C">Feasibility · doable or not?</div>
+    <div class="outs reveal" style="grid-template-columns:1fr 1fr">
+      <div class="out"><div class="out__h"><span class="out__d" style="background:#34D399"></span><span class="out__t" style="color:#34D399">Yes · doable</span></div><p>Define the next task — the optimisation roadmap, sequenced by impact.</p></div>
+      <div class="out"><div class="out__h"><span class="out__d" style="background:#F87171"></span><span class="out__t" style="color:#F87171">No · blocked</span></div><p>Flag the blockers. Report back, or route to a rebuild.</p></div>
+    </div>
+    <div class="flow reveal" style="margin-top:14px"><div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Go / no-go + next task · ~2 weeks · signed off by CTO</b></div></div></div>
+    <div class="cards two reveal">
+      <div class="card"><div class="card__label">What "scoring high" means</div><div class="mrows">
+        <div class="mrow"><span class="k">Lighthouse score</span><span class="val">90+ · green</span></div>
+        <div class="mrow"><span class="k">LCP — loading</span><span class="val">&lt; 2.5s</span></div>
+        <div class="mrow"><span class="k">INP — responsiveness</span><span class="val">&lt; 200ms</span></div>
+        <div class="mrow"><span class="k">CLS — stability</span><span class="val">&lt; 0.1</span></div></div></div>
+      <div class="card"><div class="card__label">Notes</div><ul class="ul">
+        <li><b>POC is the CTO directly</b> — technical, not KAM-mediated.</li>
+        <li><b>Lab vs field:</b> a 90+ score can still fail real-user Core Web Vitals — validate against CrUX.</li>
+        <li>If the theme caps gains, recommend a rebuild.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 10 SUMMARY -->
+  <section class="sec" id="summary" style="--ac:#A78BFA">
+    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
+    <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
+      <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
+      <div class="maprow"><div class="if"><b>Build-first</b> · new, 40+ hrs tech</div><div class="ar">→</div><div class="to">Build and ship the store first, stabilise, then move into CRO. Not the standard route.</div></div>
+      <div class="maprow"><div class="if"><b>CRO-only</b></div><div class="ar">→</div><div class="to">Run experiments to lift conversion. No design or build.</div></div>
+      <div class="maprow"><div class="if"><b>Tech-only</b> · Page Optimization</div><div class="ar">→</div><div class="to">Make the site fast, pass Core Web Vitals. POC is the CTO. ~2 weeks to go/no-go.</div></div>
+      <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Design a page, get sign-off, build it. Project-priced.</div></div>
+    </div></div>
+    <div class="cards two reveal" style="margin-top:16px">
+      <div class="card"><div class="card__label">The steps, in order</div><ul class="ul arrow">
+        <li>Onboard &amp; research (1 day, 2 hrs). Explain Troopod + expectations. Register in the brand DB.</li>
+        <li>Categorize &amp; route by scope — mind the 40-hour gate.</li>
+        <li>Pick the journey — CRO-led or Build-first.</li>
+        <li>Run the lifecycle: intake → audit → benchmark → data → PDP + A/B → rollout.</li>
+        <li>Design/dev passes every gate — 100% Figma, 0 comebacks.</li>
+        <li>Track the 2-month timeline; CVR compounds as you run more tests.</li></ul></div>
+      <div class="card"><div class="card__label">Key points to remember</div><ul class="ul">
+        <li><b>Research first</b> so categorization has 0 issues.</li>
+        <li><b>Explain every step to the brand in advance.</b></li>
+        <li>Suppress signals that don't apply before sharing.</li>
+        <li>A/B: 60% win · 95% confidence · 28-day min · top 20 SKUs.</li>
+        <li>Never build from an unlocked Figma; never skip a gate.</li>
+        <li>New brand + 40+ hrs tech → build-first.</li>
+        <li>Page Optimization POC = CTO. Lighthouse is lab; Google ranks on CrUX.</li>
+        <li>Both journeys end in CRO retention. North-star = Conversion Rate.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 11 FAQ -->
+  <section class="sec" id="faqs" style="--ac:#2DD4BF">
+    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
+    <div class="faqbar reveal" id="faqbar"></div>
+    <div class="faqs reveal" id="faqs-list"></div>
+  </section>
+
+</div></div>
+
+<div class="score" id="score" title="Continue — jump to the next section">
+  <div class="score__ring">
+    <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
+    <div class="score__pct" id="scorePct">0%</div>
+  </div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 11 read</span></div>
+</div>
+<div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
+<button class="fab" id="fab" aria-label="Back to top">↑</button>
+<div class="toasts" id="toasts"></div>
+
+<script>
+(function(){
+  "use strict";
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- section registry ---- */
+  var SECTIONS = [
+    {id:'onboarding', n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
+    {id:'triage',     n:'02', t:'Triage & Routing', ac:'#22D3EE'},
+    {id:'journeys',   n:'03', t:'Client Journeys', ac:'#38BDF8'},
+    {id:'lifecycle',  n:'04', t:'Engagement Lifecycle', ac:'#E879F9'},
+    {id:'timeline',   n:'05', t:'Timeline & CVR', ac:'#34D399'},
+    {id:'design',     n:'06', t:'Design → Development', ac:'#F472B6'},
+    {id:'zerocomeback',n:'07',t:'Zero-Comeback Deploy', ac:'#FBBF24'},
+    {id:'brandfigma', n:'08', t:'Brand Figma → Live', ac:'#818CF8'},
+    {id:'pageopt',    n:'09', t:'Page Optimization', ac:'#FB923C'},
+    {id:'summary',    n:'10', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',       n:'11', t:'FAQs', ac:'#2DD4BF'}
+  ];
+
+  /* ---- build rail + drawer nav ---- */
+  var railNav = document.getElementById('railNav');
+  var drawerNav = document.getElementById('drawerNav');
+  SECTIONS.forEach(function(s){
+    var a = document.createElement('a');
+    a.className='rlink'; a.href='#'+s.id; a.dataset.target=s.id; a.style.setProperty('--ac', s.ac);
+    a.innerHTML='<span class="rlink__dot"></span><span class="rlink__num">'+s.n+'</span>'+s.t+'<span class="rlink__chk">✓</span>';
+    railNav.appendChild(a);
+    var d = document.createElement('a');
+    d.className='dlink'; d.href='#'+s.id; d.dataset.target=s.id; d.style.setProperty('--ac', s.ac);
+    d.innerHTML='<span class="dlink__num">'+s.n+'</span>'+s.t+'<span class="dlink__chk">✓</span>';
+    drawerNav.appendChild(d);
+  });
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.rlink,.dlink'));
+
+  /* ---- FAQ cohorts + data ---- */
+  var FAQCATS=[
+    {key:'onb',name:'Onboarding & Triage',ac:'#22D3EE'},
+    {key:'cro',name:'CRO & Testing',ac:'#34D399'},
+    {key:'dsn',name:'Design',ac:'#F472B6'},
+    {key:'bld',name:'Build & Deploy',ac:'#FBBF24'},
+    {key:'perf',name:'Performance',ac:'#FB923C'},
+    {key:'proc',name:'Process & Client',ac:'#A78BFA'}
+  ];
+  var FAQS=[
+    ['onb',"A new brand wants CRO but also needs build work \u2014 which journey?","Under 40 hours of build \u2192 Journey A, the CRO-led lifecycle. 40+ hours \u2192 Journey B: build and ship the store first, stabilise, then move into CRO."],
+    ['onb',"I'm not sure how to categorize a brand.","Don't guess. The pre-onboarding research step exists so categorization has 0 issues \u2014 finish it first. Still unclear? Confirm commercial model and requirement scope in the 2-hour kickoff."],
+    ['onb',"What exactly do we cover in the 2-hour onboarding?","Who Troopod is, our expectations both ways, and a walk-through of the brand's journey and every step in advance \u2014 no surprises later."],
+    ['onb',"Where do tech hours get tracked?","In the Brand DB at registration. It logs the commercial model, requirement scope, decision-maker, and budgeted / tracked tech hours."],
+    ['onb',"A brand is recurring \u2014 what must I capture?","Capture MRR at registration \u2014 it drives forecasting and the monthly Client Update."],
+    ['cro',"How many of our A/B tests are expected to win?","Around 60%. Each winner must clear 95% confidence over a 28-day minimum window, and we start with the top 20 SKUs."],
+    ['cro',"How long does one A/B test run?","A 28-day minimum window. Ramp traffic 90:10 \u2192 50:50, top 20 SKUs first, and only call a winner at 95% confidence."],
+    ['cro',"How much conversion lift can I promise a client?","Don't promise a single number. Lift compounds with the number of tests \u2014 expect 1\u20132 in the first 2-month cycle and present a range, never a guarantee."],
+    ['cro',"A signal fired but doesn't apply to this brand.","Suppress it. Only ship signals relevant to the brand's actual context \u2014 never send generically-correct noise to the client."],
+    ['cro',"What's the north-star metric?","Conversion Rate, reported monthly against target. Both journeys end in ongoing CRO retention."],
+    ['dsn',"What are the two design modes?","Freehand (original creative direction) or Brand-guided (built strictly to the brand's existing guidelines)."],
+    ['dsn',"How do we share a design for review?","Deploy it to a GitHub link the brand can open and review on staging \u2014 not as a static file."],
+    ['dsn',"How long is the design review window?","About 2 weeks. Yes \u2192 lock and close; Changes \u2192 iterate and re-deploy; No \u2192 back to the brief and restart."],
+    ['dsn',"The brand sends conflicting feedback from several people.","Route every decision through the single named decision-maker. One voice approves."],
+    ['dsn',"What makes a Figma 'dev-ready'?","All states (default, hover, empty, error, loading), responsive frames, specs, components, exported assets, fonts, and documented interactions."],
+    ['dsn',"The brand keeps requesting changes past 2 weeks.","Cap the rounds, escalate to the named decision-maker, and scope further rounds as new work. Anything beyond the page's original scope is logged as new scope."],
+    ['dsn',"No response to a design review in 2 weeks.","Follow up and set a hard deadline. Still silent \u2192 pause the clock or close as approved-as-is per the agreed terms. Don't let it drift."],
+    ['bld',"How do we guarantee 0 comebacks?","Three gates \u2014 dev-readiness, QA against the Figma, and a written brand sign-off on staging before production. Never skip one."],
+    ['bld',"Can I skip a gate to hit a deadline?","No. A skipped gate is a future comeback. Never build from an unlocked Figma, QA against the file, and get written sign-off before production."],
+    ['bld',"The brand gave us their own Figma but it's incomplete.","Flag every gap in the readiness audit and send it back. They fill the gaps or sign off on assumptions in writing \u2014 never build on ambiguity."],
+    ['bld',"Where do we deploy?","A GitHub Pages staging link for review, then production after written sign-off, then verify the live build matches staging."],
+    ['perf',"Who is the point of contact for Page Optimization?","The CTO directly \u2014 it's a technical assessment, not KAM-mediated. Budget ~2 weeks to a go / no-go decision."],
+    ['perf',"Lighthouse is green but the client says the site feels slow.","Lighthouse is lab data; Google ranks on real-user CrUX field data. A 90+ lab score can still fail field Core Web Vitals on slow devices \u2014 validate against CrUX first."],
+    ['perf',"What scores are we aiming for?","Lighthouse 90+, LCP under 2.5s, INP under 200ms, CLS under 0.1."],
+    ['perf',"What if optimization isn't doable?","Flag the blockers. If the theme or build caps the gains, recommend a rebuild rather than forcing it."],
+    ['proc',"Do we explain the process to the brand?","Yes \u2014 the brand is walked through every step of every process in advance. No surprises."],
+    ['proc',"How often do we report to the client?","Bi-weekly performance reports, plus a monthly Client Update covering status, margin health, churn risk, and upsell."]
+  ];
+  var faqBar=document.getElementById('faqbar');
+  var faqWrap=document.getElementById('faqs-list');
+  function catMeta(k){ for(var i=0;i<FAQCATS.length;i++){ if(FAQCATS[i].key===k) return FAQCATS[i]; } return FAQCATS[0]; }
+  function addChip(label,key,ac){
+    var c=document.createElement('button'); c.className='fchip'+(key==='all'?' active':'');
+    c.textContent=label; c.dataset.cat=key; c.style.setProperty('--ac',ac||'#2DD4BF');
+    c.addEventListener('click',function(){
+      filterFaq(key);
+      Array.prototype.forEach.call(faqBar.children,function(x){ x.classList.toggle('active',x===c); });
+    });
+    faqBar.appendChild(c);
+  }
+  addChip('All','all','#2DD4BF');
+  FAQCATS.forEach(function(c){ addChip(c.name,c.key,c.ac); });
+  FAQS.forEach(function(f){
+    var m=catMeta(f[0]);
+    var el=document.createElement('div'); el.className='faq'; el.dataset.cat=f[0]; el.style.setProperty('--ac',m.ac);
+    el.innerHTML='<div class="faq__q"><span class="q">Q</span><span>'+f[1]+'</span><span class="faq__cat">'+m.name+'</span><span class="pm">+</span></div><div class="faq__a"><p>'+f[2]+'</p></div>';
+    faqWrap.appendChild(el);
+    var q=el.querySelector('.faq__q'), a=el.querySelector('.faq__a');
+    q.addEventListener('click',function(){ var open=el.classList.toggle('open'); a.style.maxHeight=open?a.scrollHeight+'px':'0'; });
+  });
+  function filterFaq(key){
+    Array.prototype.forEach.call(faqWrap.children,function(el){
+      el.classList.toggle('hide', key!=='all' && el.dataset.cat!==key);
+      if(el.classList.contains('hide')){ el.classList.remove('open'); var a=el.querySelector('.faq__a'); if(a) a.style.maxHeight='0'; }
+    });
+  }
+
+  /* ---- reminders ---- */
+  var REMIND=[
+    ["#A78BFA","<b>Research first.</b> Categorize with 0 issues."],
+    ["#22D3EE","<b>Explain every step</b> to the brand in advance."],
+    ["#E879F9","<b>Suppress</b> signals that don't apply before sharing."],
+    ["#34D399","A/B: <b>60% win · 95% · 28-day · top 20 SKUs.</b>"],
+    ["#FBBF24","<b>Never skip a gate.</b> Written sign-off before deploy."],
+    ["#38BDF8","New brand + <b>40+ hrs tech → build-first.</b>"],
+    ["#FB923C","Page Optimization POC = <b>the CTO directly.</b>"]
+  ];
+  var remWrap=document.getElementById('reminders');
+  REMIND.forEach(function(r){
+    var el=document.createElement('div'); el.className='remind';
+    el.innerHTML='<span class="remind__b" style="background:'+r[0]+';box-shadow:0 0 8px '+r[0]+'"></span><span class="remind__txt">'+r[1]+'</span>';
+    el.addEventListener('click',function(){ toast('Noted ✓', '', r[0]); });
+    remWrap.appendChild(el);
+  });
+
+  /* ---- toasts ---- */
+  var toastBox=document.getElementById('toasts');
+  function toast(msg, sub, ac){
+    var t=document.createElement('div'); t.className='toast';
+    t.style.setProperty('--tac', ac||'#A78BFA');
+    t.innerHTML='<span class="toast__d"></span><span><b>'+msg+'</b>'+(sub?' <small>'+sub+'</small>':'')+'</span>';
+    toastBox.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('in'); });
+    setTimeout(function(){ t.classList.remove('in'); setTimeout(function(){ t.remove(); },300); }, 2600);
+  }
+
+  /* ---- smooth scroll ---- */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[href^="#"],[data-scroll]');
+    if(!a) return;
+    var id=a.dataset.scroll || (a.getAttribute('href')||'').slice(1);
+    var el=document.getElementById(id);
+    if(el){ e.preventDefault(); el.scrollIntoView({behavior:prefersReduced?'auto':'smooth',block:'start'}); closeDrawer(); }
+  });
+
+  /* ---- expandable stages ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.stage'),function(st){
+    var head=st.querySelector('.stage__head'), body=st.querySelector('.stage__body');
+    head.addEventListener('click',function(){
+      var open=st.classList.toggle('open');
+      body.style.maxHeight = open ? body.scrollHeight+'px' : '0';
+    });
+  });
+  // open stage 00 by default
+  (function(){ var first=document.querySelector('.stage'); if(first){ first.classList.add('open'); var b=first.querySelector('.stage__body'); b.style.maxHeight=b.scrollHeight+'px'; } })();
+
+  /* ---- drawer ---- */
+  var drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim');
+  function openDrawer(){ drawer.classList.add('open'); scrim.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); scrim.classList.remove('open'); }
+  document.getElementById('menuBtn').addEventListener('click',openDrawer);
+  scrim.addEventListener('click',closeDrawer);
+
+  /* ---- reminders panel ---- */
+  var panel=document.getElementById('panel');
+  function togglePanel(){ panel.classList.toggle('open'); }
+  document.getElementById('bellD').addEventListener('click',togglePanel);
+  document.getElementById('bellM').addEventListener('click',togglePanel);
+  document.getElementById('panelX').addEventListener('click',function(){panel.classList.remove('open');});
+  document.addEventListener('click',function(e){
+    if(panel.classList.contains('open') && !panel.contains(e.target) && !e.target.closest('#bellD,#bellM')) panel.classList.remove('open');
+  });
+
+  /* ---- scroll progress (top bar + rail fill) ---- */
+  var pfill=document.getElementById('pfill'), railFill=document.getElementById('railFill'), railNavEl=document.getElementById('railNav');
+  var fab=document.getElementById('fab');
+  function onScroll(){
+    var se=document.scrollingElement||document.documentElement;
+    var max=se.scrollHeight-se.clientHeight;
+    var p=max>0?se.scrollTop/max:0;
+    pfill.style.width=(p*100).toFixed(2)+'%';
+    if(railNavEl){ railFill.style.height=(p*(railNavEl.scrollHeight-12)).toFixed(1)+'px'; }
+    if(se.scrollTop>500) fab.classList.add('show'); else fab.classList.remove('show');
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+
+  /* ---- scrollspy (active + section toast) ---- */
+  var shown={};
+  var spy=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var id=en.target.id;
+      navLinks.forEach(function(l){ l.classList.toggle('is-active', l.dataset.target===id); });
+      var meta=SECTIONS.filter(function(s){return s.id===id;})[0];
+      if(meta){
+        document.documentElement.style.setProperty('--rail-accent', meta.ac);
+        if(!shown[id]){ shown[id]=true; toast('Now reading · '+meta.t, meta.n+' / 11', meta.ac); }
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px', threshold:0});
+  SECTIONS.forEach(function(s){ var el=document.getElementById(s.id); if(el) spy.observe(el); });
+
+  /* ---- reveal on scroll ---- */
+  if(prefersReduced){
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'),function(el){el.classList.add('in');});
+  } else {
+    var rev=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); rev.unobserve(en.target); } });
+    },{rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'),function(el){ rev.observe(el); });
+  }
+
+  /* ---- welcome + completion ---- */
+  var done=false;
+  window.addEventListener('scroll',function(){
+    var se=document.scrollingElement||document.documentElement;
+    if(!done && se.scrollTop/(se.scrollHeight-se.clientHeight) > 0.985){ done=true; SECTIONS.forEach(function(s){ markRead(s.id); }); }
+  },{passive:true});
+
+  /* ---- preloader ---- */
+  var pre=document.getElementById('preloader'), plFill=document.getElementById('plFill');
+  document.documentElement.style.overflow='hidden';
+  var plp=0, welcomed=false;
+  var plTimer=setInterval(function(){ plp=Math.min(100, plp+(plp<70?9:5)); plFill.style.width=plp+'%'; if(plp>=100){ clearInterval(plTimer); finishPre(); } },90);
+  function finishPre(){ if(pre.classList.contains('done')) return; pre.classList.add('done'); document.documentElement.style.overflow='';
+    setTimeout(function(){ pre.style.display='none'; },650);
+    if(!welcomed){ welcomed=true; setTimeout(function(){ toast('Welcome to Comon OPS','scroll to earn your score','#A78BFA'); },300); } }
+  window.addEventListener('load',function(){ setTimeout(finishPre,400); });
+  setTimeout(finishPre,3200);
+
+  /* ---- gamified learning score ---- */
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[11,'Certified']];
+  var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
+  var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
+      scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),
+      scoreSub=document.getElementById('scoreSub'), scoreEl=document.getElementById('score');
+  function rankFor(n){ var r='Rookie'; for(var i=0;i<RANKS.length;i++){ if(n>=RANKS[i][0]) r=RANKS[i][1]; } return r; }
+  function updateScore(){
+    var pct=readCount/TOTAL;
+    ringEl.style.strokeDashoffset=(RING*(1-pct)).toFixed(1);
+    ringEl.setAttribute('stroke', pct>=1?'#34D399':'#A78BFA');
+    scorePct.textContent=Math.round(pct*100)+'%';
+    scoreXp.textContent=(readCount*100)+' XP';
+    scoreSub.textContent=readCount+' / '+TOTAL+' read';
+    var rk=rankFor(readCount);
+    if(scoreRank.textContent!==rk){ scoreRank.textContent=rk; if(readCount>0 && rk!=='Certified') toast('Rank up \u2014 '+rk, readCount+' / '+TOTAL+' read', '#A78BFA'); }
+  }
+  function xpPop(txt){ var r=scoreEl.getBoundingClientRect(); var el=document.createElement('div'); el.className='xp-pop';
+    el.textContent=txt; el.style.left=(r.left+r.width/2)+'px'; el.style.top=(r.top-4)+'px';
+    document.body.appendChild(el); setTimeout(function(){el.remove();},1000); }
+  var celebrated=false;
+  function markRead(id){
+    if(read[id]) return; read[id]=true; readCount++;
+    navLinks.forEach(function(l){ if(l.dataset.target===id) l.classList.add('read'); });
+    xpPop('+100'); updateScore();
+    if(readCount>=TOTAL) celebrate();
+  }
+  function checkRead(){
+    for(var i=0;i<SECTIONS.length;i++){ var id=SECTIONS[i].id; if(read[id]) continue;
+      var el=document.getElementById(id); if(!el) continue;
+      if(el.getBoundingClientRect().bottom < window.innerHeight*0.6) markRead(id); }
+  }
+  window.addEventListener('scroll',checkRead,{passive:true});
+  scoreEl.addEventListener('click',function(){
+    var next=null; for(var i=0;i<SECTIONS.length;i++){ if(!read[SECTIONS[i].id]){ next=SECTIONS[i]; break; } }
+    if(next){ var t=document.getElementById(next.id); if(t) t.scrollIntoView({behavior:prefersReduced?'auto':'smooth',block:'start'}); }
+    else celebrate();
+  });
+  function celebrate(){
+    if(celebrated) return; celebrated=true;
+    document.getElementById('cert').classList.add('show');
+    toast('Certified KAM \U0001F3C5','11 / 11 \u2014 1100 XP','#34D399');
+    if(prefersReduced) return;
+    var cols=['#A78BFA','#22D3EE','#34D399','#FBBF24','#F472B6','#FB923C'];
+    for(var i=0;i<80;i++){ (function(k){ var c=document.createElement('div'); c.className='confetti';
+      c.style.left=Math.random()*100+'vw'; c.style.background=cols[k%cols.length];
+      c.style.animationDuration=(2+Math.random()*1.8)+'s'; c.style.animationDelay=(Math.random()*.5)+'s';
+      c.style.width=(6+Math.random()*6)+'px';
+      document.body.appendChild(c); setTimeout(function(){c.remove();},4600); })(i); }
+  }
+  document.getElementById('certBtn').addEventListener('click',function(){ document.getElementById('cert').classList.remove('show'); });
+  updateScore();
+
+  onScroll();
+  checkRead();
+})();
+</script>
+</body>
+</html>

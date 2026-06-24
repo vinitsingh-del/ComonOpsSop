@@ -301,6 +301,28 @@
   .mini-row span{color:var(--mut)}
   .mini-row b{color:var(--txt);font-weight:700;text-align:right}
 
+  /* escalation playbook */
+  .esc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+  .esc-triggers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 18px}
+  .esc-card{border:1px solid var(--line);border-left:3px solid var(--sev);border-radius:12px;padding:14px;background:rgba(255,255,255,.035);min-height:130px}
+  .esc-card h3{font-size:14.5px;line-height:1.22;margin-bottom:7px;color:var(--txt)}
+  .esc-card p{font-size:12.7px;color:var(--mut);line-height:1.42}
+  .sev{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--sev);margin-bottom:7px;font-weight:700}
+  .esc-flow{display:grid;gap:11px}
+  .esc-step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;border:1px solid color-mix(in srgb,var(--ac) 45%,var(--line));border-radius:12px;padding:13px;background:rgba(255,255,255,.035)}
+  .esc-n{width:36px;height:36px;border-radius:9px;background:var(--ac);color:#0A0815;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:800}
+  .esc-step b{display:block;font-size:14.5px;margin-bottom:3px}
+  .esc-step span{font-size:12.8px;color:var(--mut);line-height:1.42}
+  .who-list{display:grid;gap:9px}
+  .who-row{display:grid;grid-template-columns:1fr 1.1fr;gap:12px;align-items:start;border-top:1px solid var(--line);padding-top:10px;font-size:13px}
+  .who-row:first-child{border-top:none;padding-top:0}
+  .who-row b{color:var(--txt)}
+  .who-row span{color:var(--mut);line-height:1.42}
+  .icp-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .icp-box{border:1px solid var(--line);border-radius:12px;padding:13px;background:rgba(255,255,255,.035)}
+  .icp-box b{display:block;color:var(--ac);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:5px}
+  .icp-box span{display:block;color:var(--mut);font-size:12.7px;line-height:1.42}
+
   /* map rows */
   .map{display:flex;flex-direction:column}
   .maprow{display:flex;align-items:flex-start;gap:13px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px;line-height:1.45}
@@ -360,6 +382,7 @@
     .cycle-card::before{display:none}
     .redesign-edge{grid-template-columns:1fr}
     .sow-routes,.sow-matrix{grid-template-columns:1fr}
+    .esc-grid,.esc-triggers,.icp-strip{grid-template-columns:1fr}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -373,6 +396,7 @@
     .side-panel:first-child{grid-template-columns:1fr}
     .sow-step{grid-template-columns:42px minmax(0,1fr);gap:11px;padding:13px}
     .sow-step:not(:last-child)::after{left:33px}
+    .who-row{grid-template-columns:1fr;gap:4px}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -503,7 +527,7 @@
   <section class="hero" id="hero">
     <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
     <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
-    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Thirteen sections, one flow.</p>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Fourteen sections, one flow.</p>
     <div class="hero__chips reveal">
       <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
     </div>
@@ -911,9 +935,53 @@
     </div>
   </section>
 
-  <!-- 12 SUMMARY -->
+  <!-- 12 ESCALATION -->
+  <section class="sec" id="escalation" style="--ac:#F87171">
+    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
+    <p class="lead reveal">Use this when the relationship is at risk: the brand is ghosting, delivery is late, deployment does not match design, the brand rejects design quality, conversions are not moving, or the brand is below ICP but expects CRO + ads scale.</p>
+
+    <div class="esc-triggers reveal">
+      <div class="esc-card" style="--sev:#FBBF24"><span class="sev">Amber</span><h3>Brand not responding</h3><p>No reply for 7-10 days. KAM follows up, confirms blocker, and asks for decision owner.</p></div>
+      <div class="esc-card" style="--sev:#F87171"><span class="sev">Red</span><h3>Ghosting 2-3 weeks</h3><p>Mark red. Escalate internally, pause assumptions, and send a clear reactivation note.</p></div>
+      <div class="esc-card" style="--sev:#F87171"><span class="sev">Red</span><h3>Timeline missed</h3><p>Deliverable slipped versus promised SOW/timeline. Go to CTO + founding for solution path.</p></div>
+      <div class="esc-card" style="--sev:#F87171"><span class="sev">Red</span><h3>UI/UX vs deployment mismatch</h3><p>Live build does not match approved design or staging. Stop, compare, fix, then re-approve.</p></div>
+      <div class="esc-card" style="--sev:#F472B6"><span class="sev">Design risk</span><h3>Not happy with design</h3><p>Route to design owner, re-read brief/SOW, isolate subjective taste vs brand/CRO mismatch.</p></div>
+      <div class="esc-card" style="--sev:#34D399"><span class="sev">CRO risk</span><h3>Not happy with conversions</h3><p>Route to CRO lead. Check baseline, test window, traffic quality, offer, data, and expectations.</p></div>
+    </div>
+
+    <div class="esc-grid reveal">
+      <div class="card"><div class="card__label">Short escalation flow</div><div class="esc-flow">
+        <div class="esc-step"><div class="esc-n">1</div><div><b>Tag severity</b><span>Amber if delayed or unclear. Red if ghosting 2-3 weeks, missed timeline, unhappy client, or live mismatch.</span></div></div>
+        <div class="esc-step"><div class="esc-n">2</div><div><b>Notify the right owner</b><span>KAM owns communication. CTO owns tech/timeline/deployment. Founder owns relationship/commercial risk.</span></div></div>
+        <div class="esc-step"><div class="esc-n">3</div><div><b>Run RCA</b><span>What was promised, what slipped, why it slipped, who owns the fix, and what date is realistic.</span></div></div>
+        <div class="esc-step"><div class="esc-n">4</div><div><b>Reach the brand</b><span>Apologise clearly, acknowledge the issue, ask for time to revert, and give a concrete next update window.</span></div></div>
+        <div class="esc-step"><div class="esc-n">5</div><div><b>War-room solution</b><span>Bring design/dev/CRO/ads as needed. Send one recovery plan, not scattered replies.</span></div></div>
+      </div></div>
+      <div class="card"><div class="card__label">Whom to reach</div><div class="who-list">
+        <div class="who-row"><b>KAM / Account owner</b><span>First responder. Owns client message, context, timeline, notes, apology, and follow-up cadence.</span></div>
+        <div class="who-row"><b>CTO</b><span>Missed tech delivery, deployment mismatch, performance issue, platform blocker, or timeline recovery.</span></div>
+        <div class="who-row"><b>Founder / management</b><span>Red brand, churn risk, repeated misses, commercial mismatch, angry founder/client, or trust damage.</span></div>
+        <div class="who-row"><b>Design lead</b><span>Not happy with design, UI quality, brand mismatch, Figma/AI HTML disagreement, or creative direction reset.</span></div>
+        <div class="who-row"><b>CRO lead</b><span>Conversion dissatisfaction, weak hypothesis, inconclusive test, wrong expectation, or funnel diagnosis issue.</span></div>
+        <div class="who-row"><b>Ads / growth owner</b><span>Client expects CRO + ads, traffic quality affects CVR, spend/revenue mismatch, or ICP check required.</span></div>
+      </div></div>
+    </div>
+
+    <div class="card reveal"><div class="card__label">ICP gate for CRO + ads brands</div>
+      <p style="font-size:14px;color:var(--mut);line-height:1.55;margin-bottom:10px">If a brand needs CRO + ads but is below ICP, do not promise a full-scale growth path without leadership review. Route to founder/commercial discussion before committing.</p>
+      <div class="icp-strip">
+        <div class="icp-box"><b>Revenue ICP</b><span>Minimum INR 30 lakhs revenue per month.</span></div>
+        <div class="icp-box"><b>Ad spend ICP</b><span>Minimum INR 5 lakhs ad spend per month.</span></div>
+        <div class="icp-box"><b>If below ICP</b><span>Flag as commercial risk. Founder + ads/growth owner decide fit, scope, and expectation.</span></div>
+      </div>
+    </div>
+
+    <div class="callout reveal"><div class="callout__ic">RCA</div><p><b>RCA rule:</b> for red brands, document the promise, the miss, the root cause, team owner, recovery ETA, client message, and prevention step. Then send one apology-led update to the brand: acknowledge, apologise, ask for time to revert, and return with a solution.</p></div>
+  </section>
+
+  <!-- 13 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
-    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
     <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
     <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
       <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
@@ -923,6 +991,7 @@
       <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Design a page, get sign-off, build it. Project-priced.</div></div>
       <div class="maprow"><div class="if"><b>AI HTML → Client Live</b></div><div class="ar">→</div><div class="to">Prototype a brand-safe redesign, review it with the client, approve, hand off, deploy, then monitor live.</div></div>
       <div class="maprow"><div class="if"><b>Scope of Work</b></div><div class="ar">→</div><div class="to">Classify the request, convert gaps into tasks, approve scope/hours/commercials, then route into the correct operating flow.</div></div>
+      <div class="maprow"><div class="if"><b>Escalation / Angry Brand</b></div><div class="ar">→</div><div class="to">Mark red brands, alert CTO/founder as needed, run RCA, apologise, recover timeline, and close the loop.</div></div>
     </div></div>
     <div class="cards two reveal" style="margin-top:16px">
       <div class="card"><div class="card__label">The steps, in order</div><ul class="ul arrow">
@@ -933,6 +1002,7 @@
         <li>Run the lifecycle: intake → audit → benchmark → data → PDP + A/B → rollout.</li>
         <li>For AI HTML redesigns, clean the prototype, review CRO, host preview, control revisions, approve, deploy, monitor.</li>
         <li>Design/dev passes every gate — 100% Figma, 0 comebacks.</li>
+        <li>If brand risk appears, run escalation: severity tag → owner → RCA → apology → recovery plan.</li>
         <li>Track the 2-month timeline; CVR compounds as you run more tests.</li></ul></div>
       <div class="card"><div class="card__label">Key points to remember</div><ul class="ul">
         <li><b>Research first</b> so categorization has 0 issues.</li>
@@ -942,15 +1012,16 @@
         <li>A/B: 60% win · 95% confidence · 28-day min · top 20 SKUs.</li>
         <li>AI HTML is a prototype until cleaned, approved, and handed off.</li>
         <li>Never build from an unlocked Figma; never skip a gate.</li>
+        <li>Red brands go to CTO + founder/management with RCA and a single recovery plan.</li>
         <li>New brand + 40+ hrs tech → build-first.</li>
         <li>Page Optimization POC = CTO. Lighthouse is lab; Google ranks on CrUX.</li>
         <li>Both journeys end in CRO retention. North-star = Conversion Rate.</li></ul></div>
     </div>
   </section>
 
-  <!-- 13 FAQ -->
+  <!-- 14 FAQ -->
   <section class="sec" id="faqs" style="--ac:#2DD4BF">
-    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
     <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
@@ -963,7 +1034,7 @@
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 13 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 14 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -987,8 +1058,9 @@
     {id:'zerocomeback',n:'09',t:'Zero-Comeback Deploy', ac:'#FBBF24'},
     {id:'brandfigma', n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
     {id:'pageopt',    n:'11', t:'Page Optimization', ac:'#FB923C'},
-    {id:'summary',    n:'12', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',       n:'13', t:'FAQs', ac:'#2DD4BF'}
+    {id:'escalation', n:'12', t:'Escalation / Angry Brand', ac:'#F87171'},
+    {id:'summary',    n:'13', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',       n:'14', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -1014,6 +1086,7 @@
     {key:'bld',name:'Build & Deploy',ac:'#FBBF24'},
     {key:'perf',name:'Performance',ac:'#FB923C'},
     {key:'sow',name:'Scope of Work',ac:'#22D3EE'},
+    {key:'esc',name:'Escalation',ac:'#F87171'},
     {key:'proc',name:'Process & Client',ac:'#A78BFA'}
   ];
   var FAQS=[
@@ -1027,6 +1100,11 @@
     ['sow',"Where does each SOW route next?","Pure CRO and mixed growth go to Engagement Lifecycle. Heavy/new build goes to Client Journeys. Design/redesign goes to Design → Development or AI HTML. Tech-only goes to Page Optimization."],
     ['sow',"What table format should every SOW use?","Focus → Task → Current Gap/Data → Priority → Timeline/Hours → Metric. This keeps the SOW execution-ready instead of vague."],
     ['sow',"What if the client adds extra work after approval?","Treat it as new scope. Extra work, platform limitations, third-party issues, or new requests beyond the approved cap must be estimated separately."],
+    ['esc',"When does a brand become a red brand?","Mark red when the brand ghosts for 2-3 weeks, we miss the committed timeline, deployment does not match approved UI/UX, design is rejected, conversion dissatisfaction is serious, or trust is at risk."],
+    ['esc',"Who do I alert for a missed deliverable timeline?","KAM alerts CTO and founder/management. CTO owns the technical recovery path; founder/management owns relationship and commercial risk."],
+    ['esc',"What is the red-brand RCA format?","Document promise, miss, root cause, owner, recovery ETA, client message, and prevention step. Then send one apology-led update with the next revert time."],
+    ['esc',"What if a brand wants CRO + ads but is below ICP?","Minimum ICP is INR 30 lakhs monthly revenue and INR 5 lakhs monthly ad spend. If below, flag commercial risk and route to founder plus ads/growth owner before promising scale."],
+    ['esc',"Who handles unhappy design, deployment, or conversion complaints?","Design lead handles design dissatisfaction, CTO/dev handles deployment mismatch, CRO lead handles conversion dissatisfaction, and KAM owns the client communication thread."],
     ['cro',"How many of our A/B tests are expected to win?","Around 60%. Each winner must clear 95% confidence over a 28-day minimum window, and we start with the top 20 SKUs."],
     ['cro',"How long does one A/B test run?","A 28-day minimum window. Ramp traffic 90:10 \u2192 50:50, top 20 SKUs first, and only call a winner at 95% confidence."],
     ['cro',"How much conversion lift can I promise a client?","Don't promise a single number. Lift compounds with the number of tests \u2014 expect 1\u20132 in the first 2-month cycle and present a range, never a guarantee."],
@@ -1092,6 +1170,7 @@
     ["#34D399","A/B: <b>60% win · 95% · 28-day · top 20 SKUs.</b>"],
     ["#2563EB","AI HTML is a <b>prototype</b> until cleaned, approved, and handed off."],
     ["#FBBF24","<b>Never skip a gate.</b> Written sign-off before deploy."],
+    ["#F87171","Red brand: <b>RCA + CTO/founder escalation + apology-led recovery.</b>"],
     ["#38BDF8","New brand + <b>40+ hrs tech → build-first.</b>"],
     ["#FB923C","Page Optimization POC = <b>the CTO directly.</b>"]
   ];
@@ -1244,7 +1323,7 @@
   setTimeout(finishPre,3200);
 
   /* ---- gamified learning score ---- */
-  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[13,'Certified']];
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[14,'Certified']];
   var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
   var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
       scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),

@@ -366,6 +366,30 @@
   .mock-product span{display:block;font-size:11px;color:#637066}
   .mock-price{font-family:'JetBrains Mono',monospace;color:#153E2B!important;font-weight:800!important;margin-top:7px}
 
+  /* HTML iteration process */
+  .iter-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
+  .iter-step{position:relative;border:1px solid color-mix(in srgb,var(--ac) 42%,var(--line));border-radius:12px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
+  .iter-step:not(:last-child)::after{content:'→';position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--ac);font-weight:900;z-index:2}
+  .iter-step b{display:block;font-size:13.5px;line-height:1.25;margin-bottom:6px;color:var(--txt)}
+  .iter-step span{display:block;font-size:12.3px;line-height:1.42;color:var(--mut)}
+  .iter-tabs{display:grid;gap:10px;margin:14px 0}
+  .iter-tab{border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.022)),var(--surface);overflow:hidden}
+  .iter-tab.open{border-color:var(--ac)}
+  .iter-head{display:flex;align-items:center;gap:12px;width:100%;border:none;background:transparent;color:var(--txt);padding:15px 17px;cursor:pointer;text-align:left;font-family:'Poppins'}
+  .iter-num{font-family:'JetBrains Mono',monospace;color:var(--ac);font-size:12px;font-weight:800;min-width:30px}
+  .iter-title{font-weight:800;font-size:15px;line-height:1.25;flex:1}
+  .iter-plus{color:var(--ac);font-size:18px;font-weight:900;transition:transform .2s}
+  .iter-tab.open .iter-plus{transform:rotate(45deg)}
+  .iter-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .iter-inner{padding:0 17px 17px}
+  .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:8px 0 12px}
+  .mini-box{border:1px solid var(--line);border-radius:10px;padding:10px;background:rgba(255,255,255,.03);font-size:12.5px;color:var(--mut);line-height:1.42}
+  .mini-box b{display:block;color:var(--txt);margin-bottom:4px}
+  .prompt-pair{display:grid;grid-template-columns:.8fr 1.2fr;gap:10px;margin-top:10px}
+  .client-says,.prompt-out{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(255,255,255,.03);font-size:12.8px;line-height:1.5;color:var(--mut)}
+  .client-says b,.prompt-out b{display:block;color:var(--ac);font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+  .prompt-out code{display:block;white-space:normal;color:var(--txt);font-family:'Poppins';font-size:13px;line-height:1.5}
+
   /* market timeline */
   .market-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0 18px}
   .market-stat{border:1px solid color-mix(in srgb,var(--ac) 42%,var(--line));border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.048),rgba(255,255,255,.024)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
@@ -472,6 +496,9 @@
     .market-row{grid-template-columns:1fr}
     .market-cell{border-left:none;border-top:1px solid var(--line)}
     .market-cell:first-child{border-top:none}
+    .iter-flow{grid-template-columns:1fr}
+    .iter-step:not(:last-child)::after{content:'↓';right:auto;left:18px;top:auto;bottom:-16px;transform:none}
+    .mini-grid,.prompt-pair{grid-template-columns:1fr}
     .quiz-points{grid-template-columns:1fr}
     .quiz-q{grid-template-columns:1fr}
     .quiz-actions{justify-content:flex-start}
@@ -628,7 +655,7 @@
   <section class="hero" id="hero">
     <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
     <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
-    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Sixteen sections, one flow.</p>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Seventeen sections, one flow.</p>
     <div class="hero__chips reveal">
       <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
     </div>
@@ -1211,9 +1238,82 @@
     </div>
   </section>
 
-  <!-- 13 PAGE OPTIMIZATION -->
+  <!-- 13 HTML ITERATIONS -->
+  <section class="sec" id="htmliterations" style="--ac:#7DD3FC">
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">HTML Iterations → Deploy</h2><span class="sec__kicker">feedback → prompts → safe revision</span></div>
+    <p class="lead reveal">Use this after the AI HTML preview is shared. The KAM collects structured feedback, the design team converts it into prompts, and AI revisions happen section-by-section so one change does not break the whole page.</p>
+
+    <div class="iter-flow reveal">
+      <div class="iter-step"><b>1 · Ask category-wise</b><span>Branding, layout, content, business. Never ask “what do you think?”</span></div>
+      <div class="iter-step"><b>2 · Convert feedback</b><span>Design team turns vague client comments into structured prompts.</span></div>
+      <div class="iter-step"><b>3 · Bucket prompts</b><span>Hero, navigation, PDP, trust, footer. Group before running.</span></div>
+      <div class="iter-step"><b>4 · Revise section-wise</b><span>Run one section at a time. Never regenerate the full page.</span></div>
+      <div class="iter-step"><b>5 · Approve → deploy</b><span>Internal approval first, client approval next, then deployment handoff.</span></div>
+    </div>
+
+    <div class="iter-tabs reveal">
+      <div class="iter-tab open">
+        <button class="iter-head" type="button" aria-expanded="true"><span class="iter-num">01</span><span class="iter-title">Client Feedback Rules</span><span class="iter-plus">+</span></button>
+        <div class="iter-body" style="max-height:360px"><div class="iter-inner">
+          <div class="mini-grid">
+            <div class="mini-box"><b>Branding</b>Colors, fonts, images, tone.</div>
+            <div class="mini-box"><b>Layout</b>Section order, section size, spacing, alignment.</div>
+            <div class="mini-box"><b>Content</b>Copy, headlines, CTA text.</div>
+            <div class="mini-box"><b>Business</b>Offers, pricing, product details.</div>
+          </div>
+          <div class="cards two" style="margin-top:10px">
+            <div class="card"><div class="card__label">Do not ask</div><p style="font-size:14px;color:var(--mut);line-height:1.55">“What do you think?” This creates vague, emotional, unbucketed feedback.</p></div>
+            <div class="card"><div class="card__label">Ask instead</div><p style="font-size:14px;color:var(--mut);line-height:1.55">“Please give feedback category-wise: branding, layout, content, and business.”</p></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="iter-tab">
+        <button class="iter-head" type="button" aria-expanded="false"><span class="iter-num">02</span><span class="iter-title">Feedback → Prompt Engine</span><span class="iter-plus">+</span></button>
+        <div class="iter-body"><div class="iter-inner">
+          <p style="font-size:14px;color:var(--mut);line-height:1.55">This is where the team works. Not developers. Not raw AI. The design team converts every feedback item into one structured prompt.</p>
+          <div class="prompt-pair"><div class="client-says"><b>Client says</b>Move reviews higher.</div><div class="prompt-out"><b>Prompt</b><code>Move the review section immediately below the pricing block. Maintain spacing. Do not change typography. Preserve mobile responsiveness.</code></div></div>
+          <div class="prompt-pair"><div class="client-says"><b>Client says</b>Make CTA bigger.</div><div class="prompt-out"><b>Prompt</b><code>Increase primary CTA height by 20%. Increase font weight. Maintain padding. Do not affect surrounding layout.</code></div></div>
+          <div class="prompt-pair"><div class="client-says"><b>Client says</b>Hero feels empty.</div><div class="prompt-out"><b>Prompt</b><code>Increase visual density. Reduce whitespace. Maintain premium aesthetic. Do not increase overall page height.</code></div></div>
+        </div></div>
+      </div>
+
+      <div class="iter-tab">
+        <button class="iter-head" type="button" aria-expanded="false"><span class="iter-num">03</span><span class="iter-title">Prompt Bucketing</span><span class="iter-plus">+</span></button>
+        <div class="iter-body"><div class="iter-inner">
+          <p style="font-size:14px;color:var(--mut);line-height:1.55">Do not send 50 prompts together. Group them into buckets and run them section-wise, not page-wise. This keeps AI from breaking unrelated areas.</p>
+          <div class="mini-grid">
+            <div class="mini-box"><b>Bucket A</b>Hero</div>
+            <div class="mini-box"><b>Bucket B</b>Navigation</div>
+            <div class="mini-box"><b>Bucket C</b>PDP / product block</div>
+            <div class="mini-box"><b>Bucket D</b>Trust, reviews, proof</div>
+          </div>
+          <div class="callout" style="margin-top:12px"><div class="callout__ic">!</div><p><b>Rule:</b> every prompt must include what to change, what to preserve, and what must not be affected.</p></div>
+        </div></div>
+      </div>
+
+      <div class="iter-tab">
+        <button class="iter-head" type="button" aria-expanded="false"><span class="iter-num">04</span><span class="iter-title">AI Revision Sequence</span><span class="iter-plus">+</span></button>
+        <div class="iter-body"><div class="iter-inner">
+          <p style="font-size:14px;color:var(--mut);line-height:1.55">Run prompts section-by-section. Never regenerate the full page. Each section must be internally approved before the next section is touched.</p>
+          <div class="flow" style="margin-top:12px">
+            <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Hero</b><span>Density, headline, media, offer clarity.</span></div></div>
+            <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Navigation</b><span>Header, menu, sticky elements, search/cart.</span></div></div>
+            <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Benefits / Trust</b><span>Badges, proof blocks, reviews, guarantees.</span></div></div>
+            <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><b>PDP / Product Area</b><span>Media, title, price, variants, CTA, details.</span></div></div>
+            <div class="fstep"><div class="fstep__node">5</div><div class="fcard"><b>Footer</b><span>Links, policy, support, brand closure.</span></div></div>
+            <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Internal approval → client approval → deployment handoff</b></div></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="callout reveal"><div class="callout__ic">AI</div><p><b>Non-negotiable:</b> AI revises the section you ask for. It does not own the design decision, the feedback interpretation, or the final approval.</p></div>
+  </section>
+
+  <!-- 14 PAGE OPTIMIZATION -->
   <section class="sec" id="pageopt" style="--ac:#FB923C">
-    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
+    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill o">POC · CTO directly</span><span class="pill" style="color:#FB923C;border-color:rgba(251,146,60,.4)">~2 weeks to go / no-go</span></div>
     <p class="lead reveal">A standalone offering. The goal is faster loading and better Core Web Vitals. A <span class="hl">90+ green Lighthouse score</span> is ideal, but <span class="hl">70+ can be acceptable</span> depending on brand requirements, platform limits, and agreed scope. The assessment runs with the <span class="hl">CTO directly</span>.</p>
     <div class="flow reveal">
@@ -1240,9 +1340,9 @@
     </div>
   </section>
 
-  <!-- 14 ESCALATION -->
+  <!-- 15 ESCALATION -->
   <section class="sec" id="escalation" style="--ac:#F87171">
-    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
+    <div class="sec__head reveal"><span class="sec__num">15</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
     <p class="lead reveal">Use this when the relationship is at risk: the brand is ghosting, delivery is late, deployment does not match design, the brand rejects design quality, conversions are not moving, or the brand is below ICP but expects CRO + ads scale.</p>
 
     <div class="esc-triggers reveal">
@@ -1284,9 +1384,9 @@
     <div class="callout reveal"><div class="callout__ic">RCA</div><p><b>RCA rule:</b> for red brands, document the promise, the miss, the root cause, team owner, recovery ETA, client message, and prevention step. Then send one apology-led update to the brand: acknowledge, apologise, ask for time to revert, and return with a solution.</p></div>
   </section>
 
-  <!-- 15 SUMMARY -->
+  <!-- 16 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
-    <div class="sec__head reveal"><span class="sec__num">15</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <div class="sec__head reveal"><span class="sec__num">16</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
     <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
     <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
       <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
@@ -1295,6 +1395,7 @@
       <div class="maprow"><div class="if"><b>Tech-only</b> · Page Optimization</div><div class="ar">→</div><div class="to">Make the site fast, pass Core Web Vitals. POC is the CTO. ~2 weeks to go/no-go.</div></div>
       <div class="maprow"><div class="if"><b>Design → Development</b></div><div class="ar">→</div><div class="to">Design a page, get sign-off, build it. Project-priced.</div></div>
       <div class="maprow"><div class="if"><b>AI HTML → Client Live</b></div><div class="ar">→</div><div class="to">Prototype a brand-safe redesign, review it with the client, approve, hand off, deploy, then monitor live.</div></div>
+      <div class="maprow"><div class="if"><b>HTML Iterations → Deploy</b></div><div class="ar">→</div><div class="to">Collect category-wise feedback, convert it into prompts, revise section-wise, approve, then deploy.</div></div>
       <div class="maprow"><div class="if"><b>Scope of Work</b></div><div class="ar">→</div><div class="to">Classify the request, convert gaps into tasks, approve scope/hours/commercials, then route into the correct operating flow.</div></div>
       <div class="maprow"><div class="if"><b>Market Standard Timeline</b></div><div class="ar">→</div><div class="to">Set realistic expectations against traditional UI/UX + developer timelines before committing dates.</div></div>
       <div class="maprow"><div class="if"><b>Escalation / Angry Brand</b></div><div class="ar">→</div><div class="to">Mark red brands, alert CTO/founder as needed, run RCA, apologise, recover timeline, and close the loop.</div></div>
@@ -1310,6 +1411,7 @@
         <li>Track the 8-week CVR model; CVR compounds as tests move from setup to rollout.</li>
         <li>For design work, close design review first, then pass through Figma readiness, QA, staging, sign-off, and deploy.</li>
         <li>Use AI HTML only as the fast prototype route, then clean, review, approve, hand off, deploy, and monitor.</li>
+        <li>Convert client feedback into structured prompts and revise HTML section-wise, never by regenerating the full page.</li>
         <li>For speed work, route to Page Optimization with CTO as POC.</li>
         <li>If brand risk appears, run escalation: severity tag → owner → RCA → apology → recovery plan.</li></ul></div>
       <div class="card"><div class="card__label">Key points to remember</div><ul class="ul">
@@ -1327,9 +1429,9 @@
     </div>
   </section>
 
-  <!-- 16 FAQ -->
+  <!-- 17 FAQ -->
   <section class="sec" id="faqs" style="--ac:#2DD4BF">
-    <div class="sec__head reveal"><span class="sec__num">16</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">17</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
     <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
@@ -1341,7 +1443,7 @@
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 16 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 17 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -1354,22 +1456,23 @@
 
   /* ---- section registry ---- */
   var SECTIONS = [
-    {id:'onboarding',   n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
-    {id:'nomenclature', n:'02', t:'Website Nomenclature', ac:'#5EEAD4'},
-    {id:'triage',       n:'03', t:'Triage & Routing', ac:'#22D3EE'},
-    {id:'sow',          n:'04', t:'Scope of Work', ac:'#22D3EE'},
-    {id:'market',       n:'05', t:'Market Standard Timeline', ac:'#60A5FA'},
-    {id:'journeys',     n:'06', t:'Client Journeys', ac:'#38BDF8'},
-    {id:'lifecycle',    n:'07', t:'Engagement Lifecycle', ac:'#E879F9'},
-    {id:'timeline',     n:'08', t:'Timeline & CVR', ac:'#34D399'},
-    {id:'design',       n:'09', t:'Design → Development', ac:'#F472B6'},
-    {id:'zerocomeback', n:'10', t:'Zero-Comeback Deploy', ac:'#FBBF24'},
-    {id:'brandfigma',   n:'11', t:'Brand Figma → Live', ac:'#818CF8'},
-    {id:'aihtml',       n:'12', t:'AI HTML → Client Live', ac:'#2563EB'},
-    {id:'pageopt',      n:'13', t:'Page Optimization', ac:'#FB923C'},
-    {id:'escalation',   n:'14', t:'Escalation / Angry Brand', ac:'#F87171'},
-    {id:'summary',      n:'15', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',         n:'16', t:'FAQs', ac:'#2DD4BF'}
+    {id:'onboarding',     n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
+    {id:'nomenclature',   n:'02', t:'Website Nomenclature', ac:'#5EEAD4'},
+    {id:'triage',         n:'03', t:'Triage & Routing', ac:'#22D3EE'},
+    {id:'sow',            n:'04', t:'Scope of Work', ac:'#22D3EE'},
+    {id:'market',         n:'05', t:'Market Standard Timeline', ac:'#60A5FA'},
+    {id:'journeys',       n:'06', t:'Client Journeys', ac:'#38BDF8'},
+    {id:'lifecycle',      n:'07', t:'Engagement Lifecycle', ac:'#E879F9'},
+    {id:'timeline',       n:'08', t:'Timeline & CVR', ac:'#34D399'},
+    {id:'design',         n:'09', t:'Design → Development', ac:'#F472B6'},
+    {id:'zerocomeback',   n:'10', t:'Zero-Comeback Deploy', ac:'#FBBF24'},
+    {id:'brandfigma',     n:'11', t:'Brand Figma → Live', ac:'#818CF8'},
+    {id:'aihtml',         n:'12', t:'AI HTML → Client Live', ac:'#2563EB'},
+    {id:'htmliterations', n:'13', t:'HTML Iterations → Deploy', ac:'#7DD3FC'},
+    {id:'pageopt',        n:'14', t:'Page Optimization', ac:'#FB923C'},
+    {id:'escalation',     n:'15', t:'Escalation / Angry Brand', ac:'#F87171'},
+    {id:'summary',        n:'16', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',           n:'17', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -1507,6 +1610,16 @@
         ['Should mobile and desktop be verified before sharing/deploying?',true],
         ['Can a new page added mid-review stay inside the same revision scope?',false],
         ['Does final approval come before deployment handoff?',true]
+      ]
+    },
+    htmliterations: {
+      points:['Ask category-wise feedback','Design team converts feedback to prompts','Revise section-by-section only'],
+      q:[
+        ['Should the client be asked “What do you think?” for HTML design feedback?',false],
+        ['Should feedback be collected under branding, layout, content, and business categories?',true],
+        ['Should raw client feedback go directly to developers or AI without prompt conversion?',false],
+        ['Should prompts be bucketed by section before running revisions?',true],
+        ['Should AI regenerate the full page for every feedback round?',false]
       ]
     },
     pageopt: {
@@ -1816,6 +1929,20 @@
     });
   });
 
+  /* ---- HTML iteration detail tabs ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.iter-tab'),function(tab){
+    var head=tab.querySelector('.iter-head'), body=tab.querySelector('.iter-body');
+    head.addEventListener('click',function(){
+      var open=tab.classList.toggle('open');
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+      body.style.maxHeight=open?body.scrollHeight+'px':'0';
+    });
+    if(tab.classList.contains('open')){
+      head.setAttribute('aria-expanded','true');
+      body.style.maxHeight=body.scrollHeight+'px';
+    }
+  });
+
   /* ---- scroll progress (top bar + rail fill) ---- */
   var pfill=document.getElementById('pfill'), railFill=document.getElementById('railFill'), railNavEl=document.getElementById('railNav');
   var fab=document.getElementById('fab');
@@ -1882,7 +2009,7 @@
   setTimeout(finishPre,3200);
 
   /* ---- gamified learning score ---- */
-  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[10,'Lead KAM'],[16,'Certified']];
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[7,'Operator'],[11,'Lead KAM'],[17,'Certified']];
   var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
   var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
       scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),

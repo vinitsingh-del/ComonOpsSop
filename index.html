@@ -334,6 +334,13 @@
   .maprow .ar{color:var(--ac);font-weight:700}
   .maprow .to{flex:1.1;color:var(--txt)}
 
+  /* copy templates */
+  .template-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .template-box{border:1px solid color-mix(in srgb,var(--ac) 38%,var(--line));border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);padding:16px;overflow:hidden}
+  .template-box h3{font-size:16px;margin-bottom:5px;color:var(--txt)}
+  .template-box p{font-size:12.8px;color:var(--mut);line-height:1.45;margin-bottom:10px}
+  .template-copy{display:block;white-space:pre-wrap;word-break:break-word;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);padding:13px;color:var(--txt);font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.55}
+
   /* website nomenclature */
   .nomen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
   .nomen-card{border:1px solid color-mix(in srgb,var(--ac) 38%,var(--line));border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
@@ -492,6 +499,7 @@
     .redesign-edge{grid-template-columns:1fr}
     .sow-routes,.sow-matrix{grid-template-columns:1fr}
     .esc-grid,.esc-triggers,.icp-strip{grid-template-columns:1fr}
+    .template-grid{grid-template-columns:1fr}
     .market-hero{grid-template-columns:1fr}
     .market-row{grid-template-columns:1fr}
     .market-cell{border-left:none;border-top:1px solid var(--line)}
@@ -685,6 +693,103 @@
         <li><b>Requirement note</b> — what the brand wants and why they are associating with Troopod.</li>
         <li><b>Cohort guess</b> — KAM prepares likely offering cohort before the meeting.</li>
         <li><b>MOU follow-up</b> — post-meeting documentation sent to the brand.</li></ul></div>
+    </div>
+    <div class="template-grid reveal">
+      <div class="template-box">
+        <h3>Sales → KAM Email Template</h3>
+        <p>Sales can copy this into email. Keep one field per line so KAM can paste it into the Brand DB or SOW notes.</p>
+        <code class="template-copy">Subject: New Brand Onboarding Handoff | [Brand Name]
+
+Hi KAM Team,
+
+Please find the new brand profile for onboarding.
+
+Brand Name:
+Brand Website:
+Brand Category / Niche:
+Founder / POC Name:
+POC Email:
+POC Phone / WhatsApp:
+
+Funding Status:
+Current MRR:
+Current Monthly Revenue:
+Current Monthly Ad Spend:
+Current Monthly Traffic Estimate:
+Primary Sales Channel:
+Platform / Tech Stack:
+
+Current Requirement:
+Reason for Association with Troopod:
+Expected Offering Cohort:
+Urgency / Target Timeline:
+
+Notes from Sales Call:
+Risks / Red Flags:
+Access Already Shared:
+Next Meeting Date:
+
+Sales Owner:
+Date:</code>
+      </div>
+      <div class="template-box">
+        <h3>Post-Onboarding MOU Format</h3>
+        <p>Send this after onboarding so the brand has a written understanding of scope, process, owners, and next steps.</p>
+        <code class="template-copy">Subject: MOU | Troopod x [Brand Name] | Post-Onboarding Summary
+
+Brand Name:
+Date of Onboarding:
+Troopod KAM:
+Brand Decision-Maker:
+
+1. Objective
+Troopod will support [Brand Name] for:
+[CRO / Tech / Design / AI HTML / Page Optimization / Other]
+
+2. Agreed Scope
+- Primary requirement:
+- Pages / flows in scope:
+- Deliverables:
+- Exclusions / not in scope:
+
+3. Brand Cohort
+Offering cohort selected:
+Reason for cohort:
+
+4. Responsibilities
+Brand will provide:
+- Access:
+- Brand assets:
+- Product information:
+- Single decision-maker:
+
+Troopod will provide:
+- Process ownership:
+- SOW / timeline:
+- Review links:
+- Updates and next steps:
+
+5. Timelines
+Expected start date:
+First review date:
+Expected delivery / go-live window:
+
+6. Communication
+Primary KAM:
+Communication channel:
+Review cadence:
+Feedback format: category-wise feedback only.
+
+7. Next Steps
+- Brand DB registration
+- SOW creation
+- Access collection
+- First task / review milestone
+
+Confirmed by:
+Brand:
+Troopod:</code>
+      </div>
     </div>
     <div class="callout reveal"><div class="callout__ic">DB</div><p><b>Brand registration → Brand DB</b> captures brand name, niche, site &amp; stack, decision-maker, commercial model (one-time / recurring + MRR), requirement scope, cohort readiness, and <span class="hl">tech hours — budgeted and tracked</span>.</p></div>
   </section>
@@ -1500,8 +1605,8 @@
         ['Should Sales send the KAM team a new brand profile before onboarding?',true],
         ['Should the sales handoff include funding, current MRR, ad spend, traffic estimate, and requirement note?',true],
         ['Should KAM wait until after onboarding to think about the offering cohort?',false],
-        ['Should the brand receive an MOU after the onboarding meeting?',true],
-        ['Can cohort readiness and tech hours be left out of the Brand DB?',false]
+        ['Should the brand receive an MOU with scope, owners, timeline, and next steps after onboarding?',true],
+        ['Can Sales skip the template if they remember the brand details verbally?',false]
       ]
     },
     nomenclature: {

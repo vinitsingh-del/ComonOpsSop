@@ -172,8 +172,8 @@
   /* callout */
   .callout{display:flex;gap:14px;align-items:flex-start;background:color-mix(in srgb,var(--ac) 10%,var(--surface));
     border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);border-radius:14px;padding:16px 18px;margin:8px 0;overflow-wrap:anywhere}
-  .callout__ic{width:30px;height:30px;border-radius:9px;background:var(--ac);color:#0A0815;display:grid;place-items:center;
-    font-weight:800;flex-shrink:0;font-size:17px}
+  .callout__ic{width:auto;min-width:34px;height:30px;border-radius:9px;background:var(--ac);color:#0A0815;display:grid;place-items:center;
+    font-weight:800;flex-shrink:0;font-size:15px;padding:0 6px}
   .callout p{font-size:14.5px;color:var(--mut);line-height:1.55}
   .callout p b{color:var(--txt);font-weight:600}
 
@@ -403,6 +403,34 @@
   .mock-product b{display:block;font-size:12px;color:#12281E;margin-bottom:4px}
   .mock-product span{display:block;font-size:11px;color:#637066}
   .mock-price{font-family:'JetBrains Mono',monospace;color:#153E2B!important;font-weight:800!important;margin-top:7px}
+  .metric-brief{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+  .funnel-card{border:1px solid color-mix(in srgb,var(--ac) 45%,var(--line));border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.048),rgba(255,255,255,.022)),var(--surface);padding:16px;overflow:hidden}
+  .funnel-card h3{font-size:18px;line-height:1.2;margin-bottom:6px}
+  .funnel-card p{font-size:13px;line-height:1.48;color:var(--mut);margin-bottom:14px}
+  .funnel-stack{display:grid;gap:8px}
+  .funnel-row{position:relative;display:grid;grid-template-columns:86px minmax(0,1fr) 72px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035);padding:10px 11px;overflow:hidden}
+  .funnel-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:var(--w);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 35%,transparent),transparent);opacity:.9}
+  .funnel-row > *{position:relative;z-index:1}
+  .funnel-row b{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--c)}
+  .funnel-row span{font-size:13px;color:var(--txt);font-weight:650;line-height:1.25}
+  .funnel-row em{font-style:normal;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut)}
+  .formula-box{border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);padding:14px}
+  .formula-box h3{font-size:16px;margin-bottom:10px}
+  .formula-list{display:grid;gap:9px}
+  .formula-item{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;border-top:1px solid var(--line);padding-top:9px}
+  .formula-item:first-child{border-top:none;padding-top:0}
+  .formula-item b{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac)}
+  .formula-item span{font-size:12.8px;line-height:1.42;color:var(--mut)}
+  .ga-terms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+  .ga-term{border:1px solid var(--line);border-left:3px solid var(--tc,var(--ac));border-radius:12px;background:rgba(255,255,255,.04);padding:13px;min-height:138px;overflow-wrap:anywhere}
+  .ga-term b{display:block;font-size:14px;line-height:1.2;margin-bottom:6px;color:var(--txt)}
+  .ga-term span{display:block;font-size:12.5px;line-height:1.43;color:var(--mut)}
+  .ga-term code{display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--tc,var(--ac));background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:5px 7px;white-space:normal}
+  .ref-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+  .ref-shot{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.035);padding:9px;overflow:hidden}
+  .ref-shot img{display:block;width:100%;height:92px;object-fit:cover;object-position:center;border-radius:8px;background:#fff;margin-bottom:8px}
+  .ref-shot b{display:block;font-size:12px;line-height:1.25;color:var(--txt);margin-bottom:3px}
+  .ref-shot span{display:block;font-size:11.5px;line-height:1.35;color:var(--mut)}
 
   /* HTML iteration process */
   .iter-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
@@ -547,6 +575,10 @@
     .quiz-points{grid-template-columns:1fr}
     .quiz-q{grid-template-columns:1fr}
     .quiz-actions{justify-content:flex-start}
+    .metric-brief{grid-template-columns:1fr}
+    .ga-terms{grid-template-columns:1fr 1fr}
+    .ref-gallery{grid-template-columns:1fr 1fr}
+    .ref-shot img{height:120px}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -570,6 +602,11 @@
     .label{font-size:10px;padding:6px 8px;max-width:130px}
     .mock-grid{grid-template-columns:1fr 1fr}
     .mock-search{display:none}
+    .ga-terms,.ref-gallery{grid-template-columns:1fr}
+    .funnel-row{grid-template-columns:58px minmax(0,1fr);gap:8px}
+    .funnel-row em{grid-column:2;text-align:left;font-size:10.5px}
+    .formula-item{grid-template-columns:1fr}
+    .ref-shot img{height:auto;max-height:180px}
     .master-board{padding:14px}
     .master-board::before{left:25px;top:92px}
     .code-node{grid-template-columns:34px minmax(0,1fr);gap:10px}
@@ -941,6 +978,73 @@ Troopod:</code>
           <span class="label lite" style="--x:69%;--y:94%">Sticky CTA</span>
         </div>
       </div>
+    </div>
+
+    <div class="phase reveal" style="--ac:#5EEAD4">GA4 + ecommerce funnel terms</div>
+    <div class="metric-brief reveal">
+      <div class="funnel-card">
+        <h3>How to read an ecommerce funnel</h3>
+        <p>A funnel shows where people drop while moving from visitor to buyer. For a KAM, the job is not to memorise numbers. The job is to spot which step is leaking.</p>
+        <div class="funnel-stack">
+          <div class="funnel-row" style="--c:#60A5FA;--w:100%"><b>100%</b><span>Sessions land on the website</span><em>Traffic</em></div>
+          <div class="funnel-row" style="--c:#A78BFA;--w:44%"><b>44%</b><span>View a product page / PDP</span><em>Interest</em></div>
+          <div class="funnel-row" style="--c:#F472B6;--w:15%"><b>15%</b><span>Add product to cart</span><em>Intent</em></div>
+          <div class="funnel-row" style="--c:#FBBF24;--w:8%"><b>8%</b><span>Start checkout</span><em>Decision</em></div>
+          <div class="funnel-row" style="--c:#34D399;--w:3.3%"><b>3.3%</b><span>Complete purchase</span><em>Revenue</em></div>
+        </div>
+      </div>
+      <div class="formula-box">
+        <h3>Simple formulas KAMs should know</h3>
+        <div class="formula-list">
+          <div class="formula-item"><b>CTR</b><span>Clicks ÷ impressions. If 1000 people see a banner and 50 click, CTR is 5%.</span></div>
+          <div class="formula-item"><b>CVR</b><span>Purchases ÷ sessions. If 1000 sessions create 30 orders, CVR is 3%.</span></div>
+          <div class="formula-item"><b>ATC Rate</b><span>Add-to-cart sessions ÷ total sessions. Shows product desire and CTA clarity.</span></div>
+          <div class="formula-item"><b>Checkout Rate</b><span>Checkout starts ÷ sessions or carts. Always confirm the denominator before reporting.</span></div>
+          <div class="formula-item"><b>AOV</b><span>Revenue ÷ orders. If revenue is INR 3,00,000 from 100 orders, AOV is INR 3,000.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ga-terms reveal">
+      <div class="ga-term" style="--tc:#60A5FA"><b>User</b><span>A person/browser Google Analytics recognises. One person can appear as multiple users if they use different devices.</span><code>People count</code></div>
+      <div class="ga-term" style="--tc:#60A5FA"><b>Session</b><span>One visit window. If you open a store, browse, leave, and return later, that can become another session.</span><code>Visit count</code></div>
+      <div class="ga-term" style="--tc:#60A5FA"><b>Traffic Source</b><span>Where the visitor came from: Instagram, Google, Meta ads, email, WhatsApp, direct, influencer, or organic search.</span><code>source / medium</code></div>
+      <div class="ga-term" style="--tc:#60A5FA"><b>Landing Page</b><span>The first page someone enters from. Bad landing page clarity can waste good ad traffic.</span><code>first page</code></div>
+      <div class="ga-term" style="--tc:#22D3EE"><b>Event</b><span>Any tracked action: page view, product view, add to cart, checkout start, purchase, click, scroll, video play, or form submit.</span><code>user action</code></div>
+      <div class="ga-term" style="--tc:#22D3EE"><b>Conversion / Key Event</b><span>An important event marked as a business goal. For ecommerce, purchase is the main one, but lead submit or WhatsApp click can also matter.</span><code>important action</code></div>
+      <div class="ga-term" style="--tc:#22D3EE"><b>Bounce Rate</b><span>The opposite of engaged sessions. High bounce can mean weak landing page, slow load, wrong audience, or offer mismatch.</span><code>left too fast</code></div>
+      <div class="ga-term" style="--tc:#A78BFA"><b>CTR</b><span>Click-through rate. Useful for banners, ads, nav links, product cards, and CTAs. Low CTR means people saw it but did not care enough to click.</span><code>clicks ÷ views</code></div>
+      <div class="ga-term" style="--tc:#A78BFA"><b>Engagement Rate</b><span>Share of sessions where people actually did something meaningful: stayed, clicked, viewed pages, or triggered events.</span><code>quality of visit</code></div>
+      <div class="ga-term" style="--tc:#F472B6"><b>PDP View Rate</b><span>How many sessions reach product pages. If this is low, homepage, collection, navigation, or product cards may not be pushing users forward.</span><code>PDP views ÷ sessions</code></div>
+      <div class="ga-term" style="--tc:#F472B6"><b>ATC Rate</b><span>Add-to-cart rate. If PDP traffic is high but ATC is low, check price, media, size selection, CTA, trust, delivery, and offer clarity.</span><code>ATC ÷ sessions</code></div>
+      <div class="ga-term" style="--tc:#FBBF24"><b>Cart Rate</b><span>How many users/sessions reach cart after adding products. Cart issues can include surprise pricing, discount confusion, or poor sticky CTA behaviour.</span><code>cart views ÷ sessions</code></div>
+      <div class="ga-term" style="--tc:#FBBF24"><b>Checkout Start</b><span>Users who begin checkout. If cart is high but checkout is low, check coupon, shipping, trust, login, payment options, and delivery promise.</span><code>checkout starts</code></div>
+      <div class="ga-term" style="--tc:#FBBF24"><b>Cart → Checkout Rate</b><span>Out of people who reached cart, how many started checkout. This is the cleanest way to judge cart-page friction.</span><code>checkout ÷ cart</code></div>
+      <div class="ga-term" style="--tc:#FBBF24"><b>Checkout Drop</b><span>People who start checkout but do not buy. This often points to payment failure, delivery charge, COD, address, trust, or extra fees.</span><code>lost at checkout</code></div>
+      <div class="ga-term" style="--tc:#34D399"><b>CVR</b><span>Conversion rate. In ecommerce SOP, this usually means sessions that became orders. This is the north-star metric.</span><code>orders ÷ sessions</code></div>
+      <div class="ga-term" style="--tc:#34D399"><b>Purchase</b><span>The completed order event. In GA4, this is the event that confirms money was made, not just interest.</span><code>purchase event</code></div>
+      <div class="ga-term" style="--tc:#34D399"><b>Revenue</b><span>Total sale value tracked from purchases. Always check if tax, shipping, refunds, and discounts are included before comparing.</span><code>INR value</code></div>
+      <div class="ga-term" style="--tc:#34D399"><b>AOV</b><span>Average order value. Helps decide upsells, bundles, free shipping thresholds, and offer strategy.</span><code>revenue ÷ orders</code></div>
+      <div class="ga-term" style="--tc:#FB923C"><b>Abandonment</b><span>When someone reaches a step but leaves before the next step. Example: added to cart but did not start checkout.</span><code>drop-off</code></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card__label">How a KAM should speak about funnel issues</div>
+      <div class="map">
+        <div class="maprow"><div class="if"><b>Low PDP view rate</b></div><div class="ar">→</div><div class="to">Problem may be homepage, collection page, navigation, product card, offer, or ad landing mismatch.</div></div>
+        <div class="maprow"><div class="if"><b>Good PDP views, low ATC</b></div><div class="ar">→</div><div class="to">Problem may be product media, price, CTA visibility, size/variant selector, delivery promise, trust, or reviews.</div></div>
+        <div class="maprow"><div class="if"><b>Good ATC, low checkout</b></div><div class="ar">→</div><div class="to">Problem may be cart UX, coupon clarity, shipping charge, login friction, COD/payment concern, or delivery ETA.</div></div>
+        <div class="maprow"><div class="if"><b>Good checkout, low purchase</b></div><div class="ar">→</div><div class="to">Problem may be payment failure, address flow, extra charges, slow checkout, unavailable payment mode, or final trust gap.</div></div>
+      </div>
+    </div>
+
+    <div class="phase reveal" style="--ac:#5EEAD4">Reference visuals redesigned for our SOP</div>
+    <div class="ref-gallery reveal">
+      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-funnel-simple.png" alt="Reference funnel from visits to purchase"><b>Simple funnel</b><span>Good for explaining drop-off from site visit to purchase.</span></div>
+      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-ecommerce-funnel.png" alt="Reference ecommerce session funnel"><b>Session funnel</b><span>Use this mental model for PDP, ATC, and transaction stages.</span></div>
+      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-ga-goal-flow.png" alt="Reference GA goal flow"><b>GA goal flow</b><span>Shows entries, exits, and progression between cart steps.</span></div>
+      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-checkout-flow.png" alt="Reference checkout flow"><b>Checkout flow</b><span>Useful when diagnosing address, payment, and review-order drops.</span></div>
+      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-video-funnel.png" alt="Reference video funnel"><b>Event funnel</b><span>Same concept applies to video views, form steps, quizzes, and other events.</span></div>
     </div>
 
     <div class="callout reveal"><div class="callout__ic">ABC</div><p><b>KAM language rule:</b> always name the page type first, then the exact block. Example: “On the PDP, the sticky CTA overlaps the size selector” is clearer than “the bottom thing is broken.”</p></div>
@@ -1782,13 +1886,13 @@ Troopod:</code>
       ]
     },
     nomenclature: {
-      points:['Name the page type first','Use exact block names','PDP, PLP, and homepage have different jobs'],
+      points:['Name the page type first','Use exact block + funnel terms','CVR, ATC, checkout, and cart rates reveal leaks'],
       q:[
         ['Is a product page also called a PDP?',true],
         ['Is a collection page mainly for listing and comparing products?',true],
         ['Should a KAM say “bottom thing” instead of naming the sticky CTA?',false],
-        ['Does the homepage act like the brand front door?',true],
-        ['Are hero title, subtitle, product media, price card, and CTA useful terms for SOW feedback?',true]
+        ['Does CVR usually mean purchases divided by sessions in ecommerce reporting?',true],
+        ['If PDP views are strong but ATC is weak, should the KAM inspect product media, price, CTA, trust, delivery, and variants?',true]
       ]
     },
     triage: {

@@ -666,25 +666,27 @@
   <!-- 01 ONBOARDING -->
   <section class="sec" id="onboarding" style="--ac:#A78BFA">
     <div class="sec__head reveal"><span class="sec__num">01</span><h2 class="sec__title">Brand Onboarding</h2><span class="sec__kicker">~1 day · 2-hr session</span></div>
-    <p class="lead reveal">The first thing that happens when a brand signs. We research them, run a short kickoff, and register them — so by the time we categorize, there are <span class="hl">0 issues</span>. The brand is walked through every step of every process <span class="hl">in advance</span>.</p>
+    <p class="lead reveal">The first thing that happens when a brand signs. Sales hands the brand context to KAM, the KAM prepares the right offering cohort before the call, then the brand is onboarded, registered, and sent the <span class="hl">MOU</span>.</p>
     <div class="flow reveal">
-      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Pre-onboarding research</b><span>Research before the call — model, niche, scale, current site &amp; stack, competitors — so categorization later has zero issues.</span></div></div>
-      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>Onboarding session · 1 day · 2 hours</b><span>Kickoff: what Troopod is, our expectations both ways, and a walk-through of the process in advance.</span></div></div>
-      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Brand registration → Brand DB</b><span>Register in the brand database — it tracks the account, including tech hours.</span></div></div>
-      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Categorized with 0 issues → proceed to Triage</b></div></div>
+      <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Sales lead → KAM handoff email</b><span>Sales shares the new brand profile: funding, current MRR, ad spend, traffic estimate, requirement note, and association context.</span></div></div>
+      <div class="fstep"><div class="fstep__node">2</div><div class="fcard"><b>KAM pre-call readiness</b><span>KAM reviews the profile, researches the brand, and prepares which offering cohort the brand should go to before onboarding.</span></div></div>
+      <div class="fstep"><div class="fstep__node">3</div><div class="fcard"><b>Onboarding session · 1 day · 2 hours</b><span>Kickoff: what Troopod is, expectations both ways, likely journey, and a walk-through of the process in advance.</span></div></div>
+      <div class="fstep"><div class="fstep__node">4</div><div class="fcard"><b>Brand registration → Brand DB</b><span>Register the account, decision-maker, commercial model, requirement scope, MRR, tech hours, and cohort notes.</span></div></div>
+      <div class="fstep"><div class="fstep__node">5</div><div class="fcard"><b>Post-onboarding MOU sent</b><span>After the meeting, the brand receives the MOU so expectations, scope, process, and next steps are documented.</span></div></div>
+      <div class="fstep"><div class="fstep__node">✓</div><div class="fcard dest"><b>Cohort ready → proceed to Triage</b></div></div>
     </div>
     <div class="cards two reveal">
       <div class="card"><div class="card__label">Inside the 2-hour session</div><ul class="ul">
         <li><b>What Troopod is</b> — AI-native website growth agency; our offerings and how we work.</li>
         <li><b>Our expectations</b> — access, a single decision-maker, response cadence, content &amp; assets.</li>
         <li><b>The process, in advance</b> — the journey they're on and what happens at each step.</li></ul></div>
-      <div class="card"><div class="card__label">Market-standard SaaS practices</div><ul class="ul">
-        <li>Clear kickoff with mutual expectations on day one.</li>
-        <li>Access &amp; asset checklist; a single source of truth.</li>
-        <li>Success metrics agreed; timeline shared up front.</li>
-        <li>A welcome doc and regular check-ins.</li></ul></div>
+      <div class="card"><div class="card__label">Sales handoff must include</div><ul class="ul">
+        <li><b>Brand profile</b> — funding, current MRR, current ad spends, traffic estimate.</li>
+        <li><b>Requirement note</b> — what the brand wants and why they are associating with Troopod.</li>
+        <li><b>Cohort guess</b> — KAM prepares likely offering cohort before the meeting.</li>
+        <li><b>MOU follow-up</b> — post-meeting documentation sent to the brand.</li></ul></div>
     </div>
-    <div class="callout reveal"><div class="callout__ic">DB</div><p><b>Brand registration → Brand DB</b> captures brand name, niche, site &amp; stack, decision-maker, commercial model (one-time / recurring + MRR), requirement scope, and <span class="hl">tech hours — budgeted and tracked</span>.</p></div>
+    <div class="callout reveal"><div class="callout__ic">DB</div><p><b>Brand registration → Brand DB</b> captures brand name, niche, site &amp; stack, decision-maker, commercial model (one-time / recurring + MRR), requirement scope, cohort readiness, and <span class="hl">tech hours — budgeted and tracked</span>.</p></div>
   </section>
 
   <!-- 02 WEBSITE NOMENCLATURE -->
@@ -1493,13 +1495,13 @@
   /* ---- section checkpoints ---- */
   var QUIZZES = {
     onboarding: {
-      points:['Research before routing','2-hour kickoff sets expectations','Brand DB captures scope + hours'],
+      points:['Sales handoff starts onboarding','KAM prepares cohort before call','MOU goes after onboarding'],
       q:[
-        ['Should the KAM research the brand before categorizing it?',true],
-        ['Can onboarding skip the brand journey explanation if the client seems busy?',false],
-        ['Should recurring brand MRR be captured in the Brand DB?',true],
-        ['Is the onboarding target roughly 1 day with a 2-hour session?',true],
-        ['Can tech hours be left informal outside the Brand DB?',false]
+        ['Should Sales send the KAM team a new brand profile before onboarding?',true],
+        ['Should the sales handoff include funding, current MRR, ad spend, traffic estimate, and requirement note?',true],
+        ['Should KAM wait until after onboarding to think about the offering cohort?',false],
+        ['Should the brand receive an MOU after the onboarding meeting?',true],
+        ['Can cohort readiness and tech hours be left out of the Brand DB?',false]
       ]
     },
     nomenclature: {

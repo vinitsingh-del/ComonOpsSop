@@ -334,6 +334,38 @@
   .maprow .ar{color:var(--ac);font-weight:700}
   .maprow .to{flex:1.1;color:var(--txt)}
 
+  /* website nomenclature */
+  .nomen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .nomen-card{border:1px solid color-mix(in srgb,var(--ac) 38%,var(--line));border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
+  .nomen-card b{display:block;font-size:15px;color:var(--txt);margin-bottom:6px}
+  .nomen-card span{display:block;font-size:13px;color:var(--mut);line-height:1.48}
+  .shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .shot-panel{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);padding:14px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+  .shot-panel.wide{grid-column:1/-1}
+  .shot-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .shot-title h3{font-size:17px;line-height:1.2}
+  .shot-title span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac)}
+  .shot-figure{position:relative;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+  .shot-figure img{display:block;width:100%;height:auto}
+  .label{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:2;display:inline-flex;align-items:center;gap:6px;max-width:190px;border:1px solid color-mix(in srgb,var(--ac) 58%,#fff);background:rgba(10,8,21,.88);backdrop-filter:blur(8px);color:#fff;border-radius:999px;padding:7px 10px;font-size:11.5px;line-height:1.15;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.28);pointer-events:none}
+  .label::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 22%,transparent);flex-shrink:0}
+  .label.lite{background:rgba(255,255,255,.92);color:#171320;border-color:color-mix(in srgb,var(--ac) 45%,#fff)}
+  .label.dark{background:rgba(10,8,21,.9)}
+  .mock-page{background:#F8FAF8;color:#153E2B;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+  .mock-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid #D9E4DA;background:#fff;font-weight:800;letter-spacing:.12em}
+  .mock-search{font-weight:500;letter-spacing:0;border:2px solid #153E2B;border-radius:999px;padding:8px 14px;color:#637066}
+  .mock-collection{padding:20px}
+  .mock-collection h3{font-size:28px;line-height:1.05;margin-bottom:7px;color:#12281E}
+  .mock-collection p{font-size:13px;color:#617064;margin-bottom:14px}
+  .mock-tools{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}
+  .mock-tool{border:1px solid #C9D8CB;background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700}
+  .mock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .mock-product{background:#fff;border:1px solid #D9E4DA;border-radius:12px;padding:10px;min-height:148px}
+  .mock-img{height:74px;border-radius:10px;background:linear-gradient(135deg,#D8E8D9,#F8EEDA);margin-bottom:9px}
+  .mock-product b{display:block;font-size:12px;color:#12281E;margin-bottom:4px}
+  .mock-product span{display:block;font-size:11px;color:#637066}
+  .mock-price{font-family:'JetBrains Mono',monospace;color:#153E2B!important;font-weight:800!important;margin-top:7px}
+
   /* market timeline */
   .market-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0 18px}
   .market-stat{border:1px solid color-mix(in srgb,var(--ac) 42%,var(--line));border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.048),rgba(255,255,255,.024)),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow-wrap:anywhere}
@@ -461,6 +493,11 @@
     .quiz-score{justify-self:start}
     .quiz-chev{grid-column:2;grid-row:1 / span 2}
     .quiz-inner{padding:0 14px 14px}
+    .nomen-grid,.shot-grid{grid-template-columns:1fr}
+    .shot-panel.wide{grid-column:auto}
+    .label{font-size:10px;padding:6px 8px;max-width:130px}
+    .mock-grid{grid-template-columns:1fr 1fr}
+    .mock-search{display:none}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -591,7 +628,7 @@
   <section class="hero" id="hero">
     <div class="hero__eyebrow reveal">Troopod · KAM Operating System</div>
     <h1 class="hero__title reveal">Comon <span class="g">OPS</span></h1>
-    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Fifteen sections, one flow.</p>
+    <p class="hero__sub reveal">The playbook every Key Account Manager runs — from onboarding a brand to lifting its conversion rate. Sixteen sections, one flow.</p>
     <div class="hero__chips reveal">
       <span class="pill v">CRO</span><span class="pill c">Tech</span><span class="pill g">Design</span><span class="pill o">Performance</span>
     </div>
@@ -623,9 +660,117 @@
     <div class="callout reveal"><div class="callout__ic">DB</div><p><b>Brand registration → Brand DB</b> captures brand name, niche, site &amp; stack, decision-maker, commercial model (one-time / recurring + MRR), requirement scope, and <span class="hl">tech hours — budgeted and tracked</span>.</p></div>
   </section>
 
-  <!-- 02 TRIAGE -->
+  <!-- 02 WEBSITE NOMENCLATURE -->
+  <section class="sec" id="nomenclature" style="--ac:#5EEAD4">
+    <div class="sec__head reveal"><span class="sec__num">02</span><h2 class="sec__title">Website Nomenclature</h2><span class="sec__kicker">pages · blocks · CTAs</span></div>
+    <p class="lead reveal">Before a KAM writes an SOW or gives feedback, they need to name the page and the block correctly. Use this section to identify the common ecommerce page types and the UI terms clients, designers, and developers use every day.</p>
+
+    <div class="nomen-grid reveal">
+      <div class="nomen-card"><b>Website</b><span>The full online store or brand site: homepage, product pages, collection pages, cart, checkout, policy pages, blog, and account pages.</span></div>
+      <div class="nomen-card"><b>Homepage</b><span>The front door of the brand. It explains the offer, routes users to products, builds trust, and pushes visitors into shopping journeys.</span></div>
+      <div class="nomen-card"><b>Collection Page / PLP</b><span>A product listing page. It groups products by category, concern, offer, or campaign and helps users filter, sort, compare, and choose.</span></div>
+      <div class="nomen-card"><b>Product Page / PDP</b><span>A product detail page. It sells one item with media, title, price, variants, trust, description, reviews, and add-to-cart actions.</span></div>
+      <div class="nomen-card"><b>Fold</b><span>The visible area before scrolling. Above-the-fold usually contains nav, hero, product media, title, price, and primary CTA.</span></div>
+      <div class="nomen-card"><b>CTA</b><span>Call to action. Examples: Add to Cart, Buy Now, Try On, Check Pincode, View Collection, Shop Now.</span></div>
+    </div>
+
+    <div class="shot-grid">
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Homepage Anatomy</h3><span>Front door</span></div>
+        <div class="shot-figure">
+          <img src="assets/nomenclature/homepage-hero.png" alt="Homepage screenshot with labelled ecommerce sections">
+          <span class="label lite" style="--x:21%;--y:7%">Brand logo</span>
+          <span class="label lite" style="--x:74%;--y:7%">Search bar</span>
+          <span class="label" style="--x:50%;--y:18%">Hero title</span>
+          <span class="label" style="--x:67%;--y:43%">Hero visual</span>
+          <span class="label" style="--x:27%;--y:39%">Testimonial card</span>
+          <span class="label lite" style="--x:52%;--y:71%">Benefit strip</span>
+          <span class="label" style="--x:43%;--y:88%">Product card area</span>
+        </div>
+      </div>
+
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Product Page Above The Fold</h3><span>PDP top</span></div>
+        <div class="shot-figure">
+          <img src="assets/nomenclature/product-hero.png" alt="Product page screenshot with labelled product media and sticky cart">
+          <span class="label lite" style="--x:18%;--y:4%">Navbar / header</span>
+          <span class="label" style="--x:51%;--y:9%">Offer bar</span>
+          <span class="label lite" style="--x:51%;--y:35%">Product media</span>
+          <span class="label" style="--x:62%;--y:66%">Media carousel</span>
+          <span class="label lite" style="--x:24%;--y:82%">Rating + reviews</span>
+          <span class="label" style="--x:48%;--y:87%">Product title</span>
+          <span class="label lite" style="--x:32%;--y:91%">Product tag</span>
+          <span class="label" style="--x:66%;--y:96%">Sticky add-to-cart</span>
+        </div>
+      </div>
+
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Collection Page Anatomy</h3><span>PLP mock</span></div>
+        <div class="shot-figure mock-page">
+          <div class="mock-nav"><span>BRAND</span><span class="mock-search">Search products</span></div>
+          <div class="mock-collection">
+            <h3>Rings Collection</h3>
+            <p>All products inside one category, campaign, or filterable shopping group.</p>
+            <div class="mock-tools"><span class="mock-tool">Filter</span><span class="mock-tool">Sort by</span></div>
+            <div class="mock-grid">
+              <div class="mock-product"><div class="mock-img"></div><b>Diamond Ring</b><span>Variant / rating</span><span class="mock-price">₹43,293</span></div>
+              <div class="mock-product"><div class="mock-img"></div><b>Gold Band</b><span>Bestseller badge</span><span class="mock-price">₹21,490</span></div>
+              <div class="mock-product"><div class="mock-img"></div><b>Stack Ring</b><span>Quick add CTA</span><span class="mock-price">₹18,200</span></div>
+            </div>
+          </div>
+          <span class="label" style="--x:21%;--y:16%">Collection header</span>
+          <span class="label lite" style="--x:24%;--y:43%">Filter</span>
+          <span class="label lite" style="--x:73%;--y:43%">Sort</span>
+          <span class="label" style="--x:49%;--y:70%">Product grid</span>
+          <span class="label lite" style="--x:70%;--y:85%">Price card</span>
+        </div>
+      </div>
+
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Product Conversion Blocks</h3><span>PDP lower</span></div>
+        <div class="shot-figure">
+          <img src="assets/nomenclature/product-social-size.png" alt="Product page social proof size and delivery section labels">
+          <span class="label" style="--x:29%;--y:8%">UGC / social proof</span>
+          <span class="label lite" style="--x:62%;--y:33%">Signal panel</span>
+          <span class="label" style="--x:42%;--y:55%">Pincode checker</span>
+          <span class="label lite" style="--x:57%;--y:79%">Size selector</span>
+          <span class="label" style="--x:70%;--y:94%">Sticky CTA bar</span>
+        </div>
+      </div>
+
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Description + Trust</h3><span>PDP detail</span></div>
+        <div class="shot-figure">
+          <img src="assets/nomenclature/product-description.png" alt="Product detail page description trust and payment sections labelled">
+          <span class="label" style="--x:49%;--y:10%">Payment block</span>
+          <span class="label lite" style="--x:52%;--y:28%">Trust badges</span>
+          <span class="label" style="--x:43%;--y:50%">Product image</span>
+          <span class="label lite" style="--x:36%;--y:64%">Section label</span>
+          <span class="label" style="--x:47%;--y:75%">Product description</span>
+          <span class="label lite" style="--x:72%;--y:94%">Sticky CTA</span>
+        </div>
+      </div>
+
+      <div class="shot-panel reveal">
+        <div class="shot-title"><h3>Pricing + Reviews</h3><span>PDP proof</span></div>
+        <div class="shot-figure">
+          <img src="assets/nomenclature/product-price-reviews.png" alt="Product price breakup and testimonials section labelled">
+          <span class="label" style="--x:39%;--y:9%">Section title</span>
+          <span class="label lite" style="--x:80%;--y:8%">Total price</span>
+          <span class="label" style="--x:43%;--y:18%">Tabs</span>
+          <span class="label lite" style="--x:60%;--y:38%">Price breakup</span>
+          <span class="label" style="--x:27%;--y:64%">Testimonials</span>
+          <span class="label lite" style="--x:69%;--y:94%">Sticky CTA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal"><div class="callout__ic">ABC</div><p><b>KAM language rule:</b> always name the page type first, then the exact block. Example: “On the PDP, the sticky CTA overlaps the size selector” is clearer than “the bottom thing is broken.”</p></div>
+  </section>
+
+  <!-- 03 TRIAGE -->
   <section class="sec" id="triage" style="--ac:#22D3EE">
-    <div class="sec__head reveal"><span class="sec__num">02</span><h2 class="sec__title">Triage &amp; Routing</h2><span class="sec__kicker">categorize → route</span></div>
+    <div class="sec__head reveal"><span class="sec__num">03</span><h2 class="sec__title">Triage &amp; Routing</h2><span class="sec__kicker">categorize → route</span></div>
     <p class="lead reveal">Once a brand is onboarded and registered, categorize it on two axes and route by scope.</p>
     <div class="cards two reveal">
       <div class="card"><div class="card__label">Commercial model</div><div class="chain"><span class="node">One-time</span><span class="node b">Recurring → MRR</span></div><p style="font-size:13px;color:var(--mut);margin-top:11px">Set first — it drives forecasting and the monthly Client Update.</p></div>
@@ -640,9 +785,9 @@
     </div></div>
   </section>
 
-  <!-- 03 SCOPE OF WORK -->
+  <!-- 04 SCOPE OF WORK -->
   <section class="sec" id="sow" style="--ac:#22D3EE">
-    <div class="sec__head reveal"><span class="sec__num">03</span><h2 class="sec__title">Scope of Work for Brand Making</h2><span class="sec__kicker">classify → scope → route</span></div>
+    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Scope of Work for Brand Making</h2><span class="sec__kicker">classify → scope → route</span></div>
     <p class="lead reveal">Before a brand enters delivery, make the SOW. The SOW converts the client request into <span class="hl">focus, task, current gap/data, priority, timeline or hours, owner, commercials, and handoff</span>. Then the brand gets tagged and routed to the right operating flow.</p>
 
     <div class="sow-board reveal">
@@ -703,9 +848,9 @@
     <div class="callout reveal"><div class="callout__ic">→</div><p><b>Connection rule:</b> once the SOW is approved, route the brand into the next correct page flow. Pure CRO and mixed growth go to <span class="hl">Engagement Lifecycle</span>, heavy/new build goes to <span class="hl">Client Journeys</span>, design/redesign goes to <span class="hl">Design → Development</span> or <span class="hl">AI HTML → Client Live</span>, and tech-only goes to <span class="hl">Page Optimization</span>.</p></div>
   </section>
 
-  <!-- 04 MARKET STANDARD TIMELINE -->
+  <!-- 05 MARKET STANDARD TIMELINE -->
   <section class="sec" id="market" style="--ac:#60A5FA">
-    <div class="sec__head reveal"><span class="sec__num">04</span><h2 class="sec__title">Market Standard Timeline</h2><span class="sec__kicker">traditional UI/UX + dev</span></div>
+    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Market Standard Timeline</h2><span class="sec__kicker">traditional UI/UX + dev</span></div>
     <p class="lead reveal">Use this when a trainee or brand asks, “How long would this take in the market?” Traditional delivery usually separates discovery, UX/UI, development, QA, launch, and stabilization. Our SOP compresses the loop only when scope, assets, approvals, and ownership are clean.</p>
 
     <div class="market-hero reveal">
@@ -799,9 +944,9 @@
     </div>
   </section>
 
-  <!-- 05 JOURNEYS -->
+  <!-- 06 JOURNEYS -->
   <section class="sec" id="journeys" style="--ac:#38BDF8">
-    <div class="sec__head reveal"><span class="sec__num">05</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
+    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Client Journeys</h2><span class="sec__kicker">where to move where</span></div>
     <p class="lead reveal">Two journeys cover most brands. The <span class="hl">40-hour tech gate</span> decides which one. Both end in CRO retention.</p>
     <div class="journey reveal">
       <div class="journey__h"><div class="journey__n">Journey A · CRO-led</div><div class="journey__c">Live store · tech ≤ 40 hrs</div></div>
@@ -818,9 +963,9 @@
     </div>
   </section>
 
-  <!-- 06 LIFECYCLE -->
+  <!-- 07 LIFECYCLE -->
   <section class="sec" id="lifecycle" style="--ac:#E879F9">
-    <div class="sec__head reveal"><span class="sec__num">06</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Engagement Lifecycle</h2><span class="sec__kicker">tap a stage to expand</span></div>
     <p class="lead reveal">The core work for CRO + Tech + Design brands — six stages, in order. The engine does the signals; the KAM owns judgement and the client.</p>
     <div class="stages reveal" id="stages">
       <div class="stage"><div class="stage__head"><span class="stage__num">00</span><span class="stage__t">Intake &amp; Brand Setup</span><span class="stage__when">Day 0</span><span class="stage__chev">▼</span></div>
@@ -872,9 +1017,9 @@
     </div>
   </section>
 
-  <!-- 07 TIMELINE -->
+  <!-- 08 TIMELINE -->
   <section class="sec" id="timeline" style="--ac:#34D399">
-    <div class="sec__head reveal"><span class="sec__num">07</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
+    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">Timeline &amp; CVR Model</h2><span class="sec__kicker">8 weeks</span></div>
     <p class="lead reveal">One brand cycle runs across 8 weeks. The <span class="hl">28-day test window</span> sets the pace; from Month 3, velocity rises to 2–4 tests / month.</p>
     <div class="cards two reveal">
       <div class="card"><div class="month__h">Month 1</div><div class="month__s">Audit · Benchmark · Design</div>
@@ -899,9 +1044,9 @@
       <p style="font-size:12.5px;color:var(--faint);line-height:1.5;margin-top:13px;font-style:italic">60% win rate; per-winner lift +3% (conservative) to +12% (strong), compounded. Expect <span class="hl">1–2 tests in the first 2-month cycle</span> — Month 1 is mostly setup &amp; design — rising to 2–4 / month from Month 3. Direction-setting estimates, not guarantees.</p></div>
   </section>
 
-  <!-- 08 DESIGN -->
+  <!-- 09 DESIGN -->
   <section class="sec" id="design" style="--ac:#F472B6">
-    <div class="sec__head reveal"><span class="sec__num">08</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
+    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Design → Development</h2><span class="sec__kicker">PDP · homepage · anything</span></div>
     <p class="lead reveal">How any page moves from design to development. The <span class="hl">~2-week review window</span> keeps it from stalling; nothing goes to dev until the design is closed. The brand is walked through these steps before we start.</p>
     <div class="flow reveal">
       <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brief + brand guidelines confirmed</b><span>Guidelines in hand before a pixel is drawn.</span></div></div>
@@ -923,9 +1068,9 @@
       <li><b>Dev-feasibility</b> — quick design ↔ dev check before locking.</li></ul></div>
   </section>
 
-  <!-- 09 ZERO-COMEBACK -->
+  <!-- 10 ZERO-COMEBACK -->
   <section class="sec" id="zerocomeback" style="--ac:#FBBF24">
-    <div class="sec__head reveal"><span class="sec__num">09</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
+    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Figma → Dev → Deploy</h2><span class="sec__kicker">zero-comeback</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill" style="color:#FBBF24;border-color:rgba(251,191,36,.4)">100% Figma deployed</span><span class="pill" style="color:#34D399;border-color:rgba(52,211,153,.4)">0 comebacks</span></div>
     <p class="lead reveal">The discipline that guarantees what ships matches the Figma exactly — no "this doesn't match," no "this is broken." <span class="hl">Every gate must pass. Nothing skips.</span> The brand knows every step in advance.</p>
     <div class="flow reveal">
@@ -950,9 +1095,9 @@
     </div>
   </section>
 
-  <!-- 10 BRAND FIGMA -->
+  <!-- 11 BRAND FIGMA -->
   <section class="sec" id="brandfigma" style="--ac:#818CF8">
-    <div class="sec__head reveal"><span class="sec__num">10</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
+    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">Brand Figma → Live</h2><span class="sec__kicker">they supply the file</span></div>
     <p class="lead reveal">When the brand hands over their own Figma. Extra validation up front — we didn't build the file — then it joins the zero-comeback process.</p>
     <div class="flow reveal">
       <div class="fstep"><div class="fstep__node">1</div><div class="fcard"><b>Brand provides Figma + access</b><span>File access, brand guidelines, fonts, content, assets.</span></div></div>
@@ -966,9 +1111,9 @@
       <li>Closing gaps up front is exactly what prevents comebacks after deployment.</li></ul></div>
   </section>
 
-  <!-- 11 AI HTML REDESIGN -->
+  <!-- 12 AI HTML REDESIGN -->
   <section class="sec" id="aihtml" style="--ac:#2563EB">
-    <div class="sec__head reveal"><span class="sec__num">11</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
+    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">AI HTML → Client Live</h2><span class="sec__kicker">redesign SOP</span></div>
     <p class="lead reveal">Use this when a brand needs a fast redesign prototype in HTML before it becomes a client-approved live website. The goal is <span class="hl">brand-safe, CRO-focused, premium-looking work</span> that does not feel randomly generated by AI.</p>
 
     <div class="redesign-board reveal">
@@ -1066,9 +1211,9 @@
     </div>
   </section>
 
-  <!-- 12 PAGE OPTIMIZATION -->
+  <!-- 13 PAGE OPTIMIZATION -->
   <section class="sec" id="pageopt" style="--ac:#FB923C">
-    <div class="sec__head reveal"><span class="sec__num">12</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
+    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Page Optimization</h2><span class="sec__kicker">performance</span></div>
     <div class="hero__chips reveal" style="margin:0 0 18px"><span class="pill o">POC · CTO directly</span><span class="pill" style="color:#FB923C;border-color:rgba(251,146,60,.4)">~2 weeks to go / no-go</span></div>
     <p class="lead reveal">A standalone offering. The goal is faster loading and better Core Web Vitals. A <span class="hl">90+ green Lighthouse score</span> is ideal, but <span class="hl">70+ can be acceptable</span> depending on brand requirements, platform limits, and agreed scope. The assessment runs with the <span class="hl">CTO directly</span>.</p>
     <div class="flow reveal">
@@ -1095,9 +1240,9 @@
     </div>
   </section>
 
-  <!-- 13 ESCALATION -->
+  <!-- 14 ESCALATION -->
   <section class="sec" id="escalation" style="--ac:#F87171">
-    <div class="sec__head reveal"><span class="sec__num">13</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
+    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Escalation Section / Angry Brand</h2><span class="sec__kicker">red brand protocol</span></div>
     <p class="lead reveal">Use this when the relationship is at risk: the brand is ghosting, delivery is late, deployment does not match design, the brand rejects design quality, conversions are not moving, or the brand is below ICP but expects CRO + ads scale.</p>
 
     <div class="esc-triggers reveal">
@@ -1139,9 +1284,9 @@
     <div class="callout reveal"><div class="callout__ic">RCA</div><p><b>RCA rule:</b> for red brands, document the promise, the miss, the root cause, team owner, recovery ETA, client message, and prevention step. Then send one apology-led update to the brand: acknowledge, apologise, ask for time to revert, and return with a solution.</p></div>
   </section>
 
-  <!-- 14 SUMMARY -->
+  <!-- 15 SUMMARY -->
   <section class="sec" id="summary" style="--ac:#A78BFA">
-    <div class="sec__head reveal"><span class="sec__num">14</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
+    <div class="sec__head reveal"><span class="sec__num">15</span><h2 class="sec__title">Summary</h2><span class="sec__kicker">plain words</span></div>
     <p class="lead reveal">The whole system in plain words. If you remember nothing else, remember this section.</p>
     <div class="card reveal"><div class="card__label">By cohort — what we do for each kind of brand</div><div class="map">
       <div class="maprow"><div class="if"><b>Full-stack</b> · CRO+Tech+Design</div><div class="ar">→</div><div class="to">Build/optimise the site and run CRO to keep lifting conversion. Recurring. Full lifecycle.</div></div>
@@ -1157,6 +1302,7 @@
     <div class="cards two reveal" style="margin-top:16px">
       <div class="card"><div class="card__label">The steps, in order</div><ul class="ul arrow">
         <li>Onboard &amp; research (1 day, 2 hrs). Explain Troopod + expectations. Register in the brand DB.</li>
+        <li>Learn page nomenclature — website, homepage, collection page, PDP, hero, sticky CTA, price card, reviews, and trust blocks.</li>
         <li>Categorize &amp; route by scope — mind the 40-hour gate.</li>
         <li>Create SOW: classify work, audit current gaps, build task table, approve scope, hours, commercials, and owner.</li>
         <li>Check the market-standard timeline so the client expectation is realistic before delivery dates are promised.</li>
@@ -1181,9 +1327,9 @@
     </div>
   </section>
 
-  <!-- 15 FAQ -->
+  <!-- 16 FAQ -->
   <section class="sec" id="faqs" style="--ac:#2DD4BF">
-    <div class="sec__head reveal"><span class="sec__num">15</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
+    <div class="sec__head reveal"><span class="sec__num">16</span><h2 class="sec__title">FAQs</h2><span class="sec__kicker">tap to expand</span></div>
     <p class="lead reveal">Quick answers to what comes up most — filter by cohort or browse all. When in doubt, default to the rule, not the exception.</p>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
@@ -1195,7 +1341,7 @@
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 15 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 16 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -1209,20 +1355,21 @@
   /* ---- section registry ---- */
   var SECTIONS = [
     {id:'onboarding',   n:'01', t:'Brand Onboarding', ac:'#A78BFA'},
-    {id:'triage',       n:'02', t:'Triage & Routing', ac:'#22D3EE'},
-    {id:'sow',          n:'03', t:'Scope of Work', ac:'#22D3EE'},
-    {id:'market',       n:'04', t:'Market Standard Timeline', ac:'#60A5FA'},
-    {id:'journeys',     n:'05', t:'Client Journeys', ac:'#38BDF8'},
-    {id:'lifecycle',    n:'06', t:'Engagement Lifecycle', ac:'#E879F9'},
-    {id:'timeline',     n:'07', t:'Timeline & CVR', ac:'#34D399'},
-    {id:'design',       n:'08', t:'Design → Development', ac:'#F472B6'},
-    {id:'zerocomeback', n:'09', t:'Zero-Comeback Deploy', ac:'#FBBF24'},
-    {id:'brandfigma',   n:'10', t:'Brand Figma → Live', ac:'#818CF8'},
-    {id:'aihtml',       n:'11', t:'AI HTML → Client Live', ac:'#2563EB'},
-    {id:'pageopt',      n:'12', t:'Page Optimization', ac:'#FB923C'},
-    {id:'escalation',   n:'13', t:'Escalation / Angry Brand', ac:'#F87171'},
-    {id:'summary',      n:'14', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',         n:'15', t:'FAQs', ac:'#2DD4BF'}
+    {id:'nomenclature', n:'02', t:'Website Nomenclature', ac:'#5EEAD4'},
+    {id:'triage',       n:'03', t:'Triage & Routing', ac:'#22D3EE'},
+    {id:'sow',          n:'04', t:'Scope of Work', ac:'#22D3EE'},
+    {id:'market',       n:'05', t:'Market Standard Timeline', ac:'#60A5FA'},
+    {id:'journeys',     n:'06', t:'Client Journeys', ac:'#38BDF8'},
+    {id:'lifecycle',    n:'07', t:'Engagement Lifecycle', ac:'#E879F9'},
+    {id:'timeline',     n:'08', t:'Timeline & CVR', ac:'#34D399'},
+    {id:'design',       n:'09', t:'Design → Development', ac:'#F472B6'},
+    {id:'zerocomeback', n:'10', t:'Zero-Comeback Deploy', ac:'#FBBF24'},
+    {id:'brandfigma',   n:'11', t:'Brand Figma → Live', ac:'#818CF8'},
+    {id:'aihtml',       n:'12', t:'AI HTML → Client Live', ac:'#2563EB'},
+    {id:'pageopt',      n:'13', t:'Page Optimization', ac:'#FB923C'},
+    {id:'escalation',   n:'14', t:'Escalation / Angry Brand', ac:'#F87171'},
+    {id:'summary',      n:'15', t:'Summary', ac:'#A78BFA'},
+    {id:'faqs',         n:'16', t:'FAQs', ac:'#2DD4BF'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -1250,6 +1397,16 @@
         ['Should recurring brand MRR be captured in the Brand DB?',true],
         ['Is the onboarding target roughly 1 day with a 2-hour session?',true],
         ['Can tech hours be left informal outside the Brand DB?',false]
+      ]
+    },
+    nomenclature: {
+      points:['Name the page type first','Use exact block names','PDP, PLP, and homepage have different jobs'],
+      q:[
+        ['Is a product page also called a PDP?',true],
+        ['Is a collection page mainly for listing and comparing products?',true],
+        ['Should a KAM say “bottom thing” instead of naming the sticky CTA?',false],
+        ['Does the homepage act like the brand front door?',true],
+        ['Are hero title, subtitle, product media, price card, and CTA useful terms for SOW feedback?',true]
       ]
     },
     triage: {
@@ -1725,7 +1882,7 @@
   setTimeout(finishPre,3200);
 
   /* ---- gamified learning score ---- */
-  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[9,'Lead KAM'],[14,'Certified']];
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[6,'Operator'],[10,'Lead KAM'],[16,'Certified']];
   var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
   var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
       scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),

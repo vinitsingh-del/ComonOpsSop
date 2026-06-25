@@ -434,11 +434,36 @@
   .ga-term b{display:block;font-size:14px;line-height:1.2;margin-bottom:6px;color:var(--txt)}
   .ga-term span{display:block;font-size:12.5px;line-height:1.43;color:var(--mut)}
   .ga-term code{display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--tc,var(--ac));background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:5px 7px;white-space:normal}
-  .ref-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
-  .ref-shot{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.035);padding:9px;overflow:hidden}
-  .ref-shot img{display:block;width:100%;height:92px;object-fit:cover;object-position:center;border-radius:8px;background:#fff;margin-bottom:8px}
-  .ref-shot b{display:block;font-size:12px;line-height:1.25;color:var(--txt);margin-bottom:3px}
-  .ref-shot span{display:block;font-size:11.5px;line-height:1.35;color:var(--mut)}
+  .ref-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  .ref-shot{border:1px solid color-mix(in srgb,var(--ac) 34%,var(--line));border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025)),var(--surface);padding:14px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+  .ref-shot.wide{grid-column:1/-1}
+  .ref-shot b{display:block;font-size:15px;line-height:1.2;color:var(--txt);margin:11px 0 4px}
+  .ref-shot span{display:block;font-size:12.7px;line-height:1.42;color:var(--mut)}
+  .mini-viz{min-height:220px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(7,6,14,.42);padding:14px;display:grid;align-content:center;gap:9px;position:relative;overflow:hidden}
+  .viz-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:2px}
+  .viz-funnel{display:grid;gap:7px;justify-items:center}
+  .vf-row{width:var(--w);min-width:145px;max-width:100%;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 58%,#fff));color:#061018;border-radius:10px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;box-shadow:0 10px 22px color-mix(in srgb,var(--c) 16%,transparent)}
+  .vf-row span{color:#061018;font-size:12px;line-height:1.2}
+  .vf-row em{font-style:normal;font-family:'JetBrains Mono',monospace;color:#061018;font-size:12px}
+  .session-path{display:grid;gap:10px}
+  .session-node{display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;align-items:center}
+  .session-node strong{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--c)}
+  .session-pill{border:1px solid var(--c);border-radius:999px;padding:8px 11px;color:var(--txt);font-size:12.5px;line-height:1.25;background:color-mix(in srgb,var(--c) 10%,transparent)}
+  .flow-viz{display:grid;gap:8px}
+  .flow-node{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:8px;align-items:center}
+  .flow-main{border:1px solid color-mix(in srgb,var(--c) 50%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--c) 10%,transparent);padding:9px 10px;font-size:12.5px;color:var(--txt);font-weight:700}
+  .flow-exit{font-family:'JetBrains Mono',monospace;font-size:10px;color:#FCA5A5;border:1px solid rgba(248,113,113,.35);border-radius:8px;padding:7px 6px;text-align:center;background:rgba(248,113,113,.08)}
+  .flow-arrow{min-height:30px;display:grid;place-items:center;color:var(--ac);font-weight:900;line-height:1.2}
+  .checkout-viz{display:grid;gap:8px}
+  .checkout-step{display:grid;grid-template-columns:36px minmax(0,1fr) 58px;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);padding:9px}
+  .checkout-step i{font-style:normal;width:28px;height:28px;border-radius:8px;background:var(--c);color:#061018;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:900}
+  .checkout-step span{font-size:12.5px;color:var(--txt);line-height:1.25}
+  .checkout-step em{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--c);text-align:right}
+  .event-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;min-height:150px;margin-top:4px}
+  .event-bar{display:grid;align-items:end;gap:6px;text-align:center}
+  .event-col{height:var(--h);min-height:12px;border-radius:9px 9px 4px 4px;background:linear-gradient(180deg,var(--c),color-mix(in srgb,var(--c) 55%,#111));box-shadow:0 8px 18px color-mix(in srgb,var(--c) 16%,transparent)}
+  .event-bar b{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--c);margin:0}
+  .event-bar span{font-size:10px;line-height:1.15;color:var(--mut)}
 
   /* HTML iteration process */
   .iter-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}
@@ -595,7 +620,6 @@
     .metric-brief{grid-template-columns:1fr}
     .ga-terms{grid-template-columns:1fr 1fr}
     .ref-gallery{grid-template-columns:1fr 1fr}
-    .ref-shot img{height:120px}
   }
   @media (max-width:560px){
     .panel{right:8px;left:8px;width:auto}
@@ -623,7 +647,10 @@
     .funnel-row{grid-template-columns:58px minmax(0,1fr);gap:8px}
     .funnel-row em{grid-column:2;text-align:left;font-size:10.5px}
     .formula-item{grid-template-columns:1fr}
-    .ref-shot img{height:auto;max-height:180px}
+    .mini-viz{min-height:0;padding:12px}
+    .vf-row{width:100%!important}
+    .event-bars{gap:5px;min-height:130px}
+    .event-bar span{font-size:9.5px}
     .master-board{padding:14px}
     .master-board::before{left:25px;top:92px}
     .code-node{grid-template-columns:34px minmax(0,1fr);gap:10px}
@@ -1058,11 +1085,72 @@ Troopod:</code>
 
     <div class="phase reveal" style="--ac:#5EEAD4">Reference visuals redesigned for our SOP</div>
     <div class="ref-gallery reveal">
-      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-funnel-simple.png" alt="Reference funnel from visits to purchase"><b>Simple funnel</b><span>Good for explaining drop-off from site visit to purchase.</span></div>
-      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-ecommerce-funnel.png" alt="Reference ecommerce session funnel"><b>Session funnel</b><span>Use this mental model for PDP, ATC, and transaction stages.</span></div>
-      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-ga-goal-flow.png" alt="Reference GA goal flow"><b>GA goal flow</b><span>Shows entries, exits, and progression between cart steps.</span></div>
-      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-checkout-flow.png" alt="Reference checkout flow"><b>Checkout flow</b><span>Useful when diagnosing address, payment, and review-order drops.</span></div>
-      <div class="ref-shot"><img src="assets/nomenclature/funnels/reference-video-funnel.png" alt="Reference video funnel"><b>Event funnel</b><span>Same concept applies to video views, form steps, quizzes, and other events.</span></div>
+      <div class="ref-shot">
+        <div class="mini-viz">
+          <div class="viz-title">Visitor → buyer drop-off</div>
+          <div class="viz-funnel">
+            <div class="vf-row" style="--w:100%;--c:#FB923C"><span>Visits website</span><em>100%</em></div>
+            <div class="vf-row" style="--w:82%;--c:#60A5FA"><span>Views PDP</span><em>40%</em></div>
+            <div class="vf-row" style="--w:64%;--c:#2DD4BF"><span>Adds to cart</span><em>20%</em></div>
+            <div class="vf-row" style="--w:46%;--c:#94A3B8"><span>Starts checkout</span><em>10%</em></div>
+            <div class="vf-row" style="--w:28%;--c:#A3E635"><span>Purchases</span><em>3%</em></div>
+          </div>
+        </div>
+        <b>Simple funnel</b><span>Use this to explain that every step naturally gets smaller. Our job is to find the biggest leak and improve that step first.</span>
+      </div>
+      <div class="ref-shot">
+        <div class="mini-viz">
+          <div class="viz-title">Ecommerce session journey</div>
+          <div class="session-path">
+            <div class="session-node" style="--c:#60A5FA"><strong>100%</strong><div class="session-pill">Total sessions land on the site</div></div>
+            <div class="session-node" style="--c:#A78BFA"><strong>43.8%</strong><div class="session-pill">Sessions with product page view</div></div>
+            <div class="session-node" style="--c:#F472B6"><strong>14.5%</strong><div class="session-pill">Sessions with add-to-cart</div></div>
+            <div class="session-node" style="--c:#FBBF24"><strong>3.3%</strong><div class="session-pill">Sessions with transaction</div></div>
+          </div>
+        </div>
+        <b>Session funnel</b><span>Best mental model for KAMs: traffic becomes PDP interest, PDP interest becomes cart intent, and cart intent becomes revenue.</span>
+      </div>
+      <div class="ref-shot">
+        <div class="mini-viz">
+          <div class="viz-title">GA flow reading</div>
+          <div class="flow-viz">
+            <div class="flow-node" style="--c:#5EEAD4"><div class="flow-main">Cart · 1,133 users</div><div class="flow-exit">256 exits</div></div>
+            <div class="flow-arrow">↓ 77% continue</div>
+            <div class="flow-node" style="--c:#34D399"><div class="flow-main">Cart profile · 877 users</div><div class="flow-exit">95 exits</div></div>
+            <div class="flow-arrow">↓ 89% continue</div>
+            <div class="flow-node" style="--c:#22D3EE"><div class="flow-main">Cart confirmation · 782 users</div><div class="flow-exit">100 exits</div></div>
+            <div class="flow-arrow">↓ 87% purchase</div>
+            <div class="flow-node" style="--c:#A3E635"><div class="flow-main">Purchase · 682 orders</div><div class="flow-exit">done</div></div>
+          </div>
+        </div>
+        <b>GA goal flow</b><span>Shows where users enter, continue, and exit. Use exits to identify where the customer is losing confidence.</span>
+      </div>
+      <div class="ref-shot">
+        <div class="mini-viz">
+          <div class="viz-title">Checkout diagnosis flow</div>
+          <div class="checkout-viz">
+            <div class="checkout-step" style="--c:#5EEAD4"><i>1</i><span>Viewed cart</span><em>1,413</em></div>
+            <div class="checkout-step" style="--c:#34D399"><i>2</i><span>Manage address</span><em>60%</em></div>
+            <div class="checkout-step" style="--c:#FBBF24"><i>3</i><span>Payment information</span><em>94%</em></div>
+            <div class="checkout-step" style="--c:#F472B6"><i>4</i><span>Review order</span><em>90%</em></div>
+            <div class="checkout-step" style="--c:#A3E635"><i>5</i><span>Purchase complete</span><em>final</em></div>
+          </div>
+        </div>
+        <b>Checkout flow</b><span>Use this when the leak is after ATC. Check address friction, payment modes, COD, surprise charges, and final trust.</span>
+      </div>
+      <div class="ref-shot wide">
+        <div class="mini-viz">
+          <div class="viz-title">Event completion funnel</div>
+          <div class="event-bars">
+            <div class="event-bar" style="--h:135px;--c:#60A5FA"><div class="event-col"></div><b>1.34M</b><span>Start video</span></div>
+            <div class="event-bar" style="--h:82px;--c:#38BDF8"><div class="event-col"></div><b>80K</b><span>Watch 30%</span></div>
+            <div class="event-bar" style="--h:54px;--c:#A78BFA"><div class="event-col"></div><b>32K</b><span>Watch 60%</span></div>
+            <div class="event-bar" style="--h:36px;--c:#F472B6"><div class="event-col"></div><b>16K</b><span>Watch 80%</span></div>
+            <div class="event-bar" style="--h:18px;--c:#34D399"><div class="event-col"></div><b>4.6K</b><span>Complete</span></div>
+          </div>
+        </div>
+        <b>Event funnel</b><span>Same logic applies to video views, quizzes, forms, product finders, WhatsApp clicks, and any multi-step event. It tells us where attention drops.</span>
+      </div>
     </div>
 
     <div class="callout reveal"><div class="callout__ic">ABC</div><p><b>KAM language rule:</b> always name the page type first, then the exact block. Example: “On the PDP, the sticky CTA overlaps the size selector” is clearer than “the bottom thing is broken.”</p></div>

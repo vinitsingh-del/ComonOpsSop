@@ -334,6 +334,37 @@
   .maprow .ar{color:var(--ac);font-weight:700}
   .maprow .to{flex:1.1;color:var(--txt)}
 
+  /* entire client workflow */
+  .master-board{position:relative;margin:20px 0 10px;border:1px solid color-mix(in srgb,var(--ac) 40%,var(--line));border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.02)),var(--surface);padding:18px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+  .master-board::before{content:'';position:absolute;left:34px;top:84px;bottom:32px;width:2px;background:linear-gradient(180deg,var(--ac),rgba(125,211,252,.18));border-radius:3px}
+  .master-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:14px}
+  .master-head h3{font-size:22px;line-height:1.08;letter-spacing:-.02em}
+  .master-head p{font-size:13.5px;color:var(--mut);line-height:1.5;max-width:520px;margin-top:6px}
+  .master-author{font-family:'JetBrains Mono',monospace;font-size:11px;color:#0A0815;background:var(--ac);border-radius:999px;padding:7px 10px;font-weight:800;white-space:nowrap}
+  .code-flow{display:grid;gap:14px}
+  .code-node{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:13px;align-items:start}
+  .code-dot{position:relative;z-index:2;width:34px;height:34px;border-radius:10px;background:var(--bg);border:1.5px solid var(--ac);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:var(--ac);box-shadow:0 0 18px color-mix(in srgb,var(--ac) 35%,transparent)}
+  .code-card{border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:13px;background:rgba(255,255,255,.038);padding:14px 15px;overflow-wrap:anywhere;transition:.18s}
+  .code-card:hover{border-color:color-mix(in srgb,var(--ac) 58%,var(--line));transform:translateY(-2px);background:color-mix(in srgb,var(--ac) 8%,rgba(255,255,255,.032))}
+  .code-card b{display:block;font-size:15.5px;line-height:1.25;margin-bottom:5px;color:var(--txt)}
+  .code-card p{font-size:13px;line-height:1.48;color:var(--mut)}
+  .code-line{display:block;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.5;color:#CFFAFE;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:9px 10px;margin-top:9px;white-space:normal}
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .flow-tag{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1;font-weight:800;color:#0A0815;background:var(--tag,#7DD3FC);border-radius:999px;padding:6px 8px;white-space:nowrap}
+  .branch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .branch-card{border:1px solid var(--line);border-left:3px solid var(--bc);border-radius:11px;background:rgba(255,255,255,.034);padding:11px;min-height:118px}
+  .branch-card h4{font-size:13px;line-height:1.25;margin-bottom:5px;color:var(--txt)}
+  .branch-card span{display:block;font-size:12px;line-height:1.4;color:var(--mut)}
+  .branch-card code{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bc);margin-bottom:6px}
+  .loop-strip{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin-top:12px}
+  .loop-box{border:1px solid color-mix(in srgb,var(--ac) 35%,var(--line));border-radius:10px;padding:10px;background:rgba(255,255,255,.03);font-size:12.5px;color:var(--mut);line-height:1.38}
+  .loop-box b{display:block;color:var(--txt);font-size:12.8px;margin-bottom:4px}
+  .loop-arr{display:grid;place-items:center;color:var(--ac);font-weight:900}
+  .master-rules{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  .master-rule{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.035);padding:12px;min-height:98px}
+  .master-rule b{display:block;font-size:12.8px;margin-bottom:5px;color:var(--ac);font-family:'JetBrains Mono',monospace}
+  .master-rule span{display:block;font-size:12px;line-height:1.42;color:var(--mut)}
+
   /* copy templates */
   .template-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
   .template-box{border:1px solid color-mix(in srgb,var(--ac) 38%,var(--line));border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.022)),var(--surface);padding:16px;overflow:hidden}
@@ -473,7 +504,7 @@
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:var(--reveal-delay,0ms);will-change:opacity,transform}
-  .card.reveal,.journey.reveal,.faq.reveal,.callout.reveal,.outs.reveal,.redesign-board.reveal,.sow-board.reveal{transform:translateY(24px) scale(.985)}
+  .card.reveal,.journey.reveal,.faq.reveal,.callout.reveal,.outs.reveal,.redesign-board.reveal,.sow-board.reveal,.master-board.reveal{transform:translateY(24px) scale(.985)}
   .flow.reveal,.stages.reveal{transform:translateX(-10px)}
   .reveal.in{opacity:1;transform:none}
 
@@ -500,6 +531,12 @@
     .sow-routes,.sow-matrix{grid-template-columns:1fr}
     .esc-grid,.esc-triggers,.icp-strip{grid-template-columns:1fr}
     .template-grid{grid-template-columns:1fr}
+    .master-board::before{left:32px}
+    .master-head{flex-direction:column}
+    .master-author{align-self:flex-start}
+    .branch-grid,.master-rules{grid-template-columns:1fr}
+    .loop-strip{grid-template-columns:1fr}
+    .loop-arr{min-height:20px}
     .market-hero{grid-template-columns:1fr}
     .market-row{grid-template-columns:1fr}
     .market-cell{border-left:none;border-top:1px solid var(--line)}
@@ -533,6 +570,13 @@
     .label{font-size:10px;padding:6px 8px;max-width:130px}
     .mock-grid{grid-template-columns:1fr 1fr}
     .mock-search{display:none}
+    .master-board{padding:14px}
+    .master-board::before{left:25px;top:92px}
+    .code-node{grid-template-columns:34px minmax(0,1fr);gap:10px}
+    .code-dot{width:24px;height:30px;border-radius:8px;font-size:9.5px}
+    .code-card{padding:12px}
+    .master-head h3{font-size:19px}
+    .master-rule{min-height:auto}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -1543,6 +1587,133 @@ Troopod:</code>
     <div class="faqbar reveal" id="faqbar"></div>
     <div class="faqs reveal" id="faqs-list"></div>
   </section>
+
+  <!-- 18 ENTIRE FLOWCHART -->
+  <section class="sec" id="entireflow" style="--ac:#7DD3FC">
+    <div class="sec__head reveal"><span class="sec__num">18</span><h2 class="sec__title">Entire Flowchart</h2><span class="sec__kicker">client work OS</span></div>
+    <p class="lead reveal">This is the full client workflow across all 17 sections. Read it like code: intake creates context, gates decide cohort, cohort decides delivery path, delivery loops into CRO or escalation.</p>
+
+    <div class="master-board reveal">
+      <div class="master-head">
+        <div>
+          <h3>Comon OPS Client Workflow</h3>
+          <p>From Sales handoff to onboarding, SOW, delivery route, review, deployment, CRO retention, and red-brand recovery.</p>
+        </div>
+        <div class="master-author">By Vinit Troopod</div>
+      </div>
+
+      <div class="code-flow">
+        <div class="code-node">
+          <div class="code-dot">00</div>
+          <div class="code-card">
+            <b>Start: Sales lead hands brand to KAM</b>
+            <p>Sales sends brand profile: funding, current MRR, ad spends, traffic estimate, requirement note, decision-maker, and association context.</p>
+            <code class="code-line">INIT client_context = sales_email + onboarding_call + brand_db</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#A78BFA">Brand Onboarding</span><span class="flow-tag" style="--tag:#5EEAD4">Nomenclature</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">01</div>
+          <div class="code-card">
+            <b>Prepare: KAM understands page language and brand request</b>
+            <p>Before scoping, identify whether the ask is homepage, collection page, PDP, sticky CTA, price card, hero, trust block, checkout, or performance.</p>
+            <code class="code-line">IF page_terms_unclear THEN clarify_page + block + expected_outcome</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#5EEAD4">Website</span><span class="flow-tag" style="--tag:#22D3EE">PDP / PLP / Home</span><span class="flow-tag" style="--tag:#F472B6">UIUX</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">02</div>
+          <div class="code-card">
+            <b>Gate: Triage and SOW decide the cohort</b>
+            <p>Convert request into scope, task, gap, priority, hours, owner, commercial, exclusion, metric, and approved next step.</p>
+            <code class="code-line">cohort = route(scope_type, tech_hours, commercial_model, ICP_fit)</code>
+            <div class="branch-grid">
+              <div class="branch-card" style="--bc:#38BDF8"><code>tech_hours &gt;= 40</code><h4>Build-first</h4><span>New/heavy build enters Figma → dev → deploy, then stabilizes into CRO.</span></div>
+              <div class="branch-card" style="--bc:#34D399"><code>CRO + Tech + Design</code><h4>Full-stack</h4><span>Recurring lifecycle with benchmarks, experiments, rollout, and monthly retention.</span></div>
+              <div class="branch-card" style="--bc:#FB923C"><code>Tech only</code><h4>Page Optimization</h4><span>CTO-led performance assessment, Core Web Vitals, go/no-go in roughly 2 weeks.</span></div>
+              <div class="branch-card" style="--bc:#F472B6"><code>Design / Redesign</code><h4>Design → Development</h4><span>Design closes first, then Figma readiness, QA, staging, sign-off, and deploy.</span></div>
+              <div class="branch-card" style="--bc:#2563EB"><code>AI HTML</code><h4>Prototype → Live</h4><span>Brand-safe HTML prototype, feedback prompts, section-wise iterations, approval, handoff.</span></div>
+              <div class="branch-card" style="--bc:#F87171"><code>Risk detected</code><h4>Escalation</h4><span>Ghosting, missed timeline, poor design fit, conversion issue, or below-ICP expectations.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">03</div>
+          <div class="code-card">
+            <b>Expectations: Compare against market standard timeline</b>
+            <p>Before committing, explain that traditional UI/UX + development is slower because discovery, design, development, QA, launch, and stabilization are split across handoffs.</p>
+            <code class="code-line">promise_date = SOP_speed ONLY IF assets + access + decision_owner + scope are clean</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#60A5FA">Market Timeline</span><span class="flow-tag" style="--tag:#FBBF24">No Over-Promise</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">04</div>
+          <div class="code-card">
+            <b>Delivery: Run the selected operating path</b>
+            <p>Each path has a strict gate: no development before design sign-off, no deployment before staging approval, no AI HTML before cleanup, no speed claim without technical validation.</p>
+            <div class="loop-strip">
+              <div class="loop-box"><b>Design path</b>Brief → design → review → sign-off</div>
+              <div class="loop-arr">→</div>
+              <div class="loop-box"><b>Build path</b>Figma audit → dev → QA → staging</div>
+              <div class="loop-arr">→</div>
+              <div class="loop-box"><b>Deploy path</b>Written approval → live → monitor</div>
+            </div>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#F472B6">Design</span><span class="flow-tag" style="--tag:#FBBF24">Zero-Comeback</span><span class="flow-tag" style="--tag:#818CF8">Brand Figma</span><span class="flow-tag" style="--tag:#2563EB">AI HTML</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">05</div>
+          <div class="code-card">
+            <b>Feedback: Convert client comments into structured work</b>
+            <p>Do not ask “What do you think?” Ask category-wise feedback. Design team converts feedback into prompts, buckets by section, and revises only the affected section.</p>
+            <code class="code-line">feedback → category → prompt → bucket → section_revision → internal_approval → client_review</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#7DD3FC">HTML Iterations</span><span class="flow-tag" style="--tag:#A78BFA">Client Review</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">06</div>
+          <div class="code-card">
+            <b>Retention: CRO lifecycle becomes the ongoing engine</b>
+            <p>After launch or stabilization, the brand moves into CRO where applicable: audit, benchmark, data capture, PDP/A-B testing, rollout, monthly reporting, and CVR lift tracking.</p>
+            <code class="code-line">WHILE brand_active: run_signals + prioritize_tests + report_CVR + roll_out_winners</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#E879F9">Lifecycle</span><span class="flow-tag" style="--tag:#34D399">Timeline &amp; CVR</span><span class="flow-tag" style="--tag:#38BDF8">Client Journeys</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">07</div>
+          <div class="code-card">
+            <b>Exception: Escalate red brands before trust breaks</b>
+            <p>Ghosting for 2-3 weeks, missed deliverables, design dissatisfaction, deployment mismatch, conversion dissatisfaction, or below-ICP CRO + ads expectations trigger escalation.</p>
+            <code class="code-line">IF red_brand THEN CTO/founder + RCA + apology + recovery_ETA + single_client_owner</code>
+            <div class="tag-row"><span class="flow-tag" style="--tag:#F87171">Escalation</span><span class="flow-tag" style="--tag:#FB923C">CTO</span><span class="flow-tag" style="--tag:#FBBF24">RCA</span></div>
+          </div>
+        </div>
+
+        <div class="code-node">
+          <div class="code-dot">08</div>
+          <div class="code-card">
+            <b>End state: One client truth</b>
+            <p>The KAM should always know the client cohort, active flow, current gate, owner, metric, next action, and escalation status.</p>
+            <code class="code-line">client_status = cohort + flow + gate + owner + metric + next_action + risk_level</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="master-rules">
+        <div class="master-rule"><b>Rule 01</b><span>No execution without SOW, owner, timeline, and commercial clarity.</span></div>
+        <div class="master-rule"><b>Rule 02</b><span>No deployment without written approval and live QA against the approved state.</span></div>
+        <div class="master-rule"><b>Rule 03</b><span>No vague feedback. Convert client comments into category-wise prompts or tasks.</span></div>
+        <div class="master-rule"><b>Rule 04</b><span>No silent risk. Red brands go through RCA, management visibility, and recovery communication.</span></div>
+      </div>
+    </div>
+  </section>
 </div></div>
 
 <div class="score" id="score" title="Continue — jump to the next section">
@@ -1550,7 +1721,7 @@ Troopod:</code>
     <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="4"/><circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/></svg>
     <div class="score__pct" id="scorePct">0%</div>
   </div>
-  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 17 read</span></div>
+  <div class="score__meta"><span class="score__rank" id="scoreRank">Rookie</span><span class="score__xp" id="scoreXp">0 XP</span><span class="score__sub" id="scoreSub">0 / 18 read</span></div>
 </div>
 <div class="cert" id="cert"><div class="cert__card"><div class="cert__badge">🏅</div><div class="cert__t">Certified <span class="g">KAM</span></div><div class="cert__p">You’ve read every section of Comon OPS. You know the playbook.</div><button class="cert__btn" id="certBtn">Let’s go</button></div></div>
 <button class="fab" id="fab" aria-label="Back to top">↑</button>
@@ -1579,7 +1750,8 @@ Troopod:</code>
     {id:'pageopt',        n:'14', t:'Page Optimization', ac:'#FB923C'},
     {id:'escalation',     n:'15', t:'Escalation / Angry Brand', ac:'#F87171'},
     {id:'summary',        n:'16', t:'Summary', ac:'#A78BFA'},
-    {id:'faqs',           n:'17', t:'FAQs', ac:'#2DD4BF'}
+    {id:'faqs',           n:'17', t:'FAQs', ac:'#2DD4BF'},
+    {id:'entireflow',     n:'18', t:'Entire Flowchart', ac:'#7DD3FC'}
   ];
 
   /* ---- build rail + drawer nav ---- */
@@ -1767,6 +1939,16 @@ Troopod:</code>
         ['Can FAQ filters help find cohort-specific answers faster?',true],
         ['Should unresolved ambiguity be guessed to save time?',false],
         ['Is the FAQ meant to reinforce the operating rules?',true]
+      ]
+    },
+    entireflow: {
+      points:['Cohort decides route','Delivery gates prevent comeback','Red brands need RCA + owner'],
+      q:[
+        ['Should the client cohort be decided from scope, tech hours, commercial model, and ICP fit?',true],
+        ['Can a heavy 40+ hour new-brand build be treated like a small CRO-led task?',false],
+        ['Should feedback move through category, prompt, bucket, section revision, and approval?',true],
+        ['Does a red-brand workflow need CTO/founder visibility, RCA, apology, and recovery ETA?',true],
+        ['Is the final client status complete without cohort, flow, gate, owner, metric, next action, and risk level?',false]
       ]
     }
   };
@@ -2116,7 +2298,7 @@ Troopod:</code>
   setTimeout(finishPre,3200);
 
   /* ---- gamified learning score ---- */
-  var RANKS=[[0,'Rookie'],[3,'Trainee'],[7,'Operator'],[11,'Lead KAM'],[17,'Certified']];
+  var RANKS=[[0,'Rookie'],[3,'Trainee'],[7,'Operator'],[11,'Lead KAM'],[18,'Certified']];
   var read={}, readCount=0, TOTAL=SECTIONS.length, RING=119.4;
   var ringEl=document.getElementById('ring'), scorePct=document.getElementById('scorePct'),
       scoreRank=document.getElementById('scoreRank'), scoreXp=document.getElementById('scoreXp'),
